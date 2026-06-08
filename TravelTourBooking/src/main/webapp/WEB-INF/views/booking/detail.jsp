@@ -1,6 +1,6 @@
 <%-- 
-    Document   : footer
-    Created on : Jun 8, 2026, 11:19:48 PM
+    Document   : detail
+    Created on : Jun 8, 2026, 11:20:18 PM
     Author     : LENOVO
 --%>
 
