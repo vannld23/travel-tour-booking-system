@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2026 at 12:03 PM
+-- Generation Time: Jun 11, 2026 at 12:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -37,13 +37,6 @@ CREATE TABLE `bookings` (
   `booking_status` enum('PENDING','CONFIRMED','CANCELLED','COMPLETED') DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `user_id`, `tour_id`, `booking_date`, `number_of_people`, `total_price`, `booking_status`) VALUES
-(1, 2, 1, '2026-06-11 10:02:42', 2, 7000000.00, 'CONFIRMED');
-
 -- --------------------------------------------------------
 
 --
@@ -58,14 +51,6 @@ CREATE TABLE `destinations` (
   `description` text DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `destinations`
---
-
-INSERT INTO `destinations` (`destination_id`, `destination_name`, `country`, `city`, `description`, `image_url`) VALUES
-(1, 'Da Nang Beach', 'Vietnam', 'Da Nang', 'Beautiful beach destination', 'danang.jpg'),
-(2, 'Ha Long Bay', 'Vietnam', 'Quang Ninh', 'World heritage site', 'halong.jpg');
 
 -- --------------------------------------------------------
 
@@ -82,13 +67,6 @@ CREATE TABLE `payments` (
   `payment_status` enum('PENDING','PAID','FAILED') DEFAULT 'PENDING'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `payments`
---
-
-INSERT INTO `payments` (`payment_id`, `booking_id`, `amount`, `payment_method`, `payment_date`, `payment_status`) VALUES
-(1, 1, 7000000.00, 'MOMO', '2026-06-11 10:02:42', 'PAID');
-
 -- --------------------------------------------------------
 
 --
@@ -99,14 +77,6 @@ CREATE TABLE `roles` (
   `role_id` int(11) NOT NULL,
   `role_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`role_id`, `role_name`) VALUES
-(1, 'ADMIN'),
-(2, 'CUSTOMER');
 
 -- --------------------------------------------------------
 
@@ -120,15 +90,6 @@ CREATE TABLE `schedules` (
   `day_number` int(11) NOT NULL,
   `activity_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `schedules`
---
-
-INSERT INTO `schedules` (`schedule_id`, `tour_id`, `day_number`, `activity_description`) VALUES
-(1, 1, 1, 'Arrival and beach visit'),
-(2, 1, 2, 'Ba Na Hills tour'),
-(3, 1, 3, 'Shopping and return');
 
 -- --------------------------------------------------------
 
@@ -149,13 +110,6 @@ CREATE TABLE `tours` (
   `image_url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tours`
---
-
-INSERT INTO `tours` (`tour_id`, `tour_name`, `destination_id`, `duration_days`, `price`, `max_capacity`, `start_date`, `end_date`, `description`, `image_url`) VALUES
-(1, 'Da Nang 3 Days 2 Nights', 1, 3, 3500000.00, 30, '2026-07-01', '2026-07-03', 'Enjoy Da Nang', 'tour_danang.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -173,14 +127,6 @@ CREATE TABLE `users` (
   `role_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `full_name`, `email`, `password`, `phone`, `address`, `is_active`, `role_id`, `created_at`) VALUES
-(1, 'Administrator', 'admin@travel.com', '123456', '0123456789', 'Ho Chi Minh City', 1, 1, '2026-06-11 10:02:42'),
-(2, 'Customer Demo', 'customer@travel.com', '123456', '0987654321', 'Ha Noi', 1, 2, '2026-06-11 10:02:42');
 
 --
 -- Indexes for dumped tables
@@ -244,43 +190,43 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `destinations`
 --
 ALTER TABLE `destinations`
-  MODIFY `destination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `destination_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tours`
 --
 ALTER TABLE `tours`
-  MODIFY `tour_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tour_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
