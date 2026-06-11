@@ -5,13 +5,17 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<%@ include file="../layout/header.jsp" %>
+
+<%@ include file="../layout/sidebar.jsp" %>
+
+<div class="content">
+
+    <h2>Dashboard</h2>
+
+    <p>Welcome to Travel Tour Booking System</p>
+
+</div>
+
+<%@ include file="../layout/footer.jsp" %>

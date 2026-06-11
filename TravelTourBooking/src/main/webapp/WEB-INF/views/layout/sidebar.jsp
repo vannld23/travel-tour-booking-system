@@ -5,13 +5,21 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+
+<div class="sidebar">
+
+    <ul>
+
+        <li>Dashboard</li>
+
+        <li>Tour Management</li>
+
+        <li>Booking Management</li>
+
+        <li>User Management</li>
+
+        <li>Reports</li>
+
+    </ul>
+
+</div>
