@@ -1,17 +1,38 @@
-<%-- 
-    Document   : delete
-    Created on : Jun 8, 2026, 11:22:48 PM
-    Author     : LENOVO
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <title>Xóa Tour</title>
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "action-orange": "#FF5E1F"
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F2F3F3; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); border: 1px solid rgba(224, 224, 224, 0.5); }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-8">
+    <div class="glass-card rounded-xl p-8 shadow-lg max-w-xl w-full">
+        <h1 class="text-2xl font-bold text-red-600 mb-4">Xác nhận xóa Tour</h1>
+        <p class="text-gray-700 mb-6">Bạn có chắc chắn muốn xóa tour <strong>${tour.tourName}</strong> không?</p>
+        <form method="post" action="${pageContext.request.contextPath}/tour/delete" class="flex gap-4">
+            <input type="hidden" name="id" value="${tour.tourId}">
+            <button class="px-6 py-3 rounded-lg bg-action-orange text-white font-semibold" type="submit">Xóa</button>
+            <a class="px-6 py-3 rounded-lg bg-gray-200 text-gray-800 font-semibold" href="<c:url value='/tour/list'/>">Hủy</a>
+        </form>
+    </div>
+</body>
 </html>
