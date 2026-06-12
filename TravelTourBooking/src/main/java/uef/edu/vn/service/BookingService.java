@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uef.edu.vn.service;
 
-/**
- *
- * @author LENOVO
- */
+import uef.edu.vn.dao.BookingDAO;
+import uef.edu.vn.model.Booking;
+
+import java.util.List;
+
 public class BookingService {
-    
+
+    private BookingDAO bookingDAO = new BookingDAO();
+
+    public List<Booking> getAllBookings() {
+        return bookingDAO.getAllBookings();
+    }
 }
