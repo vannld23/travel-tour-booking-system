@@ -5,11 +5,21 @@ import java.sql.Timestamp;
 public class Payment {
 
     private int paymentId;
+
     private int bookingId;
+
     private double amount;
+
     private String paymentMethod;
+
     private Timestamp paymentDate;
+
     private String paymentStatus;
+
+    // Hiển thị thông tin JOIN
+    private String fullName;
+
+    private String tourName;
 
     public Payment() {
     }
@@ -60,5 +70,21 @@ public class Payment {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
     }
 }
