@@ -1,14 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Tour Detail</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Tour</title>
     <link rel="stylesheet" href="<c:url value='/resources/css/management.css'/>">
 </head>
 <body>
-    <h1>Tour Detail</h1>
+    <h1>Chi tiết Tour</h1>
     <div class="card">
         <div class="row"><span class="label">ID:</span>${tour.tourId}</div>
         <div class="row"><span class="label">Name:</span>${tour.tourName}</div>
@@ -39,7 +40,7 @@
             </tbody>
         </table>
 
-        <a href="<c:url value='/tour/list'/>">Back</a>
+        <a href="<c:url value='/tuormanagement/list'/>">Back</a>
     </div>
 </body>
 </html>

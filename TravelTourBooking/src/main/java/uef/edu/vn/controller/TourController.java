@@ -22,7 +22,7 @@ import uef.edu.vn.model.Tour;
  * @author LENOVO
  */
 @Controller
-@RequestMapping("/tour")
+@RequestMapping("/tuormanagement")
 public class TourController {
 
     private final TourDAO tourDAO = new TourDAO();
@@ -51,14 +51,14 @@ public class TourController {
             return "tour/create";
         }
         tourDAO.save(tour);
-        return "redirect:/tour/list";
+        return "redirect:/tuormanagement/list";
     }
 
     @GetMapping("/edit")
     public String editForm(@RequestParam int id, Model model) {
         Tour tour = tourDAO.findById(id);
         if (tour == null) {
-            return "redirect:/tour/list";
+            return "redirect:/tuormanagement/list";
         }
         model.addAttribute("tour", tour);
         model.addAttribute("destinations", destinationDAO.findAll());
@@ -75,14 +75,14 @@ public class TourController {
             return "tour/edit";
         }
         tourDAO.update(tour);
-        return "redirect:/tour/list";
+        return "redirect:/tuormanagement/list";
     }
 
     @GetMapping("/detail")
     public String detail(@RequestParam int id, Model model) {
         Tour tour = tourDAO.findById(id);
         if (tour == null) {
-            return "redirect:/tour/list";
+            return "redirect:/tuormanagement/list";
         }
         model.addAttribute("tour", tour);
         model.addAttribute("schedules", new uef.edu.vn.dao.ScheduleDAO().findByTourId(id));
@@ -93,7 +93,7 @@ public class TourController {
     public String deleteConfirm(@RequestParam int id, Model model) {
         Tour tour = tourDAO.findById(id);
         if (tour == null) {
-            return "redirect:/tour/list";
+            return "redirect:/tuormanagement/list";
         }
         model.addAttribute("tour", tour);
         return "tour/delete";
@@ -102,7 +102,7 @@ public class TourController {
     @PostMapping("/delete")
     public String delete(@RequestParam int id) {
         tourDAO.delete(id);
-        return "redirect:/tour/list";
+        return "redirect:/tuormanagement/list";
     }
 
     private void validateTour(Tour tour, BeanPropertyBindingResult bindingResult) {
