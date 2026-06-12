@@ -71,4 +71,8 @@ public class BookingService {
         return bookingDAO.updateBooking(
                 booking);
     }
+
+    public List<Booking> getBookingsWithoutPayment() {
+        return bookingDAO.getBookingsWithoutPayment();
+    }
 }

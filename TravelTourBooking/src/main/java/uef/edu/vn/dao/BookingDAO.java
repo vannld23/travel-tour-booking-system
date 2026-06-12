@@ -224,4 +224,65 @@ public class BookingDAO {
         return false;
     }
 
+    public List<Booking> getBookingsWithoutPayment() {
+
+        List<Booking> bookings = new ArrayList<>();
+
+        String sql
+                = "SELECT b.*, "
+                + "u.full_name, "
+                + "t.tour_name "
+                + "FROM bookings b "
+                + "JOIN users u "
+                + "ON b.user_id = u.user_id "
+                + "JOIN tours t "
+                + "ON b.tour_id = t.tour_id "
+                + "LEFT JOIN payments p "
+                + "ON b.booking_id = p.booking_id "
+                + "WHERE p.payment_id IS NULL";
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                Booking booking = new Booking();
+
+                booking.setBookingId(
+                        rs.getInt("booking_id"));
+
+                booking.setUserId(
+                        rs.getInt("user_id"));
+
+                booking.setTourId(
+                        rs.getInt("tour_id"));
+
+                booking.setBookingDate(
+                        rs.getTimestamp("booking_date"));
+
+                booking.setNumberOfPeople(
+                        rs.getInt("number_of_people"));
+
+                booking.setTotalPrice(
+                        rs.getDouble("total_price"));
+
+                booking.setBookingStatus(
+                        rs.getString("booking_status"));
+
+                booking.setFullName(
+                        rs.getString("full_name"));
+
+                booking.setTourName(
+                        rs.getString("tour_name"));
+
+                bookings.add(booking);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return bookings;
+    }
+
 }
