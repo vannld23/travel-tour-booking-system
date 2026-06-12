@@ -1,9 +1,245 @@
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jun 11, 2026, 11:08:54 AM
-    Author     : LENOVO
+  Horizon Voyager Design System Tokens & Base CSS Styles
+  Based on DESIGN.md
 */
 
+:root {
+  /* Color Palette */
+  --surface: #f8f9f9;
+  --surface-dim: #d9dada;
+  --surface-bright: #f8f9f9;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f3f4f4;
+  --surface-container: #edeeee;
+  --surface-container-high: #e7e8e8;
+  --surface-container-highest: #e1e3e3;
+  --on-surface: #191c1c;
+  --on-surface-variant: #3f4752;
+  --inverse-surface: #2e3131;
+  --inverse-on-surface: #f0f1f1;
+  --outline: #707884;
+  --outline-variant: #bfc7d4;
+  --surface-tint: #0061a3;
+  --primary: #005f9f;
+  --on-primary: #ffffff;
+  --primary-container: #0078c7;
+  --on-primary-container: #fdfcff;
+  --inverse-primary: #9dcaff;
+  --secondary: #ab3500;
+  --on-secondary: #ffffff;
+  --secondary-container: #ff5e1f;
+  --on-secondary-container: #551600;
+  --tertiary: #415b92;
+  --on-tertiary: #ffffff;
+  --tertiary-container: #5a74ad;
+  --on-tertiary-container: #fefcff;
+  --error: #ba1a1a;
+  --on-error: #ffffff;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+  --primary-fixed: #d1e4ff;
+  --primary-fixed-dim: #9dcaff;
+  --on-primary-fixed: #001d36;
+  --on-primary-fixed-variant: #00497c;
+  --secondary-fixed: #ffdbd0;
+  --secondary-fixed-dim: #ffb59d;
+  --on-secondary-fixed: #390c00;
+  --on-secondary-fixed-variant: #832600;
+  --tertiary-fixed: #d9e2ff;
+  --tertiary-fixed-dim: #afc6ff;
+  --on-tertiary-fixed: #001a43;
+  --on-tertiary-fixed-variant: #2a457b;
+  --background: #f8f9f9;
+  --on-background: #191c1c;
+  --surface-variant: #e1e3e3;
+  
+  /* Brand specific colors */
+  --ocean-blue: #0194F3;
+  --action-orange: #FF5E1F;
+  --deep-navy: #05285D;
+  --surface-gray: #F2F3F3;
+  --status-success: #00BA4A;
+  --status-warning: #F39C12;
+
+  /* Shapes & Borders */
+  --rounded-sm: 0.25rem;
+  --rounded-default: 0.5rem;
+  --rounded-md: 0.75rem;
+  --rounded-lg: 1rem;
+  --rounded-xl: 1.5rem;
+  --rounded-full: 9999px;
+
+  /* Elevations */
+  --shadow-card: 0px 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-active: 0px 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* Spacing */
+  --space-unit: 4px;
+}
+
+/* Typography Base Classes */
+.display-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+}
+
+.headline-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.headline-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.body-lg {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.body-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.label-md {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+}
+
+.label-sm {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* Base Document Styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--surface-gray);
+  color: var(--on-surface);
+  margin: 0;
+  padding: 0;
+}
+
+/* Card-centric Glass Layouts */
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(224, 224, 224, 0.5);
+  border-radius: var(--rounded-md);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.glass-card:hover {
+  box-shadow: var(--shadow-active);
+  transform: translateY(-2px);
+}
+
+/* UI Elements */
+.input-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background: var(--surface-gray);
+  border: none;
+  border-radius: var(--rounded-default);
+  outline: none;
+  transition: all 0.2s;
+}
+
+.input-field:focus {
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(1, 148, 243, 0.1);
+  border: 1.5px solid var(--ocean-blue);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--action-orange);
+  color: #ffffff;
+  padding: 12px 24px;
+  border-radius: var(--rounded-default);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  border: 1.5px solid var(--ocean-blue);
+  color: var(--ocean-blue);
+  padding: 12px 24px;
+  border-radius: var(--rounded-default);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(1, 148, 243, 0.05);
+}
+
+.btn-ghost {
+  background: none;
+  border: none;
+  color: var(--ocean-blue);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  text-decoration: underline;
+}
+
+/* Admin Data Table Styles */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: var(--rounded-md);
+  overflow: hidden;
+}
+
+.admin-table th {
+  background-color: var(--surface-bright);
+  color: var(--on-surface-variant);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.admin-table td {
+  padding: 14px;
+  border-bottom: 1px solid #e0e0e0;
+  color: var(--on-surface);
+}
+
+.admin-table tbody tr:hover {
+  background-color: var(--surface-container-lowest);
+}

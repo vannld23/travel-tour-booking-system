@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <title>Quản trị VoyagerElite - Xóa Điểm Đến</title>
+    <title>Quản trị VoyagerElite - Xóa Lịch Trình</title>
     <script>
         tailwind.config = {
             theme: {
@@ -42,11 +42,11 @@
     <div class="flex justify-between items-center mb-8">
         <div>
             <nav class="flex items-center gap-2 text-on-surface-variant text-sm mb-2">
-                <a class="hover:text-ocean-blue" href="<c:url value='/destination/list'/>">Quản lý Điểm đến</a>
+                <a class="hover:text-ocean-blue" href="<c:url value='/itinerary/list'/>">Quản lý Lịch trình</a>
                 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                <span class="text-ocean-blue font-semibold">Xóa Điểm Đến</span>
+                <span class="text-ocean-blue font-semibold">Xóa Lịch Trình</span>
             </nav>
-            <h2 class="text-3xl font-bold text-deep-navy">Xác nhận xóa Điểm đến</h2>
+            <h2 class="text-3xl font-bold text-deep-navy">Xác nhận xóa Lịch trình</h2>
         </div>
     </div>
 
@@ -58,14 +58,20 @@
             </div>
             
             <p class="text-on-surface mb-6 leading-relaxed">
-                Bạn có chắc chắn muốn xóa điểm đến <strong class="text-deep-navy font-bold">"${destination.destinationName}"</strong>? 
-                Hành động này không thể hoàn tác và có thể ảnh hưởng đến các Tour đang thuộc điểm đến này.
+                Bạn có chắc chắn muốn xóa ngày lịch trình này? 
+                Hành động này không thể hoàn tác.
             </p>
 
-            <form method="post" action="<c:url value='/destination/delete'/>" class="flex gap-4">
-                <input type="hidden" name="id" value="${destination.destinationId}">
+            <div class="mb-6 space-y-2 p-4 bg-surface-container rounded-lg">
+                <p class="text-sm"><strong>Tên Tour:</strong> ${itinerary.tourName}</p>
+                <p class="text-sm"><strong>Ngày thứ:</strong> ${itinerary.dayNumber}</p>
+                <p class="text-sm"><strong>Hoạt động:</strong> ${itinerary.activityDescription}</p>
+            </div>
+
+            <form method="post" action="${pageContext.request.contextPath}/itinerary/delete" class="flex gap-4">
+                <input type="hidden" name="id" value="${itinerary.itineraryId}">
                 <button class="px-6 py-2.5 rounded-lg bg-action-orange text-white font-medium shadow hover:brightness-110 transition-all" type="submit">Xác nhận Xóa</button>
-                <a class="px-6 py-2.5 rounded-lg border border-outline-variant text-on-surface-variant font-medium bg-white hover:bg-surface-bright transition-all" href="<c:url value='/destination/list'/>">Hủy bỏ</a>
+                <a class="px-6 py-2.5 rounded-lg border border-outline-variant text-on-surface-variant font-medium bg-white hover:bg-surface-bright transition-all" href="<c:url value='/itinerary/list'/>">Hủy bỏ</a>
             </form>
         </section>
     </div>

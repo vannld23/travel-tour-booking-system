@@ -1,11 +1,30 @@
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+  Horizon Voyager Header Styles
+  Based on DESIGN.md
 */
-/* 
-    Created on : Jun 11, 2026, 11:09:02 AM
-    Author     : LENOVO
-*/
-<header>
-    <h2>Travel Tour Booking System</h2>
-</header>
+
+.admin-header {
+  background-color: #ffffff;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--outline-variant);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.header-logo {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--deep-navy);
+}
+
+.header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  font-weight: 500;
+}

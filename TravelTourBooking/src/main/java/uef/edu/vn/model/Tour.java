@@ -15,6 +15,26 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class Tour {
 
+    public enum Status {
+        ACTIVE, INACTIVE, UPCOMING;
+
+        public String getLabel() {
+            return switch (this) {
+                case ACTIVE   -> "Hoạt động";
+                case INACTIVE -> "Ngừng hoạt động";
+                case UPCOMING -> "Sắp diễn ra";
+            };
+        }
+
+        public String getBadgeClass() {
+            return switch (this) {
+                case ACTIVE   -> "badge-active";
+                case INACTIVE -> "badge-inactive";
+                case UPCOMING -> "badge-upcoming";
+            };
+        }
+    }
+
     private int tourId;
     private String tourName;
     private int destinationId;
@@ -28,6 +48,8 @@ public class Tour {
     private LocalDate endDate;
     private String description;
     private String imageUrl;
+    private Status status = Status.ACTIVE;
+    private int bookingCount;
 
     public Tour() {
     }
@@ -132,6 +154,30 @@ public class Tour {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getStatusLabel() {
+        return status != null ? status.getLabel() : Status.ACTIVE.getLabel();
+    }
+
+    public String getStatusBadgeClass() {
+        return status != null ? status.getBadgeClass() : Status.ACTIVE.getBadgeClass();
+    }
+
+    public int getBookingCount() {
+        return bookingCount;
+    }
+
+    public void setBookingCount(int bookingCount) {
+        this.bookingCount = bookingCount;
     }
 
     @Override

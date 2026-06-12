@@ -1,9 +1,162 @@
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jun 11, 2026, 11:09:33 AM
-    Author     : LENOVO
+  Horizon Voyager Login Page Styles
+  Based on DESIGN.md
 */
 
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-gray);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background blob decorations for premium look */
+.login-bg-blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  z-index: 0;
+}
+
+.login-bg-blob-1 {
+  background-color: var(--ocean-blue);
+  top: -10%;
+  left: -10%;
+}
+
+.login-bg-blob-2 {
+  background-color: var(--action-orange);
+  bottom: -10%;
+  right: -10%;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--rounded-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+  text-align: center;
+}
+
+.login-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--rounded-md);
+  background-color: var(--deep-navy);
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.login-logo span {
+  font-size: 36px;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--deep-navy);
+  margin: 0 0 8px 0;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin: 0 0 32px 0;
+}
+
+.login-form {
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  background-color: rgba(242, 243, 243, 0.8);
+  border: 1px solid transparent;
+  border-radius: var(--rounded-default);
+  outline: none;
+  font-size: 14px;
+  transition: all 0.25s;
+}
+
+.form-input:focus {
+  background-color: #ffffff;
+  border-color: var(--ocean-blue);
+  box-shadow: 0 0 0 3px rgba(1, 148, 243, 0.15);
+}
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--on-surface-variant);
+}
+
+.forgot-password {
+  color: var(--ocean-blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+.btn-login {
+  width: 100%;
+  height: 48px;
+  background-color: var(--action-orange);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--rounded-default);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 94, 31, 0.2);
+  transition: all 0.25s;
+}
+
+.btn-login:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(255, 94, 31, 0.3);
+}
+
+.btn-login:active {
+  transform: translateY(0);
+}

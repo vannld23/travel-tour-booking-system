@@ -20,34 +20,7 @@
 </head>
 <body class="bg-surface-gray">
 <div class="flex min-h-screen">
-<aside class="h-screen w-[280px] fixed left-0 top-0 bg-deep-navy shadow-lg flex flex-col py-6 z-50">
-    <div class="px-6 mb-8">
-        <h1 class="font-bold text-2xl text-white">Bảng điều khiển Admin</h1>
-        <p class="text-white/70 text-sm mt-1">Logistics Du lịch</p>
-    </div>
-    <nav class="flex-1 px-3 space-y-2">
-        <a class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-colors" href="<c:url value='/dashboard'/>">
-            <span class="material-symbols-outlined mr-3 text-ocean-blue">dashboard</span>
-            <span>Tổng quan</span>
-        </a>
-        <a class="flex items-center px-4 py-3 bg-ocean-blue text-white rounded-xl transition-all duration-200" href="<c:url value='/tuormanagement/list'/>">
-            <span class="material-symbols-outlined mr-3">explore</span>
-            <span>Quản lý Tour</span>
-        </a>
-        <a class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-colors" href="<c:url value='/booking/list'/>">
-            <span class="material-symbols-outlined mr-3">confirmation_number</span>
-            <span>Quản lý Đặt chỗ</span>
-        </a>
-        <a class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-colors" href="<c:url value='/report/revenue'/>">
-            <span class="material-symbols-outlined mr-3">analytics</span>
-            <span>Báo cáo</span>
-        </a>
-        <a class="flex items-center px-4 py-3 text-white/80 hover:bg-white/10 rounded-xl transition-colors" href="<c:url value='/system/setting'/>">
-            <span class="material-symbols-outlined mr-3">settings</span>
-            <span>Cài đặt</span>
-        </a>
-    </nav>
-</aside>
+    <%@ include file="../layout/sidebar.jsp" %>
 
 <main class="flex-1 ml-[280px] p-8 min-h-screen">
     <div class="flex justify-between items-center mb-8">
@@ -162,6 +135,22 @@
                             <form:input path="endDate" cssClass="w-full h-12 px-4 bg-[#F2F3F3] border-none rounded-lg" type="date" />
                         </div>
                     </div>
+                </section>
+
+                <!-- Trạng thái hoạt động -->
+                <section class="glass-card rounded-xl p-6 shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+                    <div class="flex items-center gap-2 mb-4 text-[#0194F3]">
+                        <span class="material-symbols-outlined">toggle_on</span>
+                        <h3 class="text-xl font-semibold">Trạng thái</h3>
+                    </div>
+                    <select id="statusStr" name="statusStr"
+                            class="w-full px-4 h-12 bg-[#F2F3F3] border-none rounded-lg text-sm focus:ring-2 focus:ring-ocean-blue">
+                        <c:forEach var="s" items="${statuses}">
+                            <option value="${s.name()}" ${tour.status.name() == s.name() ? 'selected' : ''}>
+                                ${s.label}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </section>
             </div>
         </div>

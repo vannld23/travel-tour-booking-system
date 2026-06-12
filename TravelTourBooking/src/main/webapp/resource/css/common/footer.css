@@ -1,12 +1,14 @@
 /*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jun 11, 2026, 11:09:09 AM
-    Author     : LENOVO
+  Horizon Voyager Footer Styles
+  Based on DESIGN.md
 */
 
-<footer>
-    © 2026 Travel Tour Booking System
-</footer>
+.admin-footer {
+  background-color: #ffffff;
+  padding: 16px 24px;
+  text-align: center;
+  border-top: 1px solid var(--outline-variant);
+  color: var(--on-surface-variant);
+  font-size: 12px;
+  font-weight: 500;
+}
