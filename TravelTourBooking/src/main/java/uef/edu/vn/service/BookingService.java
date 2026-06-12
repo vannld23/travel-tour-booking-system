@@ -4,6 +4,8 @@ import uef.edu.vn.dao.BookingDAO;
 import uef.edu.vn.model.Booking;
 import uef.edu.vn.dao.TourDAO;
 import uef.edu.vn.model.Tour;
+import uef.edu.vn.dao.PaymentDAO;
+import uef.edu.vn.model.Payment;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class BookingService {
     private TourDAO tourDAO = new TourDAO();
 
     private BookingDAO bookingDAO = new BookingDAO();
+
+    private PaymentDAO paymentDAO = new PaymentDAO();
 
     public List<Booking> getAllBookings() {
         return bookingDAO.getAllBookings();
@@ -68,11 +72,39 @@ public class BookingService {
             );
         }
 
-        return bookingDAO.updateBooking(
-                booking);
+        boolean updated
+                = bookingDAO.updateBooking(
+                        booking);
+
+        if (updated) {
+
+            Payment payment
+                    = paymentDAO.getPaymentByBookingId(
+                            booking.getBookingId());
+
+            if (payment != null
+                    && "PENDING".equals(
+                            payment.getPaymentStatus())) {
+
+                paymentDAO.updatePaymentAmount(
+                        booking.getBookingId(),
+                        booking.getTotalPrice());
+            }
+        }
+
+        return updated;
     }
 
     public List<Booking> getBookingsWithoutPayment() {
         return bookingDAO.getBookingsWithoutPayment();
+    }
+
+    public boolean updateBookingStatus(
+            int bookingId,
+            String status) {
+
+        return bookingDAO.updateBookingStatus(
+                bookingId,
+                status);
     }
 }

@@ -239,7 +239,8 @@ public class BookingDAO {
                 + "ON b.tour_id = t.tour_id "
                 + "LEFT JOIN payments p "
                 + "ON b.booking_id = p.booking_id "
-                + "WHERE p.payment_id IS NULL";
+                + "WHERE p.payment_id IS NULL "
+                + "AND b.booking_status <> 'CANCELLED'";
 
         try (
                 Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -283,6 +284,31 @@ public class BookingDAO {
         }
 
         return bookings;
+    }
+
+    public boolean updateBookingStatus(
+            int bookingId,
+            String status) {
+
+        String sql
+                = "UPDATE bookings "
+                + "SET booking_status = ? "
+                + "WHERE booking_id = ?";
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, status);
+
+            ps.setInt(2, bookingId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
 }

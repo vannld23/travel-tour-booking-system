@@ -68,8 +68,26 @@ public class PaymentService {
     public boolean confirmPayment(
             int paymentId) {
 
-        return paymentDAO.updatePaymentStatus(
-                paymentId,
-                "PAID");
+        Payment payment
+                = paymentDAO.getPaymentById(
+                        paymentId);
+
+        if (payment == null) {
+            return false;
+        }
+
+        boolean paymentUpdated
+                = paymentDAO.updatePaymentStatus(
+                        paymentId,
+                        "PAID");
+
+        if (paymentUpdated) {
+
+            bookingDAO.updateBookingStatus(
+                    payment.getBookingId(),
+                    "CONFIRMED");
+        }
+
+        return paymentUpdated;
     }
 }

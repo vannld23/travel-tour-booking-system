@@ -268,4 +268,29 @@ public class PaymentDAO {
 
         return false;
     }
+
+    public boolean updatePaymentAmount(
+            int bookingId,
+            double amount) {
+
+        String sql
+                = "UPDATE payments "
+                + "SET amount = ? "
+                + "WHERE booking_id = ?";
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setDouble(1, amount);
+
+            ps.setInt(2, bookingId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

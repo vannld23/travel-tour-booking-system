@@ -82,19 +82,30 @@
                     Xem
                 </a>
 
-                |
+                <c:if test="${booking.bookingStatus == 'PENDING'}">
 
-                <a href="${pageContext.request.contextPath}/bookings/edit/${booking.bookingId}">
-                    Sửa
-                </a>
+                    |
 
-                <c:if test="${booking.bookingStatus != 'CANCELLED'}">
+                    <a href="${pageContext.request.contextPath}/bookings/edit/${booking.bookingId}">
+                        Sửa
+                    </a>
 
                     |
 
                     <a href="${pageContext.request.contextPath}/bookings/cancel/${booking.bookingId}"
                        onclick="return confirm('Bạn có chắc muốn hủy đơn đặt tour này?')">
                         Hủy
+                    </a>
+
+                </c:if>
+
+                <c:if test="${booking.bookingStatus == 'CONFIRMED'}">
+
+                    |
+
+                    <a href="${pageContext.request.contextPath}/bookings/complete/${booking.bookingId}"
+                       onclick="return confirm('Xác nhận tour đã hoàn thành?')">
+                        Hoàn Thành
                     </a>
 
                 </c:if>

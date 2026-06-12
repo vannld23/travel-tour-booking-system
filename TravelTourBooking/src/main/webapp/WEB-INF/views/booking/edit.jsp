@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html>
@@ -45,19 +46,10 @@
                 <tr>
                     <td>Ngày Đặt</td>
                     <td>
-                <fmt:formatDate
-                    value="${booking.bookingDate}"
-                    pattern="dd/MM/yyyy HH:mm"/>
-                </td>
-                </tr>
-                <tr>
-                    <td>Tổng Tiền</td>
-                    <td>
-                <fmt:formatNumber
-                    value="${booking.totalPrice}"
-                    type="number"/>
-                VNĐ
-                </td>
+                        <fmt:formatDate
+                            value="${booking.bookingDate}"
+                            pattern="dd/MM/yyyy HH:mm"/>
+                    </td>
                 </tr>
 
                 <tr>
@@ -72,32 +64,32 @@
                 </tr>
 
                 <tr>
-                    <td>Trạng Thái</td>
+                    <td>Trạng Thái Hiện Tại</td>
                     <td>
 
-                        <select name="bookingStatus">
+                        <c:choose>
 
-                            <option value="PENDING"
-                                    ${booking.bookingStatus == 'PENDING' ? 'selected' : ''}>
+                            <c:when test="${booking.bookingStatus == 'PENDING'}">
                                 Chờ Xử Lý
-                            </option>
+                            </c:when>
 
-                            <option value="CONFIRMED"
-                                    ${booking.bookingStatus == 'CONFIRMED' ? 'selected' : ''}>
+                            <c:when test="${booking.bookingStatus == 'CONFIRMED'}">
                                 Đã Xác Nhận
-                            </option>
+                            </c:when>
 
-                            <option value="COMPLETED"
-                                    ${booking.bookingStatus == 'COMPLETED' ? 'selected' : ''}>
+                            <c:when test="${booking.bookingStatus == 'COMPLETED'}">
                                 Hoàn Thành
-                            </option>
+                            </c:when>
 
-                            <option value="CANCELLED"
-                                    ${booking.bookingStatus == 'CANCELLED' ? 'selected' : ''}>
+                            <c:when test="${booking.bookingStatus == 'CANCELLED'}">
                                 Đã Hủy
-                            </option>
+                            </c:when>
 
-                        </select>
+                            <c:otherwise>
+                                ${booking.bookingStatus}
+                            </c:otherwise>
+
+                        </c:choose>
 
                     </td>
                 </tr>

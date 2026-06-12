@@ -100,6 +100,17 @@ public class BookingController {
 
         Booking booking
                 = bookingService.getBookingById(id);
+        if (!"PENDING".equals(
+                booking.getBookingStatus())) {
+
+            return "redirect:/bookings";
+        }
+
+        if (!"PENDING".equals(
+                booking.getBookingStatus())) {
+
+            return "redirect:/bookings";
+        }
 
         model.addAttribute(
                 "booking",
@@ -116,6 +127,19 @@ public class BookingController {
     public String updateBooking(
             @ModelAttribute Booking booking) {
 
+        Booking oldBooking
+                = bookingService.getBookingById(
+                        booking.getBookingId());
+
+        if (!"PENDING".equals(
+                oldBooking.getBookingStatus())) {
+
+            return "redirect:/bookings";
+        }
+
+        booking.setBookingStatus(
+                oldBooking.getBookingStatus());
+
         bookingService.updateBooking(
                 booking
         );
@@ -130,7 +154,37 @@ public class BookingController {
     public String cancelBooking(
             @PathVariable("id") int id) {
 
+        Booking booking
+                = bookingService.getBookingById(id);
+
+        if (!"PENDING".equals(
+                booking.getBookingStatus())) {
+
+            return "redirect:/bookings";
+        }
+
         bookingService.cancelBooking(id);
+
+        return "redirect:/bookings";
+    }
+
+    @GetMapping("/bookings/complete/{id}")
+    public String completeBooking(
+            @PathVariable("id") int id) {
+
+        Booking booking
+                = bookingService.getBookingById(id);
+
+        if (!"CONFIRMED".equals(
+                booking.getBookingStatus())) {
+
+            return "redirect:/bookings";
+        }
+
+        bookingService.updateBookingStatus(
+                id,
+                "COMPLETED"
+        );
 
         return "redirect:/bookings";
     }
