@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import uef.edu.vn.model.Booking;
 import uef.edu.vn.service.BookingService;
+import uef.edu.vn.service.UserService;
+import uef.edu.vn.service.TourService;
 
 @Controller
 public class BookingController {
+
+    private UserService userService = new UserService();
+
+    private TourService tourService = new TourService();
 
     private BookingService bookingService = new BookingService();
 
@@ -57,6 +63,16 @@ public class BookingController {
         model.addAttribute(
                 "booking",
                 new Booking()
+        );
+
+        model.addAttribute(
+                "users",
+                userService.getAllUsers()
+        );
+
+        model.addAttribute(
+                "tours",
+                tourService.getAllTours()
         );
 
         return "booking/add";

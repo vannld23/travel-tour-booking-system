@@ -1,13 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uef.edu.vn.service;
 
-/**
- *
- * @author LENOVO
- */
+import uef.edu.vn.dao.TourDAO;
+import uef.edu.vn.model.Tour;
+
+import java.util.List;
+
 public class TourService {
-    
+
+    private TourDAO tourDAO = new TourDAO();
+
+    public List<Tour> getAllTours() {
+
+        return tourDAO.getAllTours();
+    }
+
+    public Tour getTourById(int tourId) {
+
+        return tourDAO.getTourById(tourId);
+    }
 }

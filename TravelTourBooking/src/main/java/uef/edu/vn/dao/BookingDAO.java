@@ -145,7 +145,7 @@ public class BookingDAO {
 
             ps.setDouble(
                     5,
-                    0
+                    booking.getTotalPrice()
             );
 
             ps.setString(
@@ -188,6 +188,7 @@ public class BookingDAO {
         String sql
                 = "UPDATE bookings "
                 + "SET number_of_people = ?, "
+                + "total_price = ?, "
                 + "booking_status = ? "
                 + "WHERE booking_id = ?";
 
@@ -199,13 +200,18 @@ public class BookingDAO {
                     booking.getNumberOfPeople()
             );
 
-            ps.setString(
+            ps.setDouble(
                     2,
+                    booking.getTotalPrice()
+            );
+
+            ps.setString(
+                    3,
                     booking.getBookingStatus()
             );
 
             ps.setInt(
-                    3,
+                    4,
                     booking.getBookingId()
             );
 
