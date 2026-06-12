@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package uef.edu.vn.model;
 
 import java.sql.Timestamp;
@@ -9,12 +5,23 @@ import java.sql.Timestamp;
 public class Booking {
 
     private int bookingId;
+
     private int userId;
+
     private int tourId;
+
     private Timestamp bookingDate;
+
     private int numberOfPeople;
+
     private double totalPrice;
+
     private String bookingStatus;
+
+    // Hiển thị thông tin JOIN
+    private String fullName;
+
+    private String tourName;
 
     public Booking() {
     }
@@ -73,5 +80,21 @@ public class Booking {
 
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
     }
 }

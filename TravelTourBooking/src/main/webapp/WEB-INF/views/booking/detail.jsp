@@ -1,59 +1,69 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Chi Tiết Đơn Đặt Tour</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Chi Tiết Đơn Đặt Tour</title>
+    </head>
+    <body>
 
-<h2>Chi Tiết Đơn Đặt Tour</h2>
+        <h2>Chi Tiết Đơn Đặt Tour</h2>
 
-<table border="1">
+        <table border="1">
 
-    <tr>
-        <th>Mã Đặt Tour</th>
-        <td>${booking.bookingId}</td>
-    </tr>
+            <tr>
+                <td>Mã Booking</td>
+                <td>${booking.bookingId}</td>
+            </tr>
 
-    <tr>
-        <th>Mã Khách Hàng</th>
-        <td>${booking.userId}</td>
-    </tr>
+            <tr>
+                <td>Khách Hàng</td>
+                <td>${booking.fullName}</td>
+            </tr>
 
-    <tr>
-        <th>Mã Tour</th>
-        <td>${booking.tourId}</td>
-    </tr>
+            <tr>
+                <td>Tên Tour</td>
+                <td>${booking.tourName}</td>
+            </tr>
 
-    <tr>
-        <th>Ngày Đặt</th>
-        <td>${booking.bookingDate}</td>
-    </tr>
+            <tr>
+                <td>Ngày Đặt</td>
+                <td>
+                    <fmt:formatDate
+                        value="${booking.bookingDate}"
+                        pattern="dd/MM/yyyy HH:mm"/>
+                </td>
+            </tr>
 
-    <tr>
-        <th>Số Người</th>
-        <td>${booking.numberOfPeople}</td>
-    </tr>
+            <tr>
+                <td>Số Người</td>
+                <td>${booking.numberOfPeople}</td>
+            </tr>
 
-    <tr>
-        <th>Tổng Tiền</th>
-        <td>${booking.totalPrice} VNĐ</td>
-    </tr>
+            <tr>
+                <td>Tổng Tiền</td>
+                <td>
+                    <fmt:formatNumber
+                        value="${booking.totalPrice}"
+                        type="number"/>
+                    VNĐ
+                </td>
+            </tr>
 
-    <tr>
-        <th>Trạng Thái</th>
-        <td>${booking.bookingStatus}</td>
-    </tr>
+            <tr>
+                <td>Trạng Thái</td>
+                <td>${booking.bookingStatus}</td>
+            </tr>
 
-</table>
+        </table>
 
-<br>
+        <br>
 
-<a href="${pageContext.request.contextPath}/bookings">
-    Quay Lại Danh Sách
-</a>
+        <a href="${pageContext.request.contextPath}/bookings">
+            Quay Lại Danh Sách
+        </a>
 
-</body>
+    </body>
 </html>

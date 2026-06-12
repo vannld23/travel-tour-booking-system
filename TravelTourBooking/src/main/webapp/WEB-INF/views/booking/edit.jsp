@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,26 +18,46 @@
                    name="bookingId"
                    value="${booking.bookingId}">
 
+            <input type="hidden"
+                   name="userId"
+                   value="${booking.userId}">
+
+            <input type="hidden"
+                   name="tourId"
+                   value="${booking.tourId}">
+
             <table border="1">
 
                 <tr>
-                    <td>Mã Khách Hàng</td>
-                    <td>
-                        <input type="number"
-                               name="userId"
-                               value="${booking.userId}"
-                               required>
-                    </td>
+                    <td>Mã Booking</td>
+                    <td>${booking.bookingId}</td>
                 </tr>
 
                 <tr>
-                    <td>Mã Tour</td>
+                    <td>Mã Khách Hàng</td>
+                    <td>${booking.fullName}</td>
+                </tr>
+
+                <tr>
+                    <td>Tên Tour</td>
+                    <td>${booking.tourName}</td>
+                </tr>
+                <tr>
+                    <td>Ngày Đặt</td>
                     <td>
-                        <input type="number"
-                               name="tourId"
-                               value="${booking.tourId}"
-                               required>
-                    </td>
+                <fmt:formatDate
+                    value="${booking.bookingDate}"
+                    pattern="dd/MM/yyyy HH:mm"/>
+                </td>
+                </tr>
+                <tr>
+                    <td>Tổng Tiền</td>
+                    <td>
+                <fmt:formatNumber
+                    value="${booking.totalPrice}"
+                    type="number"/>
+                VNĐ
+                </td>
                 </tr>
 
                 <tr>
@@ -45,16 +66,7 @@
                         <input type="number"
                                name="numberOfPeople"
                                value="${booking.numberOfPeople}"
-                               required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Tổng Tiền</td>
-                    <td>
-                        <input type="number"
-                               name="totalPrice"
-                               value="${booking.totalPrice}"
+                               min="1"
                                required>
                     </td>
                 </tr>
@@ -62,10 +74,31 @@
                 <tr>
                     <td>Trạng Thái</td>
                     <td>
-                        <input type="text"
-                               name="bookingStatus"
-                               value="${booking.bookingStatus}"
-                               required>
+
+                        <select name="bookingStatus">
+
+                            <option value="PENDING"
+                                    ${booking.bookingStatus == 'PENDING' ? 'selected' : ''}>
+                                Chờ Xử Lý
+                            </option>
+
+                            <option value="CONFIRMED"
+                                    ${booking.bookingStatus == 'CONFIRMED' ? 'selected' : ''}>
+                                Đã Xác Nhận
+                            </option>
+
+                            <option value="COMPLETED"
+                                    ${booking.bookingStatus == 'COMPLETED' ? 'selected' : ''}>
+                                Hoàn Thành
+                            </option>
+
+                            <option value="CANCELLED"
+                                    ${booking.bookingStatus == 'CANCELLED' ? 'selected' : ''}>
+                                Đã Hủy
+                            </option>
+
+                        </select>
+
                     </td>
                 </tr>
 
@@ -76,7 +109,7 @@
             <input type="submit" value="Cập Nhật">
 
             <a href="${pageContext.request.contextPath}/bookings">
-                Hủy
+                Quay Lại
             </a>
 
         </form>

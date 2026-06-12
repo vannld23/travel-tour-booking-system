@@ -20,6 +20,7 @@
                     <td>
                         <input type="number"
                                name="userId"
+                               min="1"
                                required>
                     </td>
                 </tr>
@@ -29,6 +30,7 @@
                     <td>
                         <input type="number"
                                name="tourId"
+                               min="1"
                                required>
                     </td>
                 </tr>
@@ -38,24 +40,7 @@
                     <td>
                         <input type="number"
                                name="numberOfPeople"
-                               required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Tổng Tiền</td>
-                    <td>
-                        <input type="number"
-                               name="totalPrice"
-                               required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Trạng Thái</td>
-                    <td>
-                        <input type="text"
-                               name="bookingStatus"
+                               min="1"
                                required>
                     </td>
                 </tr>
@@ -67,7 +52,7 @@
             <input type="submit" value="Lưu">
 
             <a href="${pageContext.request.contextPath}/bookings">
-                Hủy
+                Quay Lại
             </a>
 
         </form>
