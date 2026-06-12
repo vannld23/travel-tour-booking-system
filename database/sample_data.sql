@@ -1,71 +1,129 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jun 11, 2026 at 12:27 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- =========================
+-- ROLES
+-- =========================
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+INSERT INTO roles(role_name)
+VALUES
+('ADMIN'),
+('CUSTOMER');
 
+-- =========================
+-- USERS (10 records)
+-- =========================
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+INSERT INTO users(full_name,email,password,phone,address,role_id)
+VALUES
+('Nguyen Van A','[a@gmail.com](mailto:a@gmail.com)','123456','0901111111','HCM',2),
+('Tran Thi B','[b@gmail.com](mailto:b@gmail.com)','123456','0902222222','Ha Noi',2),
+('Le Van C','[c@gmail.com](mailto:c@gmail.com)','123456','0903333333','Da Nang',2),
+('Pham Thi D','[d@gmail.com](mailto:d@gmail.com)','123456','0904444444','Can Tho',2),
+('Hoang Van E','[e@gmail.com](mailto:e@gmail.com)','123456','0905555555','Hue',2),
+('Vo Thi F','[f@gmail.com](mailto:f@gmail.com)','123456','0906666666','Nha Trang',2),
+('Dang Van G','[g@gmail.com](mailto:g@gmail.com)','123456','0907777777','Quang Ninh',2),
+('Bui Thi H','[h@gmail.com](mailto:h@gmail.com)','123456','0908888888','Hai Phong',2),
+('Do Van I','[i@gmail.com](mailto:i@gmail.com)','123456','0909999999','Vung Tau',2);
 
---
--- Database: `travel_tour_booking`
---
+-- =========================
+-- DESTINATIONS (10 records)
+-- =========================
 
--- --------------------------------------------------------
+INSERT INTO destinations(destination_name,country,city,description,image_url)
+VALUES
+('Da Nang Beach','Vietnam','Da Nang','Beautiful beach','danang.jpg'),
+('Ha Long Bay','Vietnam','Quang Ninh','World heritage site','halong.jpg'),
+('Nha Trang Beach','Vietnam','Nha Trang','Beautiful sea','nhatrang.jpg'),
+('Phu Quoc Island','Vietnam','Kien Giang','Island paradise','phuquoc.jpg'),
+('Hoi An Ancient Town','Vietnam','Quang Nam','Ancient town','hoian.jpg'),
+('Sapa Mountain','Vietnam','Lao Cai','Mountain trekking','sapa.jpg'),
+('Da Lat City','Vietnam','Lam Dong','City of flowers','dalat.jpg'),
+('Hue Imperial City','Vietnam','Hue','Historical destination','hue.jpg'),
+('Cat Ba Island','Vietnam','Hai Phong','Island tourism','catba.jpg'),
+('Moc Chau Plateau','Vietnam','Son La','Green tea hills','mocchau.jpg');
 
---
--- Table structure for table `destinations`
---
+-- =========================
+-- TOURS (10 records)
+-- =========================
 
-CREATE TABLE `destinations` (
-  `destination_id` int(11) NOT NULL,
-  `destination_name` varchar(100) NOT NULL,
-  `country` varchar(100) DEFAULT NULL,
-  `city` varchar(100) DEFAULT NULL,
-  `description` text DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO tours(
+tour_name,destination_id,duration_days,
+price,max_capacity,start_date,end_date,
+description,image_url
+)
+VALUES
+('Da Nang Discovery',1,3,3500000,30,'2026-07-01','2026-07-03','Explore Da Nang','tour1.jpg'),
+('Ha Long Cruise',2,2,2800000,25,'2026-07-10','2026-07-11','Ha Long Bay Tour','tour2.jpg'),
+('Nha Trang Vacation',3,4,4500000,30,'2026-08-01','2026-08-04','Beach Holiday','tour3.jpg'),
+('Phu Quoc Resort',4,5,6500000,20,'2026-08-10','2026-08-14','Luxury Resort','tour4.jpg'),
+('Hoi An Heritage',5,2,2500000,25,'2026-08-20','2026-08-21','Ancient Town Visit','tour5.jpg'),
+('Sapa Adventure',6,3,3900000,20,'2026-09-01','2026-09-03','Mountain Trekking','tour6.jpg'),
+('Da Lat Flower Tour',7,3,3200000,25,'2026-09-10','2026-09-12','Flower Festival','tour7.jpg'),
+('Hue Culture Tour',8,2,2700000,20,'2026-09-20','2026-09-21','Historical Tour','tour8.jpg'),
+('Cat Ba Escape',9,3,3600000,20,'2026-10-01','2026-10-03','Island Adventure','tour9.jpg'),
+('Moc Chau Experience',10,2,2200000,15,'2026-10-15','2026-10-16','Tea Hill Tour','tour10.jpg');
 
---
--- Dumping data for table `destinations`
---
+-- =========================
+-- SCHEDULES (20 records)
+-- =========================
 
-INSERT INTO `destinations` (`destination_id`, `destination_name`, `country`, `city`, `description`, `image_url`) VALUES
-(1, 'Da Nang Beach', 'Vietnam', 'Da Nang', 'Beautiful beach destination', 'danang.jpg'),
-(2, 'Ha Long Bay', 'Vietnam', 'Quang Ninh', 'World heritage site', 'halong.jpg'),
-(3, 'Da Lat', 'Vietnam', 'Lam Dong', 'City of flowers and pine forests', 'dalat.jpg');
+INSERT INTO schedules(tour_id,day_number,activity_description)
+VALUES
+(1,1,'Arrival and beach visit'),
+(1,2,'Ba Na Hills'),
+(2,1,'Cruise tour'),
+(2,2,'Visit caves'),
+(3,1,'Beach activities'),
+(3,2,'VinWonders'),
+(4,1,'Check-in resort'),
+(4,2,'Safari visit'),
+(5,1,'Ancient town walk'),
+(5,2,'Lantern festival'),
+(6,1,'Cat Cat village'),
+(6,2,'Fansipan peak'),
+(7,1,'Flower garden'),
+(7,2,'Xuan Huong lake'),
+(8,1,'Imperial Citadel'),
+(8,2,'Thien Mu Pagoda'),
+(9,1,'Island tour'),
+(9,2,'Kayaking'),
+(10,1,'Tea plantation'),
+(10,2,'Local culture');
 
---
--- Indexes for dumped tables
---
+-- =========================
+-- BOOKINGS (10 records)
+-- =========================
 
---
--- Indexes for table `destinations`
---
-ALTER TABLE `destinations`
-  ADD PRIMARY KEY (`destination_id`);
+INSERT INTO bookings(
+user_id,tour_id,number_of_people,
+total_price,booking_status
+)
+VALUES
+(2,1,2,7000000,'CONFIRMED'),
+(3,2,1,2800000,'CONFIRMED'),
+(4,3,2,9000000,'PENDING'),
+(5,4,3,19500000,'CONFIRMED'),
+(6,5,2,5000000,'COMPLETED'),
+(7,6,1,3900000,'PENDING'),
+(8,7,2,6400000,'CONFIRMED'),
+(9,8,1,2700000,'COMPLETED'),
+(2,10,4,8800000,'CONFIRMED');
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- =========================
+-- PAYMENTS (10 records)
+-- =========================
 
---
--- AUTO_INCREMENT for table `destinations`
---
-ALTER TABLE `destinations`
-  MODIFY `destination_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO payments(
+booking_id,
+amount,
+payment_method,
+payment_status
+)
+VALUES
+(1,7000000,'MOMO','PAID'),
+(2,2800000,'BANK_TRANSFER','PAID'),
+(3,9000000,'MOMO','PENDING'),
+(4,19500000,'BANK_TRANSFER','PAID'),
+(5,5000000,'CASH','PAID'),
+(6,3900000,'MOMO','PENDING'),
+(7,6400000,'BANK_TRANSFER','PAID'),
+(8,2700000,'CASH','PAID'),
+(9,7200000,'MOMO','PENDING');
