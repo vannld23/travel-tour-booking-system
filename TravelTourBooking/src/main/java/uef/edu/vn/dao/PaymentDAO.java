@@ -301,4 +301,67 @@ public class PaymentDAO {
 
         return false;
     }
+
+    public List<Payment> getPaymentsByUserId(
+            int userId) {
+
+        List<Payment> payments = new ArrayList<>();
+
+        String sql
+                = "SELECT p.*, "
+                + "u.full_name, "
+                + "t.tour_name "
+                + "FROM payments p "
+                + "JOIN bookings b "
+                + "ON p.booking_id = b.booking_id "
+                + "JOIN users u "
+                + "ON b.user_id = u.user_id "
+                + "JOIN tours t "
+                + "ON b.tour_id = t.tour_id "
+                + "WHERE u.user_id = ?";
+
+        try (
+                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, userId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Payment payment = new Payment();
+
+                payment.setPaymentId(
+                        rs.getInt("payment_id"));
+
+                payment.setBookingId(
+                        rs.getInt("booking_id"));
+
+                payment.setAmount(
+                        rs.getDouble("amount"));
+
+                payment.setPaymentMethod(
+                        rs.getString("payment_method"));
+
+                payment.setPaymentDate(
+                        rs.getTimestamp("payment_date"));
+
+                payment.setPaymentStatus(
+                        rs.getString("payment_status"));
+
+                payment.setFullName(
+                        rs.getString("full_name"));
+
+                payment.setTourName(
+                        rs.getString("tour_name"));
+
+                payments.add(payment);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return payments;
+    }
 }
