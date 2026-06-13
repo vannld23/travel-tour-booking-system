@@ -23,7 +23,8 @@ VALUES
 ('Vo Thi F','f@gmail.com','123456','0906666666','Nha Trang',2),
 ('Dang Van G','g@gmail.com','123456','0907777777','Quang Ninh',2),
 ('Bui Thi H','h@gmail.com','123456','0908888888','Hai Phong',2),
-('Do Van I','i@gmail.com','123456','0909999999','Vung Tau',2);
+('Do Van I','i@gmail.com','123456','0909999999','Vung Tau',2),
+('Nguyen Le Dam Van','vannld23@uef.edu.vn','1234','0395540150','Kon Tum',1);
 
 -- =========================
 -- DESTINATIONS (10 records)
