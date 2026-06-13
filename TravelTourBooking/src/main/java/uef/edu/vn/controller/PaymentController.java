@@ -78,4 +78,5 @@ public class PaymentController {
         paymentService.confirmPayment(id);
         return "redirect:/payment/list";
     }
+    
 }

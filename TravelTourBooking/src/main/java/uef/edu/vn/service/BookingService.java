@@ -112,4 +112,10 @@ public class BookingService {
         }
         return bookingDAO.updateBookingStatus(bookingId, "COMPLETED");
     }
+    public List<Booking> getBookingsByUserId(
+        int userId) {
+
+    return bookingDAO.getBookingsByUserId(
+            userId);
+}
 }

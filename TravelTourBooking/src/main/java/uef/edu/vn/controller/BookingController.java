@@ -12,6 +12,8 @@ import uef.edu.vn.model.Booking;
 import uef.edu.vn.service.BookingService;
 import uef.edu.vn.service.UserService;
 import uef.edu.vn.service.TourService;
+import jakarta.servlet.http.HttpSession;
+import uef.edu.vn.model.User;
 
 /**
  * Controller quản lý đặt chỗ (Booking).
@@ -63,13 +65,6 @@ public class BookingController {
     public String create(@ModelAttribute Booking booking) {
         bookingService.addBooking(booking);
         return "redirect:/booking/list";
-    }
-
-    // ── CLIENT: Lịch sử booking của khách ───────────────────────────────────
-    @GetMapping("/history")
-    public String history(Model model) {
-        model.addAttribute("bookings", bookingService.getAllBookings());
-        return "client/booking/history";
     }
 
     // ── ADMIN: Xác nhận booking PENDING → CONFIRMED ──────────────────────────
@@ -126,5 +121,34 @@ public class BookingController {
         booking.setBookingStatus(old.getBookingStatus());
         bookingService.updateBooking(booking);
         return "redirect:/booking/detail/" + booking.getBookingId();
+    }
+
+    @GetMapping("/history")
+    public String bookingHistory(Model model) {
+
+        model.addAttribute(
+                "bookings",
+                bookingService.getAllBookings());
+
+        return "client/booking/history";
+    }
+
+    @GetMapping("/history/detail/{id}")
+    public String clientBookingDetail(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Booking booking
+                = bookingService.getBookingById(id);
+
+        if (booking == null) {
+            return "redirect:/booking/history";
+        }
+
+        model.addAttribute(
+                "booking",
+                booking);
+
+        return "client/booking/detail";
     }
 }
