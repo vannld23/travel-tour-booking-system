@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="info-row">
-                            <span class="info-label">Tên khách khách hàng</span>
+                            <span class="info-label">Tên khách hàng</span>
                             <span class="info-value font-semibold">${payment.fullName}</span>
                         </div>
 
