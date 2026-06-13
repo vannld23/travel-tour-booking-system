@@ -9,5 +9,15 @@ package uef.edu.vn.constant;
  * @author LENOVO
  */
 public class BookingStatus {
-    
+
+    public static final String PENDING = "PENDING";
+
+    public static final String CONFIRMED = "CONFIRMED";
+
+    public static final String COMPLETED = "COMPLETED";
+
+    public static final String CANCELLED = "CANCELLED";
+
+    private BookingStatus() {
+    }
 }

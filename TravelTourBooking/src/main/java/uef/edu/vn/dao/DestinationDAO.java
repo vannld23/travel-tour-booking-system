@@ -65,9 +65,7 @@ public class DestinationDAO {
              + "LEFT JOIN bookings b ON b.tour_id         = t.tour_id ";
     }
 
-    private static final String GROUP_BY =
-        " GROUP BY d.destination_id, d.destination_name, d.country, " +
-        "d.city, d.description, d.image_url, d.status ";
+
 
     /**
      * Tạo mệnh đề GROUP BY phù hợp tuỳ theo việc cột 'status' có tồn tại hay không.

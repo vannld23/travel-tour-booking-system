@@ -38,6 +38,10 @@
             <span class="material-symbols-outlined mr-3">analytics</span>
             <span>Báo cáo</span>
         </a>
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${fn:contains(reqUri, '/payment') ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" href="<c:url value='/payment/list'/>">
+            <span class="material-symbols-outlined mr-3">payments</span>
+            <span>Quản lý Thanh toán</span>
+        </a>
         <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${fn:contains(reqUri, '/system') or fn:contains(reqUri, '/setting') ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" href="<c:url value='/system/setting'/>">
             <span class="material-symbols-outlined mr-3">settings</span>
             <span>Cài đặt</span>
