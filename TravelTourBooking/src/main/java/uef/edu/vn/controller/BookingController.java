@@ -16,18 +16,17 @@ import uef.edu.vn.service.TourService;
 /**
  * Controller quản lý đặt chỗ (Booking).
  *
- * Luồng trạng thái:
- *   PENDING   → admin xác nhận (sau khi khách đã thanh toán) → CONFIRMED
- *   CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong)  → COMPLETED
- *   PENDING / CONFIRMED → admin/khách hủy                     → CANCELLED
- *   CANCELLED → không tương tác thêm
+ * Luồng trạng thái: PENDING → admin xác nhận (sau khi khách đã thanh toán) →
+ * CONFIRMED CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong) → COMPLETED
+ * PENDING / CONFIRMED → admin/khách hủy → CANCELLED CANCELLED → không tương tác
+ * thêm
  */
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
 
-    private final UserService    userService    = new UserService();
-    private final TourService    tourService    = new TourService();
+    private final UserService userService = new UserService();
+    private final TourService tourService = new TourService();
     private final BookingService bookingService = new BookingService();
 
     // ── Root redirect ────────────────────────────────────────────────────────
@@ -93,12 +92,16 @@ public class BookingController {
     // Chỉ hủy được khi đang PENDING (hoặc CONFIRMED nếu admin cho phép)
     @GetMapping("/cancel/{id}")
     public String cancel(@PathVariable("id") int id) {
+
         Booking booking = bookingService.getBookingById(id);
+
         if (booking != null
-                && ("PENDING".equals(booking.getBookingStatus())
-                    || "CONFIRMED".equals(booking.getBookingStatus()))) {
+                && "PENDING".equals(
+                        booking.getBookingStatus())) {
+
             bookingService.cancelBooking(id);
         }
+
         return "redirect:/booking/list";
     }
 
