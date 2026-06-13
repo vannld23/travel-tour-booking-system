@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import uef.edu.vn.model.Payment;
 import uef.edu.vn.service.PaymentService;
 import uef.edu.vn.service.BookingService;
+import jakarta.servlet.http.HttpSession;
+import uef.edu.vn.model.User;
 
 /**
  * Controller quản lý thanh toán (Payment).
@@ -78,5 +80,33 @@ public class PaymentController {
         paymentService.confirmPayment(id);
         return "redirect:/payment/list";
     }
-    
+
+    @GetMapping("/history")
+    public String paymentHistory(Model model) {
+
+        model.addAttribute(
+                "payments",
+                paymentService.getAllPayments());
+
+        return "client/payment/history";
+    }
+
+    @GetMapping("/history/detail/{id}")
+    public String paymentDetailClient(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Payment payment
+                = paymentService.getPaymentById(id);
+
+        if (payment == null) {
+            return "redirect:/payment/history";
+        }
+
+        model.addAttribute(
+                "payment",
+                payment);
+
+        return "client/payment/detail";
+    }
 }
