@@ -18,7 +18,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "auth/login";
+        return "client/auth/login";
     }
 
     @PostMapping("/login")
@@ -50,13 +50,13 @@ public class AuthController {
         if (user == null) {
             model.addAttribute("error", "Tài khoản không tồn tại trên hệ thống hoặc sai Email.");
             model.addAttribute("email", email);
-            return "auth/login";
+            return "client/auth/login";
         }
 
         if (!user.isActive()) {
             model.addAttribute("error", "Tài khoản của bạn đã bị khóa.");
             model.addAttribute("email", email);
-            return "auth/login";
+            return "client/auth/login";
         }
 
         // 3. So khớp mật khẩu
@@ -66,7 +66,7 @@ public class AuthController {
         } else {
             model.addAttribute("error", "Mật khẩu không chính xác.");
             model.addAttribute("email", email);
-            return "auth/login";
+            return "client/auth/login";
         }
     }
 
@@ -78,12 +78,12 @@ public class AuthController {
 
     @GetMapping("/forgot-password")
     public String forgotPasswordForm() {
-        return "auth/forgot-password";
+        return "client/auth/forgot-password";
     }
 
     @PostMapping("/forgot-password")
     public String handleForgotPassword(@RequestParam("email") String email, Model model) {
         model.addAttribute("message", "Liên kết đặt lại mật khẩu đã được gửi đến email " + email);
-        return "auth/forgot-password";
+        return "client/auth/forgot-password";
     }
 }

@@ -39,6 +39,6 @@ public class DashboardController {
         model.addAttribute("monthlyRevenues", monthlyRevenues);
         model.addAttribute("currentYear", java.time.LocalDate.now().getYear());
 
-        return "dashboard/index";
+        return "admin/dashboard/index";
     }
 }

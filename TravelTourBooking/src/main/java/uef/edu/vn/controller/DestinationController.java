@@ -68,7 +68,7 @@ public class DestinationController {
         model.addAttribute("filterCity",    city);
         model.addAttribute("filterStatus",  statusStr);
 
-        return "destination/list";
+        return "admin/destination/list";
     }
 
     // ─── CREATE ───────────────────────────────────────────────────────────────
@@ -77,7 +77,7 @@ public class DestinationController {
     public String createForm(Model model) {
         model.addAttribute("destination", new Destination());
         model.addAttribute("statuses",    Destination.Status.values());
-        return "destination/create";
+        return "admin/destination/create";
     }
 
     @PostMapping("/create")
@@ -92,7 +92,7 @@ public class DestinationController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("org.springframework.validation.BindingResult.destination", bindingResult);
             model.addAttribute("statuses", Destination.Status.values());
-            return "destination/create";
+            return "admin/destination/create";
         }
         destinationDAO.save(destination);
         return "redirect:/destination/list";
@@ -108,7 +108,7 @@ public class DestinationController {
         }
         model.addAttribute("destination", destination);
         model.addAttribute("statuses",    Destination.Status.values());
-        return "destination/edit";
+        return "admin/destination/edit";
     }
 
     @PostMapping("/edit")
@@ -122,7 +122,7 @@ public class DestinationController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("org.springframework.validation.BindingResult.destination", bindingResult);
             model.addAttribute("statuses", Destination.Status.values());
-            return "destination/edit";
+            return "admin/destination/edit";
         }
         destinationDAO.update(destination);
         return "redirect:/destination/list";
@@ -137,7 +137,7 @@ public class DestinationController {
             return "redirect:/destination/list";
         }
         model.addAttribute("destination", destination);
-        return "destination/detail";
+        return "admin/destination/detail";
     }
 
     // ─── DELETE ───────────────────────────────────────────────────────────────
@@ -149,7 +149,7 @@ public class DestinationController {
             return "redirect:/destination/list";
         }
         model.addAttribute("destination", destination);
-        return "destination/delete";
+        return "admin/destination/delete";
     }
 
     @PostMapping("/delete")

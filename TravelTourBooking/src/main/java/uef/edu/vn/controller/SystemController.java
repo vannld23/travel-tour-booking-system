@@ -18,6 +18,6 @@ public class SystemController {
 
     @GetMapping("/setting")
     public String setting() {
-        return "system/setting";
+        return "admin/system/setting";
     }
 }

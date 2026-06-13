@@ -79,7 +79,7 @@ public class TourController {
         model.addAttribute("filterMaxDurationDays", maxDurationDays);
         model.addAttribute("filterStatus", statusStr);
 
-        return "tour/list";
+        return "admin/tour/list";
     }
 
     // ─── TẠO MỚI ──────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ public class TourController {
         model.addAttribute("tour", new Tour());
         model.addAttribute("destinations", destinationDAO.findAll());
         model.addAttribute("statuses", Tour.Status.values());
-        return "tour/create";
+        return "admin/tour/create";
     }
 
     @PostMapping("/create")
@@ -104,7 +104,7 @@ public class TourController {
             model.addAttribute("org.springframework.validation.BindingResult.tour", bindingResult);
             model.addAttribute("destinations", destinationDAO.findAll());
             model.addAttribute("statuses", Tour.Status.values());
-            return "tour/create";
+            return "admin/tour/create";
         }
         tourDAO.save(tour);
         return "redirect:/tuormanagement/list";
@@ -121,7 +121,7 @@ public class TourController {
         model.addAttribute("tour", tour);
         model.addAttribute("destinations", destinationDAO.findAll());
         model.addAttribute("statuses", Tour.Status.values());
-        return "tour/edit";
+        return "admin/tour/edit";
     }
 
     @PostMapping("/edit")
@@ -136,7 +136,7 @@ public class TourController {
             model.addAttribute("org.springframework.validation.BindingResult.tour", bindingResult);
             model.addAttribute("destinations", destinationDAO.findAll());
             model.addAttribute("statuses", Tour.Status.values());
-            return "tour/edit";
+            return "admin/tour/edit";
         }
         tourDAO.update(tour);
         return "redirect:/tuormanagement/list";
@@ -152,7 +152,7 @@ public class TourController {
         }
         model.addAttribute("tour", tour);
         model.addAttribute("itineraries", new uef.edu.vn.dao.ItineraryDAO().findByTourId(id));
-        return "tour/detail";
+        return "admin/tour/detail";
     }
 
     // ─── XÓA ──────────────────────────────────────────────────────────────────
@@ -164,7 +164,7 @@ public class TourController {
             return "redirect:/tuormanagement/list";
         }
         model.addAttribute("tour", tour);
-        return "tour/delete";
+        return "admin/tour/delete";
     }
 
     @PostMapping("/delete")

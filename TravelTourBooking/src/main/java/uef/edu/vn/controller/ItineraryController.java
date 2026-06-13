@@ -76,7 +76,7 @@ public class ItineraryController {
         model.addAttribute("filterKeyword", keyword);
         model.addAttribute("filterStatus", statusStr);
 
-        return "itinerary/list";
+        return "admin/itinerary/list";
     }
 
     // ─── TẠO MỚI ──────────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ public class ItineraryController {
         model.addAttribute("itinerary", new Itinerary());
         model.addAttribute("tours", tourDAO.findAll());
         model.addAttribute("statuses", Itinerary.Status.values());
-        return "itinerary/create";
+        return "admin/itinerary/create";
     }
 
     @PostMapping("/create")
@@ -101,7 +101,7 @@ public class ItineraryController {
             model.addAttribute("org.springframework.validation.BindingResult.itinerary", bindingResult);
             model.addAttribute("tours", tourDAO.findAll());
             model.addAttribute("statuses", Itinerary.Status.values());
-            return "itinerary/create";
+            return "admin/itinerary/create";
         }
         itineraryDAO.save(itinerary);
         return "redirect:/itinerary/list";
@@ -118,7 +118,7 @@ public class ItineraryController {
         model.addAttribute("itinerary", itinerary);
         model.addAttribute("tours", tourDAO.findAll());
         model.addAttribute("statuses", Itinerary.Status.values());
-        return "itinerary/edit";
+        return "admin/itinerary/edit";
     }
 
     @PostMapping("/edit")
@@ -133,7 +133,7 @@ public class ItineraryController {
             model.addAttribute("org.springframework.validation.BindingResult.itinerary", bindingResult);
             model.addAttribute("tours", tourDAO.findAll());
             model.addAttribute("statuses", Itinerary.Status.values());
-            return "itinerary/edit";
+            return "admin/itinerary/edit";
         }
         itineraryDAO.update(itinerary);
         return "redirect:/itinerary/list";
@@ -148,7 +148,7 @@ public class ItineraryController {
             return "redirect:/itinerary/list";
         }
         model.addAttribute("itinerary", itinerary);
-        return "itinerary/delete";
+        return "admin/itinerary/delete";
     }
 
     @PostMapping("/delete")

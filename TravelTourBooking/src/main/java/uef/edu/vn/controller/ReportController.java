@@ -18,16 +18,16 @@ public class ReportController {
 
     @GetMapping("/revenue")
     public String revenue() {
-        return "report/revenue";
+        return "admin/report/revenue";
     }
 
     @GetMapping("/booking-report")
     public String bookingReport() {
-        return "report/booking-report";
+        return "admin/report/booking-report";
     }
 
     @GetMapping("/export")
     public String export() {
-        return "report/export";
+        return "admin/report/export";
     }
 }

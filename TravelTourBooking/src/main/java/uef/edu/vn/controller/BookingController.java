@@ -18,21 +18,21 @@ public class BookingController {
 
     @GetMapping({"", "/", "/list"})
     public String list() {
-        return "booking/list";
+        return "admin/booking/list";
     }
 
     @GetMapping("/history")
     public String history() {
-        return "booking/history";
+        return "client/booking/history";
     }
 
     @GetMapping("/detail")
     public String detail() {
-        return "booking/detail";
+        return "admin/booking/detail";
     }
 
     @GetMapping("/create")
     public String create() {
-        return "booking/create";
+        return "client/booking/create";
     }
 }
