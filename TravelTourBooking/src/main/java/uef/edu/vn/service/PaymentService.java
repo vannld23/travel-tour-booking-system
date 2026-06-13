@@ -105,4 +105,11 @@ public class PaymentService {
 
         return paymentUpdated;
     }
+
+    public List<Payment> getPaymentsByUserId(
+            int userId) {
+
+        return paymentDAO.getPaymentsByUserId(
+                userId);
+    }
 }

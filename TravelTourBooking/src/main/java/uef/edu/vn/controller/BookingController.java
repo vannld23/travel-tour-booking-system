@@ -51,22 +51,6 @@ public class BookingController {
         return "admin/booking/detail";
     }
 
-    // ── CLIENT: Form tạo booking thủ công ───────────────────────────────────
-    // Khi tạo thủ công → booking có trạng thái PENDING (chưa thanh toán)
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("booking", new Booking());
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("tours", tourService.getAllTours());
-        return "client/booking/create";
-    }
-
-    @PostMapping("/create")
-    public String create(@ModelAttribute Booking booking) {
-        bookingService.addBooking(booking);
-        return "redirect:/booking/list";
-    }
-
     // ── ADMIN: Xác nhận booking PENDING → CONFIRMED ──────────────────────────
     // Điều kiện: khách đã thanh toán, admin bấm xác nhận
     @GetMapping("/confirm/{id}")
@@ -150,5 +134,32 @@ public class BookingController {
                 booking);
 
         return "client/booking/detail";
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(Model model) {
+
+        model.addAttribute(
+                "booking",
+                new Booking());
+
+        model.addAttribute(
+                "tours",
+                tourService.getAllTours());
+
+        return "client/booking/create";
+    }
+
+    @PostMapping("/create")
+    public String create(
+            @ModelAttribute Booking booking) {
+
+        // User test tạm
+        booking.setUserId(2);
+
+        bookingService.addBooking(
+                booking);
+
+        return "redirect:/booking/history";
     }
 }
