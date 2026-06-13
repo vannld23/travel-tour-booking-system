@@ -110,10 +110,9 @@
                         <label class="block text-sm font-semibold text-on-surface-variant mb-2">Phương thức thanh toán</label>
                         <select name="paymentMethod" required
                                 class="w-full rounded-lg border border-outline-variant bg-surface-bright text-sm focus:outline-none focus:ring-2 focus:ring-ocean-blue py-2.5 px-3">
-                            <option value="Visa">Visa</option>
-                            <option value="Mastercard">Mastercard</option>
-                            <option value="MoMo">MoMo</option>
-                            <option value="Chuyển khoản">Chuyển khoản</option>
+                            <option value="VISA">Thẻ Visa (VISA)</option>
+                            <option value="BANK_TRANSFER">Chuyển khoản (BANK_TRANSFER)</option>
+                            <option value="MOMO">Ví MoMo (MOMO)</option>
                         </select>
                     </div>
 

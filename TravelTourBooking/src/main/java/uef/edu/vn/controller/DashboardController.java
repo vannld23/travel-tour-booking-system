@@ -24,7 +24,7 @@ public class DashboardController {
      * @param model Spring MVC model
      * @return JSP view path
      */
-    @GetMapping({"/", "/dashboard", "/admin/dashboard"})
+    @GetMapping({"/admin", "/admin/", "/dashboard", "/admin/dashboard"})
     public String index(Model model) {
         // Fetch stats from DAO
         DashboardDTO stats = dashboardDAO.getAllDashboardStats();
