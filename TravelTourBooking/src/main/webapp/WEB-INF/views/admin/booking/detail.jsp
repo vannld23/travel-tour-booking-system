@@ -164,7 +164,7 @@
                         <div class="space-y-3">
                             <!-- Xác nhận booking -->
                             <c:if test="${booking.bookingStatus == 'PENDING'}">
-                                <a href="<c:url value='/booking/complete/${booking.bookingId}'/>"
+                                <a href="<c:url value='/booking/confirm/${booking.bookingId}'/>"
                                    class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-green-600 text-white font-semibold text-sm hover:bg-green-700 transition-colors">
                                     <span class="material-symbols-outlined text-base">check_circle</span>
                                     Xác nhận đặt chỗ
