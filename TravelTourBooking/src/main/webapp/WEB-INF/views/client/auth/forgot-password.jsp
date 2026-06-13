@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
     <!-- Link CSS stylesheets -->
-    <link rel="stylesheet" href="<c:url value='/resource/css/common/layout.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/resource/css/auth/login.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/css/common/layout.css'/>"/>
+    <link rel="stylesheet" href="<c:url value='/resources/css/auth/login.css'/>"/>
 </head>
 <body>
     <div class="login-container">

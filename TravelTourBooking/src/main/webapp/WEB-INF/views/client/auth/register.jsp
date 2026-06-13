@@ -17,10 +17,10 @@
               rel="stylesheet"/>
 
         <link rel="stylesheet"
-              href="<c:url value='/resource/css/common/layout.css'/>"/>
+              href="<c:url value='/resources/css/common/layout.css'/>"/>
 
         <link rel="stylesheet"
-              href="<c:url value='/resource/css/auth/login.css'/>"/>
+              href="<c:url value='/resources/css/auth/login.css'/>"/>
     </head>
 
     <body>
