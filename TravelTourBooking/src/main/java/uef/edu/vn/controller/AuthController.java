@@ -3,10 +3,8 @@ package uef.edu.vn.controller;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import uef.edu.vn.dao.UserDAO;
 import uef.edu.vn.model.User;
 
@@ -16,74 +14,156 @@ public class AuthController {
 
     private final UserDAO userDAO = new UserDAO();
 
+    // =========================
+    // LOGIN
+    // =========================
     @GetMapping("/login")
-    public String loginForm() {
+    public String loginForm(HttpSession session,
+            @RequestParam(required = false) String registerSuccess,
+            Model model) {
+        if (session.getAttribute("currentUser") != null) {
+
+            return "redirect:/";
+        }
+
+        if (registerSuccess != null) {
+
+            model.addAttribute(
+                    "message",
+                    "Đăng ký tài khoản thành công. Vui lòng đăng nhập.");
+        }
         return "client/auth/login";
     }
 
     @PostMapping("/login")
     public String login(
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
+            @RequestParam String email,
+            @RequestParam String password,
             HttpSession session,
             Model model) {
 
-        // Trim input
-        if (email != null) email = email.trim();
-        if (password != null) password = password.trim();
+        User user = userDAO.login(email, password);
 
-        // 1. LUÔN CHO PHÉP tài khoản kiểm thử mặc định (để tránh lỗi khi CSDL có sẵn user khác)
-        if ("admin@voyagerelite.com".equalsIgnoreCase(email) && "admin123".equals(password)) {
-            User fallbackAdmin = new User();
-            fallbackAdmin.setUserId(0);
-            fallbackAdmin.setFullName("Administrator (Fallback)");
-            fallbackAdmin.setEmail("admin@voyagerelite.com");
-            fallbackAdmin.setRoleId(1); // Admin role
-            fallbackAdmin.setActive(true);
-
-            session.setAttribute("currentUser", fallbackAdmin);
-            return "redirect:/dashboard";
-        }
-
-        // 2. Tìm tài khoản trong CSDL
-        User user = userDAO.findByEmail(email);
         if (user == null) {
-            model.addAttribute("error", "Tài khoản không tồn tại trên hệ thống hoặc sai Email.");
-            model.addAttribute("email", email);
+
+            model.addAttribute(
+                    "error",
+                    "Email hoặc mật khẩu không đúng.");
+
+            model.addAttribute(
+                    "email",
+                    email);
+
             return "client/auth/login";
         }
 
-        if (!user.isActive()) {
-            model.addAttribute("error", "Tài khoản của bạn đã bị khóa.");
-            model.addAttribute("email", email);
-            return "client/auth/login";
+        session.setAttribute(
+                "currentUser",
+                user);
+
+        // phân quyền
+        if (user.getRoleId() == 1) {
+
+            return "redirect:/admin/dashboard";
         }
 
-        // 3. So khớp mật khẩu
-        if (password.equals(user.getPassword())) {
-            session.setAttribute("currentUser", user);
-            return "redirect:/dashboard";
-        } else {
-            model.addAttribute("error", "Mật khẩu không chính xác.");
-            model.addAttribute("email", email);
-            return "client/auth/login";
-        }
+        return "redirect:/";
     }
 
+    // =========================
+    // REGISTER
+    // =========================
+    @GetMapping("/register")
+    public String registerForm() {
+
+        return "client/auth/register";
+    }
+
+    @PostMapping("/register")
+    public String register(
+            @RequestParam String fullName,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String confirmPassword,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String address,
+            Model model) {
+
+        if (!password.equals(confirmPassword)) {
+
+            model.addAttribute(
+                    "error",
+                    "Mật khẩu xác nhận không khớp.");
+
+            return "client/auth/register";
+        }
+
+        if (userDAO.emailExists(email)) {
+
+            model.addAttribute(
+                    "error",
+                    "Email đã tồn tại.");
+
+            return "client/auth/register";
+        }
+
+        User user = new User();
+
+        user.setFullName(fullName);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setAddress(address);
+
+        // CUSTOMER
+        user.setRoleId(2);
+
+        boolean result
+                = userDAO.insertUser(user);
+
+        if (!result) {
+
+            model.addAttribute(
+                    "error",
+                    "Đăng ký thất bại.");
+
+            return "client/auth/register";
+        }
+
+        return "redirect:/auth/login?registerSuccess=true";
+    }
+
+    // =========================
+    // LOGOUT
+    // =========================
     @GetMapping("/logout")
-    public String logout(HttpSession session) {
+    public String logout(
+            HttpSession session) {
+
         session.invalidate();
+
         return "redirect:/auth/login";
     }
 
+    // =========================
+    // FORGOT PASSWORD
+    // =========================
     @GetMapping("/forgot-password")
     public String forgotPasswordForm() {
+
         return "client/auth/forgot-password";
     }
 
     @PostMapping("/forgot-password")
-    public String handleForgotPassword(@RequestParam("email") String email, Model model) {
-        model.addAttribute("message", "Liên kết đặt lại mật khẩu đã được gửi đến email " + email);
+    public String forgotPassword(
+            @RequestParam String email,
+            Model model) {
+
+        model.addAttribute(
+                "message",
+                "Liên kết đặt lại mật khẩu đã được gửi tới "
+                + email);
+
         return "client/auth/forgot-password";
     }
 }

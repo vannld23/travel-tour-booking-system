@@ -12,22 +12,23 @@ import uef.edu.vn.model.Booking;
 import uef.edu.vn.service.BookingService;
 import uef.edu.vn.service.UserService;
 import uef.edu.vn.service.TourService;
+import jakarta.servlet.http.HttpSession;
+import uef.edu.vn.model.User;
 
 /**
  * Controller quản lý đặt chỗ (Booking).
  *
- * Luồng trạng thái:
- *   PENDING   → admin xác nhận (sau khi khách đã thanh toán) → CONFIRMED
- *   CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong)  → COMPLETED
- *   PENDING / CONFIRMED → admin/khách hủy                     → CANCELLED
- *   CANCELLED → không tương tác thêm
+ * Luồng trạng thái: PENDING → admin xác nhận (sau khi khách đã thanh toán) →
+ * CONFIRMED CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong) → COMPLETED
+ * PENDING / CONFIRMED → admin/khách hủy → CANCELLED CANCELLED → không tương tác
+ * thêm
  */
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
 
-    private final UserService    userService    = new UserService();
-    private final TourService    tourService    = new TourService();
+    private final UserService userService = new UserService();
+    private final TourService tourService = new TourService();
     private final BookingService bookingService = new BookingService();
 
     // ── Root redirect ────────────────────────────────────────────────────────
@@ -66,13 +67,6 @@ public class BookingController {
         return "redirect:/booking/list";
     }
 
-    // ── CLIENT: Lịch sử booking của khách ───────────────────────────────────
-    @GetMapping("/history")
-    public String history(Model model) {
-        model.addAttribute("bookings", bookingService.getAllBookings());
-        return "client/booking/history";
-    }
-
     // ── ADMIN: Xác nhận booking PENDING → CONFIRMED ──────────────────────────
     // Điều kiện: khách đã thanh toán, admin bấm xác nhận
     @GetMapping("/confirm/{id}")
@@ -93,12 +87,16 @@ public class BookingController {
     // Chỉ hủy được khi đang PENDING (hoặc CONFIRMED nếu admin cho phép)
     @GetMapping("/cancel/{id}")
     public String cancel(@PathVariable("id") int id) {
+
         Booking booking = bookingService.getBookingById(id);
+
         if (booking != null
-                && ("PENDING".equals(booking.getBookingStatus())
-                    || "CONFIRMED".equals(booking.getBookingStatus()))) {
+                && "PENDING".equals(
+                        booking.getBookingStatus())) {
+
             bookingService.cancelBooking(id);
         }
+
         return "redirect:/booking/list";
     }
 
@@ -123,5 +121,34 @@ public class BookingController {
         booking.setBookingStatus(old.getBookingStatus());
         bookingService.updateBooking(booking);
         return "redirect:/booking/detail/" + booking.getBookingId();
+    }
+
+    @GetMapping("/history")
+    public String bookingHistory(Model model) {
+
+        model.addAttribute(
+                "bookings",
+                bookingService.getAllBookings());
+
+        return "client/booking/history";
+    }
+
+    @GetMapping("/history/detail/{id}")
+    public String clientBookingDetail(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Booking booking
+                = bookingService.getBookingById(id);
+
+        if (booking == null) {
+            return "redirect:/booking/history";
+        }
+
+        model.addAttribute(
+                "booking",
+                booking);
+
+        return "client/booking/detail";
     }
 }
