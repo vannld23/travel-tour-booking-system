@@ -67,26 +67,38 @@ public class PaymentController {
     // ADD PAYMENT
     // =========================
     @PostMapping("/add")
-    public String addPayment(@ModelAttribute Payment payment) {
-        paymentService.addPayment(payment);
-        return "redirect:/payment/list";
-    }
+    public String addPayment(
+            @ModelAttribute Payment payment) {
 
-    // =========================
-    // CONFIRM PAYMENT
-    // =========================
-    @GetMapping("/confirm/{id}")
-    public String confirmPayment(@PathVariable("id") int id) {
-        paymentService.confirmPayment(id);
+        System.out.println("===== CREATE PAYMENT =====");
+        System.out.println("BOOKING ID = " + payment.getBookingId());
+        System.out.println("METHOD = " + payment.getPaymentMethod());
+
+        boolean result
+                = paymentService.addPayment(payment);
+
+        System.out.println("RESULT = " + result);
+
         return "redirect:/payment/list";
     }
 
     @GetMapping("/history")
-    public String paymentHistory(Model model) {
+    public String paymentHistory(
+            HttpSession session,
+            Model model) {
+
+        User currentUser
+                = (User) session.getAttribute(
+                        "currentUser");
+
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
 
         model.addAttribute(
                 "payments",
-                paymentService.getAllPayments());
+                paymentService.getPaymentsByUserId(
+                        currentUser.getUserId()));
 
         return "client/payment/history";
     }
@@ -108,5 +120,17 @@ public class PaymentController {
                 payment);
 
         return "client/payment/detail";
+    }
+    // =========================
+// CONFIRM PAYMENT
+// =========================
+
+    @GetMapping("/confirm/{id}")
+    public String confirmPayment(
+            @PathVariable("id") int id) {
+
+        paymentService.confirmPayment(id);
+
+        return "redirect:/payment/list";
     }
 }

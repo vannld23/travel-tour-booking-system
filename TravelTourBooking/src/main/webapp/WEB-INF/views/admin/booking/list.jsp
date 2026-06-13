@@ -119,7 +119,7 @@
                         </nav>
                         <h2 class="text-3xl font-bold text-deep-navy">Danh sách Đặt chỗ</h2>
                     </div>
-                    <a href="<c:url value='/booking/create'/>"
+                    <a href="<c:url value='/booking/admin/create'/>"
                        class="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-action-orange text-white font-medium shadow hover:brightness-110 transition-all">
                         <span class="material-symbols-outlined text-base">add_circle</span>
                         Đặt tour thủ công
