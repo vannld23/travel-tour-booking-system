@@ -1,8 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package uef.edu.vn.service;
+
 import uef.edu.vn.dao.BookingDAO;
 import uef.edu.vn.dao.PaymentDAO;
 import uef.edu.vn.model.Booking;
@@ -10,11 +11,13 @@ import uef.edu.vn.model.Payment;
 
 import java.sql.Timestamp;
 import java.util.List;
+
 /**
  *
  * @author LENOVO
  */
 public class PaymentService {
+
     private PaymentDAO paymentDAO = new PaymentDAO();
 
     private BookingDAO bookingDAO = new BookingDAO();
@@ -78,6 +81,13 @@ public class PaymentService {
                         paymentId);
 
         if (payment == null) {
+            return false;
+        }
+
+        // Không xác nhận lại nếu đã PAID
+        if ("PAID".equals(
+                payment.getPaymentStatus())) {
+
             return false;
         }
 
