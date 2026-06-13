@@ -1,191 +1,38 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package uef.edu.vn.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import uef.edu.vn.model.Booking;
-import uef.edu.vn.service.BookingService;
-import uef.edu.vn.service.UserService;
-import uef.edu.vn.service.TourService;
-
+/**
+ *
+ * @author LENOVO
+ */
 @Controller
+@RequestMapping("/booking")
 public class BookingController {
 
-    private UserService userService = new UserService();
-
-    private TourService tourService = new TourService();
-
-    private BookingService bookingService = new BookingService();
-
-    // =========================
-    // LIST BOOKING
-    // =========================
-    @GetMapping("/bookings")
-    public String getAllBookings(Model model) {
-
-        model.addAttribute(
-                "bookings",
-                bookingService.getAllBookings()
-        );
-
-        return "booking/list";
+    @GetMapping({"", "/", "/list"})
+    public String list() {
+        return "admin/booking/list";
     }
 
-    // =========================
-    // BOOKING DETAIL
-    // =========================
-    @GetMapping("/bookings/{id}")
-    public String bookingDetail(
-            @PathVariable("id") int id,
-            Model model) {
-
-        Booking booking
-                = bookingService.getBookingById(id);
-
-        model.addAttribute(
-                "booking",
-                booking
-        );
-
-        return "booking/detail";
+    @GetMapping("/history")
+    public String history() {
+        return "client/booking/history";
     }
 
-    // =========================
-    // SHOW ADD FORM
-    // =========================
-    @GetMapping("/bookings/add")
-    public String showAddForm(Model model) {
-
-        model.addAttribute(
-                "booking",
-                new Booking()
-        );
-
-        model.addAttribute(
-                "users",
-                userService.getAllUsers()
-        );
-
-        model.addAttribute(
-                "tours",
-                tourService.getAllTours()
-        );
-
-        return "booking/add";
+    @GetMapping("/detail")
+    public String detail() {
+        return "admin/booking/detail";
     }
 
-    // =========================
-    // ADD BOOKING
-    // =========================
-    @PostMapping("/bookings/add")
-    public String addBooking(
-            @ModelAttribute Booking booking) {
-
-        bookingService.addBooking(booking);
-
-        return "redirect:/bookings";
-    }
-
-    // =========================
-    // SHOW EDIT FORM
-    // =========================
-    @GetMapping("/bookings/edit/{id}")
-    public String showEditForm(
-            @PathVariable("id") int id,
-            Model model) {
-
-        Booking booking
-                = bookingService.getBookingById(id);
-        if (!"PENDING".equals(
-                booking.getBookingStatus())) {
-
-            return "redirect:/bookings";
-        }
-
-        if (!"PENDING".equals(
-                booking.getBookingStatus())) {
-
-            return "redirect:/bookings";
-        }
-
-        model.addAttribute(
-                "booking",
-                booking
-        );
-
-        return "booking/edit";
-    }
-
-    // =========================
-    // UPDATE BOOKING
-    // =========================
-    @PostMapping("/bookings/edit")
-    public String updateBooking(
-            @ModelAttribute Booking booking) {
-
-        Booking oldBooking
-                = bookingService.getBookingById(
-                        booking.getBookingId());
-
-        if (!"PENDING".equals(
-                oldBooking.getBookingStatus())) {
-
-            return "redirect:/bookings";
-        }
-
-        booking.setBookingStatus(
-                oldBooking.getBookingStatus());
-
-        bookingService.updateBooking(
-                booking
-        );
-
-        return "redirect:/bookings";
-    }
-
-    // =========================
-    // DELETE BOOKING
-    // =========================
-    @GetMapping("/bookings/cancel/{id}")
-    public String cancelBooking(
-            @PathVariable("id") int id) {
-
-        Booking booking
-                = bookingService.getBookingById(id);
-
-        if (!"PENDING".equals(
-                booking.getBookingStatus())) {
-
-            return "redirect:/bookings";
-        }
-
-        bookingService.cancelBooking(id);
-
-        return "redirect:/bookings";
-    }
-
-    @GetMapping("/bookings/complete/{id}")
-    public String completeBooking(
-            @PathVariable("id") int id) {
-
-        Booking booking
-                = bookingService.getBookingById(id);
-
-        if (!"CONFIRMED".equals(
-                booking.getBookingStatus())) {
-
-            return "redirect:/bookings";
-        }
-
-        bookingService.updateBookingStatus(
-                id,
-                "COMPLETED"
-        );
-
-        return "redirect:/bookings";
+    @GetMapping("/create")
+    public String create() {
+        return "client/booking/create";
     }
 }

@@ -1,90 +1,58 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package uef.edu.vn.model;
 
-import java.sql.Timestamp;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.io.Serializable;
 
-public class Payment {
+/**
+ *
+ * @author tranq
+ */
+@Entity
+public class Payment implements Serializable {
 
-    private int paymentId;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    private int bookingId;
-
-    private double amount;
-
-    private String paymentMethod;
-
-    private Timestamp paymentDate;
-
-    private String paymentStatus;
-
-    // Hiển thị thông tin JOIN
-    private String fullName;
-
-    private String tourName;
-
-    public Payment() {
+    public Long getId() {
+        return id;
     }
 
-    public int getPaymentId() {
-        return paymentId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Payment)) {
+            return false;
+        }
+        Payment other = (Payment) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
+    @Override
+    public String toString() {
+        return "uef.edu.vn.model.Payment[ id=" + id + " ]";
     }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public Timestamp getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Timestamp paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public String getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getTourName() {
-        return tourName;
-    }
-
-    public void setTourName(String tourName) {
-        this.tourName = tourName;
-    }
+    
 }

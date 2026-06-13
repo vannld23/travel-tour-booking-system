@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 32px;
+    color: #1f2937;
+}
+
+h1, h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    max-width: 640px;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 120px;
+}
+
+.error {
+    color: #dc2626;
+    display: block;
+    margin-top: 6px;
+}
+
+button,
+a {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.primary {
+    background: #2563eb;
+    color: #fff;
+}
+
+.secondary {
+    background: #6b7280;
+    color: #fff;
+}
+
+.danger {
+    background: #dc2626;
+    color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+}
+
+th,
+td {
+    border: 1px solid #d1d5db;
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #111827;
+    color: #fff;
+}
+
+.actions {
+    white-space: nowrap;
+}
+
+.card {
+    max-width: 900px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.alert {
+    max-width: 720px;
+    border: 1px solid #fca5a5;
+    background: #fef2f2;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.row {
+    margin-bottom: 12px;
+}
+
+.label {
+    font-weight: 700;
+    display: inline-block;
+    min-width: 150px;
+}

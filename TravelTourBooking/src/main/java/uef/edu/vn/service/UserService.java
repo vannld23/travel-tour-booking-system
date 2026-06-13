@@ -1,16 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package uef.edu.vn.service;
 
-import uef.edu.vn.dao.UserDAO;
-import uef.edu.vn.model.User;
-
-import java.util.List;
-
+/**
+ *
+ * @author LENOVO
+ */
 public class UserService {
-
-    private UserDAO userDAO = new UserDAO();
-
-    public List<User> getAllUsers() {
-
-        return userDAO.getAllUsers();
-    }
+    
 }

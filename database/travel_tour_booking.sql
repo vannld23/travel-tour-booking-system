@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `travel_tour_booking`
 --
+CREATE DATABASE IF NOT EXISTS `travel_tour_booking`;
+USE `travel_tour_booking`;
 
 -- --------------------------------------------------------
 
