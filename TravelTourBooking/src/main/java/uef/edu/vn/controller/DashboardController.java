@@ -23,6 +23,7 @@ public class DashboardController {
     /**
      * Admin Dashboard
      */
+
     @GetMapping({"/dashboard", "/admin/dashboard"})
     public String index(
             HttpSession session,
@@ -52,6 +53,7 @@ public class DashboardController {
 
         List<MonthlyRevenueDTO> monthlyRevenues =
                 dashboardDAO.getMonthlyRevenue();
+
 
         model.addAttribute("stats", stats);
         model.addAttribute("tourRevenues", tourRevenues);

@@ -134,10 +134,9 @@
                     <label class="text-sm text-on-surface-variant font-semibold">Phương thức:</label>
                     <select id="methodFilter" onchange="filterTable()" class="bg-surface-gray border-none rounded-lg px-4 py-2 text-sm text-on-surface-variant focus:ring-2 focus:ring-ocean-blue">
                         <option value="">Tất cả</option>
-                        <option value="Visa">Visa</option>
-                        <option value="Mastercard">Mastercard</option>
-                        <option value="MoMo">MoMo</option>
-                        <option value="Chuyển khoản">Chuyển khoản</option>
+                        <option value="VISA">Thẻ Visa</option>
+                        <option value="BANK_TRANSFER">Chuyển khoản</option>
+                        <option value="MOMO">Ví MoMo</option>
                     </select>
                 </div>
                 <div class="flex items-center gap-3">
@@ -200,17 +199,19 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
                                         <c:choose>
-                                            <c:when test="${p.paymentMethod == 'Visa' or p.paymentMethod == 'Mastercard'}">
-                                                <span class="material-symbols-outlined text-deep-navy text-base">credit_card</span>
+                                            <c:when test="${p.paymentMethod == 'VISA'}">
+                                                <span class="material-symbols-outlined text-[#1A1F71] text-base">credit_card</span>
+                                                <span class="font-medium">Thẻ Visa</span>
                                             </c:when>
-                                            <c:when test="${p.paymentMethod == 'MoMo'}">
+                                            <c:when test="${p.paymentMethod == 'MOMO'}">
                                                 <span class="material-symbols-outlined text-[#A50064] text-base">account_balance_wallet</span>
+                                                <span class="font-medium">Ví MoMo</span>
                                             </c:when>
                                             <c:otherwise>
                                                 <span class="material-symbols-outlined text-ocean-blue text-base">account_balance</span>
+                                                <span class="font-medium">Chuyển khoản</span>
                                             </c:otherwise>
                                         </c:choose>
-                                        <span class="font-medium">${p.paymentMethod}</span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 font-semibold text-action-orange">

@@ -123,7 +123,13 @@
 
                         <div class="info-row">
                             <span class="info-label">Phương thức thanh toán</span>
-                            <span class="info-value font-semibold">${payment.paymentMethod}</span>
+                            <span class="info-value font-semibold">
+                                <c:choose>
+                                    <c:when test="${payment.paymentMethod == 'VISA'}">Thẻ Visa (VISA)</c:when>
+                                    <c:when test="${payment.paymentMethod == 'MOMO'}">Ví MoMo (MOMO)</c:when>
+                                    <c:otherwise>Chuyển khoản (BANK_TRANSFER)</c:otherwise>
+                                </c:choose>
+                            </span>
                         </div>
 
                         <div class="info-row font-semibold">

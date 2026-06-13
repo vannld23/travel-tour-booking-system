@@ -26,12 +26,15 @@ public class BookingDAO {
         String sql
                 = "SELECT b.*, "
                 + "u.full_name, "
-                + "t.tour_name "
+                + "t.tour_name, "
+                + "p.payment_status "
                 + "FROM bookings b "
                 + "JOIN users u "
                 + "ON b.user_id = u.user_id "
                 + "JOIN tours t "
-                + "ON b.tour_id = t.tour_id";
+                + "ON b.tour_id = t.tour_id "
+                + "LEFT JOIN payments p "
+                + "ON b.booking_id = p.booking_id";
 
         try (
                 Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
@@ -54,6 +57,9 @@ public class BookingDAO {
                 booking.setTourName(
                         rs.getString("tour_name"));
 
+                booking.setPaymentStatus(
+                        rs.getString("payment_status"));
+
                 bookings.add(booking);
             }
 
@@ -69,12 +75,15 @@ public class BookingDAO {
         String sql
                 = "SELECT b.*, "
                 + "u.full_name, "
-                + "t.tour_name "
+                + "t.tour_name, "
+                + "p.payment_status "
                 + "FROM bookings b "
                 + "JOIN users u "
                 + "ON b.user_id = u.user_id "
                 + "JOIN tours t "
                 + "ON b.tour_id = t.tour_id "
+                + "LEFT JOIN payments p "
+                + "ON b.booking_id = p.booking_id "
                 + "WHERE b.booking_id = ?";
 
         try (
@@ -114,6 +123,9 @@ public class BookingDAO {
 
                 booking.setTourName(
                         rs.getString("tour_name"));
+
+                booking.setPaymentStatus(
+                        rs.getString("payment_status"));
 
                 return booking;
             }

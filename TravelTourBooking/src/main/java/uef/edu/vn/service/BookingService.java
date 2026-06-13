@@ -91,6 +91,11 @@ public class BookingService {
         if (booking == null || !"PENDING".equals(booking.getBookingStatus())) {
             return false;
         }
+        // Yêu cầu: Phải có giao dịch thanh toán và giao dịch đó đã thành công (PAID)
+        Payment payment = paymentDAO.getPaymentByBookingId(bookingId);
+        if (payment == null || !"PAID".equals(payment.getPaymentStatus())) {
+            return false;
+        }
         return bookingDAO.updateBookingStatus(bookingId, "CONFIRMED");
     }
 

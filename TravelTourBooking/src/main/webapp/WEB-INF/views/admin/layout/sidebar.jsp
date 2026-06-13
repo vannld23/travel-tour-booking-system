@@ -14,6 +14,10 @@
     </div>
 
     <nav class="flex-1 px-3 space-y-2">
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline text-white/80 hover:bg-white/10" href="<c:url value='/'/>">
+            <span class="material-symbols-outlined mr-3">home</span>
+            <span>Trang chủ (Client)</span>
+        </a>
         <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${fn:contains(reqUri, '/dashboard') ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" href="<c:url value='/dashboard'/>">
             <span class="material-symbols-outlined mr-3">dashboard</span>
             <span>Tổng quan</span>

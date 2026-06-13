@@ -213,28 +213,42 @@
 
                                 <!-- Trạng thái -->
                                 <td class="px-6 py-4 text-center">
-                                    <c:choose>
-                                        <c:when test="${booking.bookingStatus == 'PENDING'}">
-                                            <span class="px-3 py-1 rounded-full badge-pending text-xs font-bold inline-flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[13px]">schedule</span> Chờ xác nhận
-                                            </span>
-                                        </c:when>
-                                        <c:when test="${booking.bookingStatus == 'CONFIRMED'}">
-                                            <span class="px-3 py-1 rounded-full badge-confirmed text-xs font-bold inline-flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[13px]">check_circle</span> Đã xác nhận
-                                            </span>
-                                        </c:when>
-                                        <c:when test="${booking.bookingStatus == 'COMPLETED'}">
-                                            <span class="px-3 py-1 rounded-full badge-completed text-xs font-bold inline-flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[13px]">task_alt</span> Hoàn thành
-                                            </span>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <span class="px-3 py-1 rounded-full badge-cancelled text-xs font-bold inline-flex items-center gap-1">
-                                                <span class="material-symbols-outlined text-[13px]">cancel</span> Đã hủy
-                                            </span>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <div class="flex flex-col items-center">
+                                        <c:choose>
+                                            <c:when test="${booking.bookingStatus == 'PENDING'}">
+                                                <span class="px-3 py-1 rounded-full badge-pending text-xs font-bold inline-flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-[13px]">schedule</span> Chờ xác nhận
+                                                </span>
+                                            </c:when>
+                                            <c:when test="${booking.bookingStatus == 'CONFIRMED'}">
+                                                <span class="px-3 py-1 rounded-full badge-confirmed text-xs font-bold inline-flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-[13px]">check_circle</span> Đã xác nhận
+                                                </span>
+                                            </c:when>
+                                            <c:when test="${booking.bookingStatus == 'COMPLETED'}">
+                                                <span class="px-3 py-1 rounded-full badge-completed text-xs font-bold inline-flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-[13px]">task_alt</span> Hoàn thành
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="px-3 py-1 rounded-full badge-cancelled text-xs font-bold inline-flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-[13px]">cancel</span> Đã hủy
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <c:choose>
+                                            <c:when test="${booking.paymentStatus == 'PAID'}">
+                                                <span class="text-[10px] text-green-600 font-semibold mt-1 flex items-center gap-0.5">
+                                                    <span class="material-symbols-outlined text-[10px]">check</span> Đã thanh toán
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="text-[10px] text-red-500 font-semibold mt-1 flex items-center gap-0.5">
+                                                    <span class="material-symbols-outlined text-[10px]">warning</span> Chưa thanh toán
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
                                 </td>
 
                                 <!-- Hành động -->
@@ -247,14 +261,25 @@
                                             <span class="material-symbols-outlined text-[15px]">visibility</span>
                                         </a>
 
-                                        <!-- Xác nhận (chỉ khi PENDING) -->
-                                        <c:if test="${booking.bookingStatus == 'PENDING'}">
-                                            <button class="btn-action btn-confirm"
-                                                    onclick="showStatusModal(${booking.bookingId}, 'CONFIRMED', '#BK-${booking.bookingId}')"
-                                                    title="Xác nhận đặt chỗ">
-                                                <span class="material-symbols-outlined text-[15px]">check_circle</span>
-                                            </button>
-                                        </c:if>
+                                         <!-- Xác nhận (chỉ khi PENDING) -->
+                                         <c:if test="${booking.bookingStatus == 'PENDING'}">
+                                             <c:choose>
+                                                 <c:when test="${booking.paymentStatus == 'PAID'}">
+                                                     <button class="btn-action btn-confirm"
+                                                             onclick="showStatusModal(${booking.bookingId}, 'CONFIRMED', '#BK-${booking.bookingId}')"
+                                                             title="Xác nhận đặt chỗ">
+                                                         <span class="material-symbols-outlined text-[15px]">check_circle</span>
+                                                     </button>
+                                                 </c:when>
+                                                 <c:otherwise>
+                                                     <button class="btn-action bg-gray-200 text-gray-400 opacity-40 cursor-not-allowed"
+                                                             disabled
+                                                             title="Yêu cầu thanh toán thành công (PAID) trước khi xác nhận">
+                                                         <span class="material-symbols-outlined text-[15px]">lock</span>
+                                                     </button>
+                                                 </c:otherwise>
+                                             </c:choose>
+                                         </c:if>
 
                                         <!-- Hoàn thành (chỉ khi CONFIRMED) -->
                                         <c:if test="${booking.bookingStatus == 'CONFIRMED'}">

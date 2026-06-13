@@ -31,6 +31,8 @@ public class Booking {
 
     private String tourName;
 
+    private String paymentStatus;
+
     public Booking() {
     }
 
@@ -104,5 +106,13 @@ public class Booking {
 
     public void setTourName(String tourName) {
         this.tourName = tourName;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }
