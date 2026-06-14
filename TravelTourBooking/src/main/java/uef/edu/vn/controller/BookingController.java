@@ -12,22 +12,25 @@ import uef.edu.vn.model.Booking;
 import uef.edu.vn.service.BookingService;
 import uef.edu.vn.service.UserService;
 import uef.edu.vn.service.TourService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+import uef.edu.vn.model.User;
+import uef.edu.vn.model.Tour;
 
 /**
  * Controller quản lý đặt chỗ (Booking).
  *
- * Luồng trạng thái:
- *   PENDING   → admin xác nhận (sau khi khách đã thanh toán) → CONFIRMED
- *   CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong)  → COMPLETED
- *   PENDING / CONFIRMED → admin/khách hủy                     → CANCELLED
- *   CANCELLED → không tương tác thêm
+ * Luồng trạng thái: PENDING → admin xác nhận (sau khi khách đã thanh toán) →
+ * CONFIRMED CONFIRMED → admin đánh dấu hoàn thành (tour đã đi xong) → COMPLETED
+ * PENDING / CONFIRMED → admin/khách hủy → CANCELLED CANCELLED → không tương tác
+ * thêm
  */
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
 
-    private final UserService    userService    = new UserService();
-    private final TourService    tourService    = new TourService();
+    private final UserService userService = new UserService();
+    private final TourService tourService = new TourService();
     private final BookingService bookingService = new BookingService();
 
     // ── Root redirect ────────────────────────────────────────────────────────
@@ -50,29 +53,6 @@ public class BookingController {
         return "admin/booking/detail";
     }
 
-    // ── CLIENT: Form tạo booking thủ công ───────────────────────────────────
-    // Khi tạo thủ công → booking có trạng thái PENDING (chưa thanh toán)
-    @GetMapping("/create")
-    public String showCreateForm(Model model) {
-        model.addAttribute("booking", new Booking());
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("tours", tourService.getAllTours());
-        return "client/booking/create";
-    }
-
-    @PostMapping("/create")
-    public String create(@ModelAttribute Booking booking) {
-        bookingService.addBooking(booking);
-        return "redirect:/booking/list";
-    }
-
-    // ── CLIENT: Lịch sử booking của khách ───────────────────────────────────
-    @GetMapping("/history")
-    public String history(Model model) {
-        model.addAttribute("bookings", bookingService.getAllBookings());
-        return "client/booking/history";
-    }
-
     // ── ADMIN: Xác nhận booking PENDING → CONFIRMED ──────────────────────────
     // Điều kiện: khách đã thanh toán, admin bấm xác nhận
     @GetMapping("/confirm/{id}")
@@ -93,12 +73,16 @@ public class BookingController {
     // Chỉ hủy được khi đang PENDING (hoặc CONFIRMED nếu admin cho phép)
     @GetMapping("/cancel/{id}")
     public String cancel(@PathVariable("id") int id) {
+
         Booking booking = bookingService.getBookingById(id);
+
         if (booking != null
-                && ("PENDING".equals(booking.getBookingStatus())
-                    || "CONFIRMED".equals(booking.getBookingStatus()))) {
+                && "PENDING".equals(
+                        booking.getBookingStatus())) {
+
             bookingService.cancelBooking(id);
         }
+
         return "redirect:/booking/list";
     }
 
@@ -123,5 +107,137 @@ public class BookingController {
         booking.setBookingStatus(old.getBookingStatus());
         bookingService.updateBooking(booking);
         return "redirect:/booking/detail/" + booking.getBookingId();
+    }
+
+    @GetMapping("/history")
+    public String bookingHistory(
+            HttpSession session,
+            Model model) {
+
+        User currentUser
+                = (User) session.getAttribute(
+                        "currentUser");
+
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute(
+                "bookings",
+                bookingService.getBookingsByUserId(
+                        currentUser.getUserId()));
+
+        return "client/booking/history";
+    }
+
+    @GetMapping("/history/detail/{id}")
+    public String clientBookingDetail(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Booking booking
+                = bookingService.getBookingById(id);
+
+        if (booking == null) {
+            return "redirect:/booking/history";
+        }
+
+        model.addAttribute(
+                "booking",
+                booking);
+
+        return "client/booking/detail";
+    }
+
+    @GetMapping("/create")
+    public String showCreateForm(
+            @RequestParam(required = false) Integer tourId,
+            HttpSession session,
+            Model model) {
+
+        User currentUser
+                = (User) session.getAttribute(
+                        "currentUser");
+
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute(
+                "booking",
+                new Booking());
+
+        model.addAttribute(
+                "tours",
+                tourService.getAllTours());
+
+        if (tourId != null) {
+
+            Tour selectedTour
+                    = tourService.getTourById(
+                            tourId);
+
+            model.addAttribute(
+                    "selectedTour",
+                    selectedTour);
+
+            model.addAttribute(
+                    "relatedTours",
+                    tourService.getAllTours());
+        }
+
+        return "client/booking/create";
+    }
+
+    @PostMapping("/create")
+    public String create(
+            @ModelAttribute Booking booking,
+            HttpSession session) {
+
+        User currentUser
+                = (User) session.getAttribute(
+                        "currentUser");
+
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        booking.setUserId(
+                currentUser.getUserId());
+
+        bookingService.addBooking(
+                booking);
+
+        return "redirect:/booking/history";
+    }
+    // ── ADMIN: Form tạo booking ─────────────────────
+
+    @GetMapping("/admin/create")
+    public String adminCreateForm(
+            Model model) {
+
+        model.addAttribute(
+                "booking",
+                new Booking());
+
+        model.addAttribute(
+                "users",
+                userService.getAllUsers());
+
+        model.addAttribute(
+                "tours",
+                tourService.getAllTours());
+
+        return "admin/booking/create";
+    }
+
+    @PostMapping("/admin/create")
+    public String adminCreate(
+            @ModelAttribute Booking booking) {
+
+        bookingService.addBooking(
+                booking);
+
+        return "redirect:/booking/list";
     }
 }

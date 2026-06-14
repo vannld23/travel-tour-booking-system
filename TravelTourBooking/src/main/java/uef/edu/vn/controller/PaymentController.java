@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import uef.edu.vn.model.Payment;
 import uef.edu.vn.service.PaymentService;
 import uef.edu.vn.service.BookingService;
+import jakarta.servlet.http.HttpSession;
+import uef.edu.vn.model.User;
 
 /**
  * Controller quản lý thanh toán (Payment).
@@ -65,17 +67,70 @@ public class PaymentController {
     // ADD PAYMENT
     // =========================
     @PostMapping("/add")
-    public String addPayment(@ModelAttribute Payment payment) {
-        paymentService.addPayment(payment);
+    public String addPayment(
+            @ModelAttribute Payment payment) {
+
+        System.out.println("===== CREATE PAYMENT =====");
+        System.out.println("BOOKING ID = " + payment.getBookingId());
+        System.out.println("METHOD = " + payment.getPaymentMethod());
+
+        boolean result
+                = paymentService.addPayment(payment);
+
+        System.out.println("RESULT = " + result);
+
         return "redirect:/payment/list";
     }
 
+    @GetMapping("/history")
+    public String paymentHistory(
+            HttpSession session,
+            Model model) {
+
+        User currentUser
+                = (User) session.getAttribute(
+                        "currentUser");
+
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        model.addAttribute(
+                "payments",
+                paymentService.getPaymentsByUserId(
+                        currentUser.getUserId()));
+
+        return "client/payment/history";
+    }
+
+    @GetMapping("/history/detail/{id}")
+    public String paymentDetailClient(
+            @PathVariable("id") int id,
+            Model model) {
+
+        Payment payment
+                = paymentService.getPaymentById(id);
+
+        if (payment == null) {
+            return "redirect:/payment/history";
+        }
+
+        model.addAttribute(
+                "payment",
+                payment);
+
+        return "client/payment/detail";
+    }
     // =========================
-    // CONFIRM PAYMENT
-    // =========================
+// CONFIRM PAYMENT
+// =========================
+
     @GetMapping("/confirm/{id}")
-    public String confirmPayment(@PathVariable("id") int id) {
+    public String confirmPayment(
+            @PathVariable("id") int id) {
+
         paymentService.confirmPayment(id);
+
         return "redirect:/payment/list";
     }
 }

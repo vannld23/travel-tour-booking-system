@@ -136,3 +136,4 @@ public class HomeController {
         return "client/tour-detail";
     }
 }
+

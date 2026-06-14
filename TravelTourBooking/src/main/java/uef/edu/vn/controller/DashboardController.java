@@ -1,43 +1,71 @@
 package uef.edu.vn.controller;
 
+import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import uef.edu.vn.dao.DashboardDAO;
 import uef.edu.vn.model.DashboardDTO;
 import uef.edu.vn.model.MonthlyRevenueDTO;
 import uef.edu.vn.model.TopTourDTO;
 import uef.edu.vn.model.TourRevenueDTO;
+import uef.edu.vn.model.User;
 
-/**
- * Controller handling the dashboard administrative view.
- */
 @Controller
 public class DashboardController {
 
     private final DashboardDAO dashboardDAO = new DashboardDAO();
 
     /**
-     * Maps the admin dashboard page. Supports both /dashboard and /admin/dashboard for compatibility.
-     * 
-     * @param model Spring MVC model
-     * @return JSP view path
+     * Admin Dashboard
      */
-    @GetMapping({"/admin", "/admin/", "/dashboard", "/admin/dashboard"})
-    public String index(Model model) {
-        // Fetch stats from DAO
-        DashboardDTO stats = dashboardDAO.getAllDashboardStats();
-        List<TourRevenueDTO> tourRevenues = dashboardDAO.getRevenueByTour();
-        List<TopTourDTO> topTours = dashboardDAO.getTopTours();
-        List<MonthlyRevenueDTO> monthlyRevenues = dashboardDAO.getMonthlyRevenue();
 
-        // Bind data to Model
+    @GetMapping({"/dashboard", "/admin/dashboard"})
+    public String index(
+            HttpSession session,
+            Model model) {
+
+        User currentUser =
+                (User) session.getAttribute("currentUser");
+
+        // Chưa đăng nhập
+        if (currentUser == null) {
+            return "redirect:/auth/login";
+        }
+
+        // Không phải Admin
+        if (currentUser.getRoleId() != 1) {
+            return "redirect:/user/profile";
+        }
+
+        DashboardDTO stats =
+                dashboardDAO.getAllDashboardStats();
+
+        List<TourRevenueDTO> tourRevenues =
+                dashboardDAO.getRevenueByTour();
+
+        List<TopTourDTO> topTours =
+                dashboardDAO.getTopTours();
+
+        List<MonthlyRevenueDTO> monthlyRevenues =
+                dashboardDAO.getMonthlyRevenue();
+
+
         model.addAttribute("stats", stats);
         model.addAttribute("tourRevenues", tourRevenues);
         model.addAttribute("topTours", topTours);
         model.addAttribute("monthlyRevenues", monthlyRevenues);
-        model.addAttribute("currentYear", java.time.LocalDate.now().getYear());
+        model.addAttribute(
+                "currentYear",
+                LocalDate.now().getYear());
+
+        model.addAttribute(
+                "currentUser",
+                currentUser);
 
         return "admin/dashboard/index";
     }
