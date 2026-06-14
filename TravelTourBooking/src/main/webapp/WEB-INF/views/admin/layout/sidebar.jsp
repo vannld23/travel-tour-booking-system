@@ -8,7 +8,7 @@
 
 <aside class="h-screen w-[280px] fixed left-0 top-0 bg-[#05285D] shadow-lg flex flex-col py-6 z-50 leading-normal overflow-hidden">
 
-    <div class="px-6 mb-8">
+    <div class="px-6    mb-8">
         <h1 class="font-bold text-2xl text-white m-0">Bảng điều khiển Admin</h1>
         <p class="text-white/70 text-sm m-0 mt-1">Logistics Du lịch</p>
     </div>
