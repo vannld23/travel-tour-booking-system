@@ -34,7 +34,7 @@
                         <ul class="space-y-4">
                             <li><a class="text-surface-container hover:text-ocean-blue transition-colors text-body-md" href="#">Privacy Policy</a></li>
                             <li><a class="text-surface-container hover:text-ocean-blue transition-colors text-body-md" href="#">Terms of Service</a></li>
-                            <li><a class="text-surface-container hover:text-ocean-blue transition-colors text-body-md" href="#">Contact Support</a></li>
+                            <li><a class="text-surface-container hover:text-ocean-blue transition-colors text-body-md" href="<c:url value='/support'/>">Contact Support</a></li>
                         </ul>
                     </div>
                     <div class="col-span-2 lg:col-span-1">

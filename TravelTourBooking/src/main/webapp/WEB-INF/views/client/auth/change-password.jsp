@@ -4,51 +4,154 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Đổi mật khẩu - Horizon Voyager Admin</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <!-- Link CSS stylesheets -->
-    <link rel="stylesheet" href="<c:url value='/resources/css/common/layout.css'/>"/>
-    <link rel="stylesheet" href="<c:url value='/resources/css/auth/login.css'/>"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Đặt lại mật khẩu - VoyagerElite</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "ocean-blue": "#0194F3",
+              "deep-navy": "#05285D",
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
 </head>
-<body>
-    <div class="login-container">
-        <!-- Blobs trang trí phía sau -->
-        <div class="login-bg-blob login-bg-blob-1"></div>
-        <div class="login-bg-blob login-bg-blob-2"></div>
+<body class="bg-gray-100 font-sans min-h-screen relative flex flex-col justify-between overflow-x-hidden">
+    <!-- Traveloka-style Left Logo Banner -->
+    <div class="absolute top-0 left-0 bg-[#0194F3] text-white px-10 pt-5 pb-7 rounded-br-[80px] shadow-lg z-20 flex items-center gap-2 select-none">
+        <span class="material-symbols-outlined text-white text-3xl font-bold">explore</span>
+        <span class="text-2xl font-black tracking-tight">VoyagerElite</span>
+    </div>
 
-        <div class="login-card">
-            <div class="login-logo">
-                <span class="material-symbols-outlined">lock_reset</span>
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <div class="w-full h-full bg-black/25 absolute inset-0"></div>
+        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resource/images/login.jpg'/>"/>
+    </div>
+
+    <!-- Main Container -->
+    <div class="relative z-10 min-h-screen w-full flex flex-col justify-between px-6 py-6 md:px-16 md:py-8">
+        <!-- Top Nav Link -->
+        <div class="flex justify-end items-center">
+            <a href="<c:url value='/'/>" class="text-white hover:text-blue-100 font-semibold flex items-center gap-1.5 transition-all drop-shadow-sm text-sm">
+                <span class="material-symbols-outlined text-base">arrow_back</span>
+                Vào Trang chủ VoyagerElite
+            </a>
+        </div>
+
+        <!-- Center content area -->
+        <div class="flex flex-col lg:flex-row items-center justify-between my-auto gap-12 w-full max-w-7xl mx-auto">
+            <!-- Left Header text -->
+            <div class="text-white max-w-xl hidden lg:block drop-shadow-md">
+                <h1 class="text-5xl font-extrabold leading-[1.25] tracking-wide mb-6">
+                    Đặt Mật Khẩu Mới,<br/>Tiếp Tục Hành Trình.
+                </h1>
+                <p class="text-lg text-white/90 font-medium">
+                    Hãy tạo một mật khẩu an toàn và dễ nhớ để bảo vệ tài khoản và lịch trình du lịch của bạn tốt hơn.
+                </p>
             </div>
-            
-            <h2 class="login-title">Đặt lại mật khẩu</h2>
-            <p class="login-subtitle" style="margin-bottom: 24px;">Nhập mật khẩu mới của bạn bên dưới</p>
 
-            <form class="login-form" action="<c:url value='/auth/change-password'/>" method="post">
-                <c:if test="${not empty error}">
-                    <div style="background-color: #FEE2E2; color: #B91C1C; padding: 10px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; margin-bottom: 20px; border: 1px solid #FCA5A5; text-align: left; display: flex; align-items: center; gap: 8px;">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">error</span>
-                        ${error}
+            <!-- Right card -->
+            <div class="w-full max-w-[440px] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-gray-100">
+                <!-- Card top promo banner -->
+                <div class="bg-[#E8F5FD] px-6 py-4 flex items-center justify-between border-b border-[#0194F3]/10">
+                    <div class="max-w-[75%]">
+                        <h3 class="text-[#05285D] font-bold text-[14px] leading-snug">Đặt lại mật khẩu cho tài khoản của bạn</h3>
                     </div>
-                </c:if>
-
-                <div class="form-group">
-                    <label class="form-label" for="password">Mật khẩu mới</label>
-                    <input class="form-input" type="password" id="password" name="password" required placeholder="Tối thiểu 6 ký tự"/>
+                    <div class="w-12 h-12 flex-shrink-0 relative">
+                        <span class="material-symbols-outlined text-4xl text-[#0194F3] absolute right-0 bottom-0">lock_reset</span>
+                        <span class="material-symbols-outlined text-lg text-orange-500 absolute left-1 top-0 animate-bounce">security</span>
+                    </div>
                 </div>
 
-                <div class="form-group" style="margin-bottom: 24px;">
-                    <label class="form-label" for="confirmPassword">Xác nhận mật khẩu mới</label>
-                    <input class="form-input" type="password" id="confirmPassword" name="confirmPassword" required placeholder="Nhập lại mật khẩu mới"/>
-                </div>
+                <!-- Card body -->
+                <div class="p-6 md:p-8 flex-grow">
+                    <div class="mb-5">
+                        <h2 class="text-2xl font-extrabold text-[#05285D]">Đặt lại mật khẩu</h2>
+                        <p class="text-xs text-gray-500 mt-1">Vui lòng nhập mật khẩu mới bên dưới</p>
+                    </div>
 
-                <button class="btn-login" type="submit">Đặt lại mật khẩu</button>
-            </form>
+                    <form class="space-y-4" action="<c:url value='/auth/change-password'/>" method="post">
+                        <!-- Messages -->
+                        <c:if test="${not empty error}">
+                            <div class="bg-red-50 text-red-600 px-4 py-3 rounded-xl text-xs font-semibold border border-red-100 text-left flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">error</span>
+                                <span>${error}</span>
+                            </div>
+                        </c:if>
+
+                        <!-- Input Password -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1" for="password">Mật khẩu mới</label>
+                            <div class="relative">
+                                <input class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="password" name="password" placeholder="Tối thiểu 6 ký tự" type="password" required/>
+                                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#05285D]" type="button" id="toggle-password">
+                                    <span class="material-symbols-outlined text-lg">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Input Confirm Password -->
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 mb-1" for="confirmPassword">Xác nhận mật khẩu mới</label>
+                            <div class="relative">
+                                <input class="w-full pl-4 pr-10 py-2.5 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" type="password" required/>
+                                <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#05285D]" type="button" id="toggle-confirm-password">
+                                    <span class="material-symbols-outlined text-lg">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button class="w-full bg-[#0194F3] hover:bg-[#0082d6] text-white py-3 rounded-xl font-bold shadow-md active:scale-[0.99] transition-all text-sm mt-3" type="submit">
+                            Đặt lại mật khẩu
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer section -->
+        <div class="flex flex-col sm:flex-row justify-between items-center w-full max-w-7xl mx-auto gap-2 border-t border-white/10 pt-4 mt-auto">
+            <span class="text-white/70 text-[11px]">Bằng cách tiếp tục, bạn đồng ý với Điều khoản & Điều kiện của chúng tôi.</span>
+            <span class="text-white/80 text-[11px]">© 2026 VoyagerElite. All rights reserved.</span>
         </div>
     </div>
+
+    <script>
+        // Toggle password visibility
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        if (togglePasswordBtn && passwordInput) {
+            togglePasswordBtn.addEventListener('click', () => {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                togglePasswordBtn.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+            });
+        }
+
+        // Toggle confirm password visibility
+        const toggleConfirmPasswordBtn = document.getElementById('toggle-confirm-password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        if (toggleConfirmPasswordBtn && confirmPasswordInput) {
+            toggleConfirmPasswordBtn.addEventListener('click', () => {
+                const isPassword = confirmPasswordInput.getAttribute('type') === 'password';
+                confirmPasswordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                toggleConfirmPasswordBtn.querySelector('.material-symbols-outlined').textContent = isPassword ? 'visibility_off' : 'visibility';
+            });
+        }
+    </script>
 </body>
 </html>

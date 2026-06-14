@@ -39,6 +39,7 @@ public class Destination {
     private String imageUrl;
     private Status status;        // trạng thái điểm đến (NEW)
     private int    bookingCount;  // số lượt đặt tour liên quan (NEW - computed from DB join)
+    private int    tourCount;     // số lượng tour (NEW - computed from DB join)
 
     public Destination() {
         this.status = Status.ACTIVE; // mặc định là ACTIVE
@@ -101,6 +102,44 @@ public class Destination {
 
     public int getBookingCount() { return bookingCount; }
     public void setBookingCount(int bookingCount) { this.bookingCount = bookingCount; }
+
+    public int getTourCount() { return tourCount; }
+    public void setTourCount(int tourCount) { this.tourCount = tourCount; }
+
+    /** Tiện ích: xác định mã vùng miền dựa trên tên thành phố */
+    public String getRegionCode() {
+        if (city == null) return "all";
+        String normalized = city.toLowerCase().trim();
+        if (normalized.contains("quảng ninh") || normalized.contains("lào cai") || normalized.contains("sơn la") || 
+            normalized.contains("hải phòng") || normalized.contains("hà nội") || normalized.contains("ha noi") ||
+            normalized.contains("sapa") || normalized.contains("hạ long") || normalized.contains("moc chau") ||
+            normalized.contains("cat ba")) {
+            return "north";
+        }
+        if (normalized.contains("đà nẵng") || normalized.contains("da nang") || normalized.contains("quảng nam") || 
+            normalized.contains("hội an") || normalized.contains("thừa thiên") || normalized.contains("huế") || 
+            normalized.contains("hue") || normalized.contains("quảng bình") || normalized.contains("quang nam")) {
+            return "central";
+        }
+        if (normalized.contains("kiên giang") || normalized.contains("phú quốc") || normalized.contains("lâm đồng") || 
+            normalized.contains("đà lạt") || normalized.contains("nha trang") || normalized.contains("vũng tàu") || 
+            normalized.contains("hồ chí minh") || normalized.contains("hcm") || normalized.contains("cần thơ") || 
+            normalized.contains("phu quoc") || normalized.contains("da lat")) {
+            return "south";
+        }
+        return "all";
+    }
+
+    /** Tiện ích: lấy nhãn hiển thị vùng miền tiếng Việt */
+    public String getRegionLabel() {
+        String code = getRegionCode();
+        return switch (code) {
+            case "north"   -> "MIỀN BẮC";
+            case "central" -> "MIỀN TRUNG";
+            case "south"   -> "MIỀN NAM";
+            default        -> "MIỀN BẮC"; // fallback mặc định đẹp mắt
+        };
+    }
 
     // ─── Standard overrides ──────────────────────────────────────────────────
 
