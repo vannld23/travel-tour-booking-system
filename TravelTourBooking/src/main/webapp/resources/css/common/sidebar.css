@@ -16,6 +16,8 @@
   flex-direction: column;
   padding: 24px 0;
   z-index: 50;
+  overflow-y: auto;
+  display: none;
 }
 
 .sidebar-logo {
@@ -109,3 +111,31 @@
   font-size: 12px;
   color: rgba(255, 255, 255, 0.7);
 }
+
+.custom-scrollbar {
+    overflow-y: auto;
+    scrollbar-width: none; 
+}
+.custom-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* [Đoạn mã cho Dropdown báo cáo bạn mới hỏi] */
+#reportDropdown {
+    background: rgba(0, 0, 0, 0.1); 
+    margin: 4px 0;
+    border-radius: 8px;
+    padding: 8px 0;
+}
+#reportDropdown a {
+    padding: 8px 24px; 
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    display: block; /* Thêm dòng này để link chiếm hết chiều rộng hàng */
+    text-decoration: none; /* Đảm bảo không có gạch chân */
+}
+#reportDropdown a:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
