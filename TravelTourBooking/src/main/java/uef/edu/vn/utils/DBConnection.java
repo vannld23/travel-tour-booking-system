@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class DBConnection {
 
     private static final String DEFAULT_URL =
-            "jdbc:mysql://localhost:3307/travel_tour_booking?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+            "jdbc:mysql://localhost:3306/travel_tour_booking?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String DEFAULT_USER = "root";
     private static final String DEFAULT_PASSWORD = "";
 
