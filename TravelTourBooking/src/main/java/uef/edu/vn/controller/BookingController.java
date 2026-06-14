@@ -180,6 +180,10 @@ public class BookingController {
             model.addAttribute(
                     "selectedTour",
                     selectedTour);
+
+            model.addAttribute(
+                    "relatedTours",
+                    tourService.getAllTours());
         }
 
         return "client/booking/create";

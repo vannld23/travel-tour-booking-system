@@ -10,6 +10,17 @@
 
         <div class="mb-8">
 
+            <a href="javascript:history.back()"
+               class="inline-flex items-center gap-2 mb-5 px-4 py-2 bg-white border-2 border-slate-300 rounded-lg font-semibold text-deep-navy hover:bg-slate-100 transition-all">
+
+                <span class="material-symbols-outlined">
+                    arrow_back
+                </span>
+
+                Quay lại
+
+            </a>
+
             <h1 class="text-headline-lg font-bold text-deep-navy">
                 Đặt Tour
             </h1>
@@ -210,11 +221,11 @@
                                     <div>
 
                                         <div class="font-semibold">
-                                            Tiền mặt
+                                            Visa
                                         </div>
 
                                         <div class="text-sm text-slate-500">
-                                            Thanh toán tại văn phòng
+                                            Thanh toán qua thẻ quốc tế VISA, MASTER CARD,...
                                         </div>
 
                                     </div>
@@ -303,6 +314,68 @@
             </div>
 
         </form>
+        <!-- TOUR GỢI Ý -->
+
+        <div class="mt-12">
+
+            <h2 class="text-3xl font-bold text-deep-navy mb-6">
+                Khám phá thêm tour khác
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <c:forEach var="tour" items="${relatedTours}">
+
+                    <c:if test="${tour.tourId != selectedTour.tourId}">
+
+                        <div class="bg-white border-2 border-slate-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
+
+                            <img src="${tour.imageUrl}"
+                                 alt="${tour.tourName}"
+                                 class="w-full h-52 object-cover">
+
+                            <div class="p-5">
+
+                                <h3 class="font-bold text-xl text-deep-navy mb-2">
+                                    ${tour.tourName}
+                                </h3>
+
+                                <p class="text-slate-500 mb-4">
+                                    ${tour.durationDays} ngày
+                                </p>
+
+                                <div class="flex justify-between items-center">
+
+                                    <span class="text-action-orange text-lg font-bold">
+
+                                        <fmt:formatNumber
+                                            value="${tour.price}"
+                                            type="number"/>
+
+                                        đ
+
+                                    </span>
+
+                                    <a href="${pageContext.request.contextPath}/booking/create?tourId=${tour.tourId}"
+                                       class="px-4 py-2 rounded-lg bg-ocean-blue text-white font-semibold hover:brightness-110">
+
+                                        Xem tour
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </c:if>
+
+                </c:forEach>
+
+            </div>
+
+        </div>
 
     </div>
 

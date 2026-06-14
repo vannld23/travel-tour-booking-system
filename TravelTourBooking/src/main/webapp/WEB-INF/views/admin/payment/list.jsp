@@ -199,7 +199,7 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center gap-2">
                                         <c:choose>
-                                            <c:when test="${p.paymentMethod == 'VISA'}">
+                                            <c:when test="${p.paymentMethod == 'CASH'}">
                                                 <span class="material-symbols-outlined text-[#1A1F71] text-base">credit_card</span>
                                                 <span class="font-medium">Thẻ Visa</span>
                                             </c:when>
