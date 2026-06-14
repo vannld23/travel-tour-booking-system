@@ -147,8 +147,10 @@ public class TourDAO {
                                   String keyword, Integer destinationId, BigDecimal maxPrice,
                                   Integer maxDurationDays, Tour.Status status) {
         if (isNotBlank(keyword)) {
-            sql.append(" AND (t.tour_name LIKE ? OR t.description LIKE ?) ");
+            sql.append(" AND (t.tour_name LIKE ? OR t.description LIKE ? OR d.destination_name LIKE ? OR d.city LIKE ?) ");
             String likePattern = "%" + keyword.trim() + "%";
+            params.add(likePattern);
+            params.add(likePattern);
             params.add(likePattern);
             params.add(likePattern);
         }

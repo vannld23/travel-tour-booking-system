@@ -59,7 +59,8 @@ public class DestinationDAO {
 
         return "SELECT d.destination_id, d.destination_name, d.country, d.city, d.description, d.image_url, "
              + statusExpr + ", "
-             + "COUNT(DISTINCT b.booking_id) AS booking_count "
+             + "COUNT(DISTINCT b.booking_id) AS booking_count, "
+             + "COUNT(DISTINCT t.tour_id) AS tour_count "
              + "FROM destinations d "
              + "LEFT JOIN tours    t ON t.destination_id = d.destination_id "
              + "LEFT JOIN bookings b ON b.tour_id         = t.tour_id ";
@@ -304,6 +305,11 @@ public class DestinationDAO {
                 status
         );
         dest.setBookingCount(rs.getInt("booking_count"));
+        try {
+            dest.setTourCount(rs.getInt("tour_count"));
+        } catch (SQLException e) {
+            dest.setTourCount(0);
+        }
         return dest;
     }
 

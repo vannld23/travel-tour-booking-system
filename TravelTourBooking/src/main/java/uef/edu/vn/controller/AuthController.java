@@ -86,4 +86,63 @@ public class AuthController {
         model.addAttribute("message", "Liên kết đặt lại mật khẩu đã được gửi đến email " + email);
         return "client/auth/forgot-password";
     }
+
+    @GetMapping("/register")
+    public String registerForm() {
+        return "client/auth/register";
+    }
+
+    @PostMapping("/register")
+    public String register(
+            @RequestParam("fullName") String fullName,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            @RequestParam("confirmPassword") String confirmPassword,
+            Model model) {
+
+        fullName = fullName != null ? fullName.trim() : "";
+        email = email != null ? email.trim() : "";
+        password = password != null ? password.trim() : "";
+        confirmPassword = confirmPassword != null ? confirmPassword.trim() : "";
+
+        model.addAttribute("fullName", fullName);
+        model.addAttribute("email", email);
+
+        if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+            model.addAttribute("error", "Vui lòng nhập đầy đủ các trường thông tin bắt buộc.");
+            return "client/auth/register";
+        }
+
+        if (password.length() < 6) {
+            model.addAttribute("error", "Mật khẩu phải có độ dài tối thiểu 6 ký tự.");
+            return "client/auth/register";
+        }
+
+        if (!password.equals(confirmPassword)) {
+            model.addAttribute("error", "Mật khẩu xác nhận không khớp.");
+            return "client/auth/register";
+        }
+
+        if (userDAO.findByEmail(email) != null) {
+            model.addAttribute("error", "Địa chỉ email này đã được sử dụng.");
+            return "client/auth/register";
+        }
+
+        User newUser = new User();
+        newUser.setFullName(fullName);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
+        newUser.setPhone("");
+        newUser.setAddress("");
+        newUser.setActive(true);
+        newUser.setRoleId(2); // CUSTOMER role
+
+        boolean saved = userDAO.save(newUser);
+        if (saved) {
+            return "redirect:/auth/login";
+        } else {
+            model.addAttribute("error", "Đăng ký không thành công do lỗi hệ thống.");
+            return "client/auth/register";
+        }
+    }
 }

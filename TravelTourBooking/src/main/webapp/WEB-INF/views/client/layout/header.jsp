@@ -123,10 +123,10 @@
             <div class="flex items-center gap-8">
                 <a href="<c:url value='/'/>" class="text-headline-md font-headline-md text-primary font-bold">VoyagerElite</a>
                 <div class="hidden md:flex gap-6">
-                    <a class="text-primary border-b-2 border-primary pb-1 font-semibold transition-all duration-200" href="<c:url value='/'/>">Tours</a>
-                    <a class="text-deep-navy font-medium hover:text-ocean-blue transition-colors" href="#">Điểm đến</a>
-                    <a class="text-deep-navy font-medium hover:text-ocean-blue transition-colors" href="#">Ưu đãi</a>
-                    <a class="text-deep-navy font-medium hover:text-ocean-blue transition-colors" href="#">Hỗ trợ</a>
+                    <a class="${empty pageTitle || (!pageTitle.contains('Điểm đến') && !pageTitle.contains('Ưu đãi') && !pageTitle.contains('Hỗ trợ')) ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-all duration-200" href="<c:url value='/'/>">Tours</a>
+                    <a class="${not empty pageTitle && pageTitle.contains('Điểm đến') ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-colors" href="<c:url value='/destinations'/>">Điểm đến</a>
+                    <a class="${not empty pageTitle && pageTitle.contains('Ưu đãi') ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-colors" href="<c:url value='/deals'/>">Ưu đãi</a>
+                    <a class="${not empty pageTitle && pageTitle.contains('Hỗ trợ') ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-colors" href="<c:url value='/support'/>">Hỗ trợ</a>
                 </div>
             </div>
             
