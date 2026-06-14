@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <c:set var="pageTitle" value="Trung tâm Hỗ trợ | VoyagerElite" />
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <style>
     .card-shadow {
@@ -196,4 +196,4 @@
     }
 </script>
 
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

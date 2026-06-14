@@ -62,7 +62,7 @@ public class HomeController {
         model.addAttribute("destinationId", destinationId);
         model.addAttribute("priceRange", priceRange);
 
-        return "client/home";
+        return "client/home/home";
     }
 
     @GetMapping("/destinations")
@@ -74,7 +74,7 @@ public class HomeController {
                 .collect(java.util.stream.Collectors.toList());
         model.addAttribute("destinations", activeDestinations);
         model.addAttribute("pageTitle", "Điểm đến | VoyagerElite Luxury Travel");
-        return "client/destination";
+        return "client/home/destination";
     }
 
     @GetMapping("/deals")
@@ -103,13 +103,13 @@ public class HomeController {
         model.addAttribute("flashSaleTours", flashSaleTours);
         model.addAttribute("limitedTours", limitedTours);
         model.addAttribute("pageTitle", "Ưu đãi | VoyagerElite Luxury Travel");
-        return "client/deals";
+        return "client/home/deals";
     }
 
     @GetMapping("/support")
     public String support(Model model) {
         model.addAttribute("pageTitle", "Trung tâm Hỗ trợ | VoyagerElite");
-        return "client/support";
+        return "client/home/support";
     }
 
     @GetMapping("/tour/detail")
@@ -133,7 +133,7 @@ public class HomeController {
         model.addAttribute("relatedTours", relatedTours);
         
         model.addAttribute("pageTitle", tour.getTourName() + " | VoyagerElite");
-        return "client/tour-detail";
+        return "client/home/tour-detail";
     }
 }
 

@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <!-- Fallback check for tour image -->
 <c:set var="tourImg" value="${tour.imageUrl}"/>
@@ -369,4 +369,4 @@
     </div>
 </main>
 
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

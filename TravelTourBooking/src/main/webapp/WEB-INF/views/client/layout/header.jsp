@@ -142,4 +142,55 @@
                     <a class="${not empty pageTitle && pageTitle.contains('Hỗ trợ') ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-colors" href="<c:url value='/support'/>">Hỗ trợ</a>
                 </div>
             </div>
-        </nav>
+
+            <!-- Right side: Auth buttons or User menu -->
+            <div class="flex items-center gap-3">
+                <c:choose>
+                    <c:when test="${not empty sessionScope.currentUser}">
+                        <!-- Logged-in user avatar dropdown -->
+                        <div class="relative group">
+                            <button class="flex items-center gap-2 bg-surface-container-low rounded-full px-4 py-2 hover:bg-surface-container transition-colors cursor-pointer" id="user-menu-btn">
+                                <span class="material-symbols-outlined text-ocean-blue text-[22px]" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+                                <span class="text-deep-navy font-semibold text-sm hidden md:block max-w-[120px] truncate">${sessionScope.currentUser.fullName}</span>
+                                <span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+                            </button>
+                            <!-- Dropdown -->
+                            <div class="absolute right-0 top-full mt-2 w-52 bg-white rounded-xl shadow-xl border border-outline-variant/30 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                <div class="px-4 py-2 border-b border-outline-variant/20 mb-1">
+                                    <p class="text-xs text-on-surface-variant font-medium">Đăng nhập với</p>
+                                    <p class="text-sm text-deep-navy font-bold truncate">${sessionScope.currentUser.email}</p>
+                                </div>
+                                <c:if test="${sessionScope.currentUser.roleId == 1}">
+                                    <a href="<c:url value='/admin/dashboard'/>" class="flex items-center gap-2 px-4 py-2 text-sm text-deep-navy hover:bg-surface-container-low transition-colors font-medium">
+                                        <span class="material-symbols-outlined text-[18px] text-ocean-blue">admin_panel_settings</span>
+                                        Trang quản trị
+                                    </a>
+                                </c:if>
+                                <a href="<c:url value='/auth/change-password'/>" class="flex items-center gap-2 px-4 py-2 text-sm text-deep-navy hover:bg-surface-container-low transition-colors font-medium">
+                                    <span class="material-symbols-outlined text-[18px] text-on-surface-variant">lock</span>
+                                    Đổi mật khẩu
+                                </a>
+                                <div class="border-t border-outline-variant/20 mt-1 pt-1">
+                                    <a href="<c:url value='/auth/logout'/>" class="flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors font-medium">
+                                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Guest: Login + Register buttons -->
+                        <a href="<c:url value='/auth/login'/>"
+                           class="text-deep-navy font-semibold text-sm px-4 py-2 rounded-lg hover:bg-surface-container-low transition-colors hidden md:block">
+                            Đăng nhập
+                        </a>
+                        <a href="<c:url value='/auth/register'/>"
+                           class="bg-ocean-blue text-white font-semibold text-sm px-5 py-2 rounded-lg hover:bg-primary transition-all shadow-sm active:scale-95">
+                            Đăng ký
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+    </nav>

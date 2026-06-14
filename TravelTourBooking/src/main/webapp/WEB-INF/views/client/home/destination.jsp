@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Điểm đến | VoyagerElite Luxury Travel" />
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <!-- Hero Section -->
 <header class="relative h-[480px] flex items-center overflow-hidden">
@@ -201,4 +201,4 @@
     }
 </script>
 
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

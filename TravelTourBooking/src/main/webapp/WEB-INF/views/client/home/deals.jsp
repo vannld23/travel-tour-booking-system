@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Ưu đãi | VoyagerElite Luxury Travel" />
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
 <!-- Hero Section -->
 <section class="relative h-[500px] flex items-center overflow-hidden">
@@ -449,4 +449,4 @@
     setInterval(updateCountdown, 1000);
 </script>
 
-<%@ include file="layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

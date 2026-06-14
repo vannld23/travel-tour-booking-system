@@ -1,8 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="VoyagerElite - Khám phá thế giới theo cách của bạn" />
-<%@ include file="layout/header.jsp" %>
+<%@ include file="../layout/header.jsp" %>
 
     <!-- Hero Section -->
     <section class="relative h-[600px] flex items-center justify-center overflow-hidden">
@@ -338,4 +338,4 @@
     </section>
 
     <!-- Footer -->
-    <%@ include file="layout/footer.jsp" %>
+    <%@ include file="../layout/footer.jsp" %>
