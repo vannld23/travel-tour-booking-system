@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uef.edu.vn.dao.DashboardDAO;
-import uef.edu.vn.dao.ReportDAO;
 import uef.edu.vn.dto.RevenueByTimeDTO;
 import uef.edu.vn.model.DashboardDTO;
 import uef.edu.vn.service.ReportService;
@@ -31,9 +30,12 @@ public class ReportController {
     public String dashboard(Model model) {
         // Lấy dữ liệu thống kê từ Service
         DashboardDTO stats = reportService.getSystemOverview();
-
+        DashboardDAO dashboardDAO = new DashboardDAO();
         // Truyền vào model với key "stats"
         model.addAttribute("stats", stats);
+
+        //Lấy danh sách Top 5 Tour (đã có sẵn trong DashboardDAO của bạn)
+        model.addAttribute("topTours", dashboardDAO.getTopTours());
 
         model.addAttribute("activePage", "report-dashboard");
 

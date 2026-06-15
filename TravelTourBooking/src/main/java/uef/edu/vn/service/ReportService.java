@@ -79,6 +79,7 @@ public class ReportService {
         for (Map.Entry<String, BigDecimal> entry : revenueMap.entrySet()) {
             result.add(new RevenueByTimeDTO(entry.getKey(), entry.getValue()));
         }
+           
         return result;
     }
 }

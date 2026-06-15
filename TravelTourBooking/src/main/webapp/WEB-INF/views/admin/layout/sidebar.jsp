@@ -51,7 +51,7 @@
 
             <div id="reportDropdown" class="hidden pl-10 space-y-2 pb-2">
                 <a href="${pageContext.request.contextPath}/admin/report/dashboard" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50'}">Tổng quan hệ thống</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50'}">1. Tổng quan hệ thống</a>
 
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>

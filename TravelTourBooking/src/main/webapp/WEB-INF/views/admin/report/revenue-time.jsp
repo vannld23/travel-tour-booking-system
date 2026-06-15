@@ -9,7 +9,10 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
-            .glass-card { background: white; border: 1px solid #e5e7eb; }
+            .glass-card {
+                background: white;
+                border: 1px solid #e5e7eb;
+            }
         </style>
     </head>
     <body class="bg-[#F2F3F3]">
@@ -19,7 +22,7 @@
             <main class="flex-1 ml-[280px] p-8">
                 <div class="mb-8 flex justify-between items-center">
                     <h2 class="text-3xl font-bold text-gray-800">Doanh thu theo thời gian</h2>
-                    
+
                     <form action="revenue-time" method="GET" class="flex gap-2">
                         <input type="date" name="startDate" value="${startDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
                         <input type="date" name="endDate" value="${endDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
@@ -61,16 +64,33 @@
                 type: 'line',
                 data: {
                     labels: [<c:forEach items="${revenueList}" var="item">"${item.period}",</c:forEach>],
-                    datasets: [{
-                        label: 'Doanh thu (VNĐ)',
-                        data: [<c:forEach items="${revenueList}" var="item">${item.totalRevenue},</c:forEach>],
-                        borderColor: '#2563eb',
-                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                        fill: true,
-                        tension: 0.3
-                    }]
+                            datasets: [{
+                                    label: 'Doanh thu (VNĐ)',
+                                    data: [<c:forEach items="${revenueList}" var="item">${item.totalRevenue},</c:forEach>],
+                                    borderColor: '#2563eb',
+                                    backgroundColor: '#2563eb', // Màu của dấu chấm
+                                    pointRadius: 4, // Kích thước dấu chấm (làm nó to và rõ hơn)
+                                    pointHoverRadius: 8, // Kích thước khi di chuột vào
+                                    fill: true,
+                                    tension: 0.3
+                                }]
                 },
-                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {position: 'bottom'}
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return '₫' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
             });
         </script>
     </body>

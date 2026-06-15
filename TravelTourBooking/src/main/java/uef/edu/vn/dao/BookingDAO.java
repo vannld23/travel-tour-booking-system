@@ -10,14 +10,28 @@ import uef.edu.vn.utils.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import uef.edu.vn.dto.RevenueByTimeDTO;
 
 /**
  *
  * @author LENOVO
  */
 public class BookingDAO {
+
+    private Connection connection;
+
+    public BookingDAO() {
+        try {
+            this.connection = DBConnection.getConnection();
+        } catch (Exception e) {
+            // Ghi log lỗi để dễ kiểm tra
+            System.err.println("Lỗi kết nối database: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     public List<Booking> getAllBookings() {
 
@@ -399,5 +413,25 @@ public class BookingDAO {
         }
 
         return bookings;
+    }
+
+    public List<RevenueByTimeDTO> getRevenueStats(String start, String end) {
+        List<RevenueByTimeDTO> stats = new ArrayList<>();
+        String sql = "SELECT DATE_FORMAT(booking_date, '%Y-%m') AS period, SUM(total_price) AS revenue "
+                + "FROM bookings "
+                + "WHERE booking_status = 'COMPLETED' AND booking_date BETWEEN ? AND ? "
+                + "GROUP BY period ORDER BY period ASC";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, start + " 00:00:00");
+            ps.setString(2, end + " 23:59:59");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                stats.add(new RevenueByTimeDTO(rs.getString("period"), rs.getBigDecimal("revenue")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return stats;
     }
 }
