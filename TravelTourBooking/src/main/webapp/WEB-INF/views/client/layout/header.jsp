@@ -197,6 +197,12 @@
                                         <div class="mx-4 border-t border-outline-variant/20"></div>
                                     </c:if>
 
+                                    <a href="<c:url value='/user/profile'/>"
+                                       class="flex items-center gap-3 px-5 py-3 hover:bg-surface-container-low transition-colors group">
+                                        <span class="material-symbols-outlined text-[20px] text-ocean-blue" style="font-variation-settings:'FILL' 1;">account_circle</span>
+                                        <span class="text-sm font-medium text-deep-navy group-hover:text-ocean-blue transition-colors">Thông tin cá nhân</span>
+                                    </a>
+
                                     <a href="<c:url value='/booking/my-bookings'/>"
                                        class="flex items-center gap-3 px-5 py-3 hover:bg-surface-container-low transition-colors group">
                                         <span class="material-symbols-outlined text-[20px] text-[#7B61FF]" style="font-variation-settings:'FILL' 1;">confirmation_number</span>
