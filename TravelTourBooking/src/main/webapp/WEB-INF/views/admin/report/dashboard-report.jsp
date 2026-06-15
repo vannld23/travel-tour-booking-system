@@ -36,30 +36,49 @@
 
                     <div class="bg-white rounded-xl p-6 glass-card shadow-sm border-l-4 border-blue-500">
                         <p class="text-xs font-bold text-gray-500 uppercase">Tổng số Tour</p>
-                        <p class="text-3xl font-bold text-gray-800">${not empty stats ? stats.totalTours : 0}</p>
+                        <p class="text-3xl font-bold text-gray-800">${stats.totalTours}</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-6 glass-card shadow-sm border-l-4 border-green-500">
                         <p class="text-xs font-bold text-gray-500 uppercase">Tổng đặt chỗ</p>
-                        <p class="text-3xl font-bold text-gray-800">${not empty stats ? stats.totalBookings : 0}</p>
+                        <p class="text-3xl font-bold text-gray-800">${stats.totalBookings}</p>
                     </div>
 
                     <div class="bg-white rounded-xl p-6 glass-card shadow-sm border-l-4 border-purple-500">
                         <p class="text-xs font-bold text-gray-500 uppercase">Tổng doanh thu</p>
                         <p class="text-3xl font-bold text-gray-800">
-                            <fmt:formatNumber value="${not empty stats ? stats.totalRevenue : 0}" type="currency" currencySymbol="₫"/>
+                            <fmt:formatNumber value="${stats.totalRevenue}" type="currency" currencySymbol="₫" maxFractionDigits="0"/>
                         </p>
                     </div>
 
                     <div class="bg-white rounded-xl p-6 glass-card shadow-sm border-l-4 border-orange-500">
                         <p class="text-xs font-bold text-gray-500 uppercase">Tổng người dùng</p>
-                        <p class="text-3xl font-bold text-gray-800">${not empty stats ? stats.totalUsers : 0}</p>
+                        <p class="text-3xl font-bold text-gray-800">${stats.totalUsers}</p>
                     </div>
                 </div>
 
-                <section class="glass-card rounded-xl p-6 shadow-sm">
-                    <h3 class="font-bold text-gray-800 mb-4">Chi tiết báo cáo</h3>
-                    <p class="text-sm text-gray-600">Dữ liệu được cập nhật theo thời gian thực từ hệ thống.</p>
+                <section class="glass-card rounded-xl p-6 shadow-sm mt-8">
+                    <h3 class="font-bold text-gray-800 mb-4">Top 5 Tour bán chạy nhất</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-gray-400 text-sm border-b">
+                                    <th class="pb-3 font-medium">Tên Tour</th>
+                                    <th class="pb-3 font-medium text-center">Số lượng đặt</th>
+                                    <th class="pb-3 font-medium text-right">Tổng hành khách</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                                <c:forEach items="${topTours}" var="tour">
+                                    <tr class="border-b last:border-none">
+                                        <td class="py-4 font-medium">${tour.tourName}</td>
+                                        <td class="py-4 text-center">${tour.bookingCount}</td>
+                                        <td class="py-4 text-right">${tour.totalPeople}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </main>
         </div>
