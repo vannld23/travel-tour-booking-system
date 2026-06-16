@@ -44,7 +44,7 @@ public class ReportService {
         return new DashboardDTO(totalUsers, totalTours, totalBookings, totalRevenue);
     }
 
-    // Báo cáo 2 : Donh thu theo thời gian
+    // Báo cáo 2 : Doanh thu theo thời gian
     public List<RevenueByTimeDTO> getRevenueByTime(String startDateStr, String endDateStr) {
         List<Booking> allBookings = bookingDAO.getAllBookings();
         Map<String, BigDecimal> revenueMap = new TreeMap<>();
