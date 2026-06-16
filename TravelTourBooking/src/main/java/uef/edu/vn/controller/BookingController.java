@@ -152,6 +152,7 @@ public class BookingController {
     @GetMapping("/create")
     public String showCreateForm(
             @RequestParam(required = false) Integer tourId,
+            @RequestParam(required = false) String error,
             HttpSession session,
             Model model) {
 
@@ -166,6 +167,9 @@ public class BookingController {
         model.addAttribute(
                 "booking",
                 new Booking());
+        model.addAttribute(
+                "error",
+                error);
 
         model.addAttribute(
                 "tours",
@@ -184,6 +188,10 @@ public class BookingController {
             model.addAttribute(
                     "relatedTours",
                     tourService.getAllTours());
+            model.addAttribute(
+                    "remainingSlots",
+                    bookingService.getRemainingSlots(
+                            tourId));
         }
 
         return "client/booking/create";
@@ -205,8 +213,16 @@ public class BookingController {
         booking.setUserId(
                 currentUser.getUserId());
 
-        bookingService.addBooking(
-                booking);
+        boolean result
+                = bookingService.addBooking(
+                        booking);
+
+        if (!result) {
+
+            return "redirect:/booking/create?tourId="
+                    + booking.getTourId()
+                    + "&error=full";
+        }
 
         return "redirect:/booking/history";
     }

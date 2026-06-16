@@ -138,6 +138,30 @@
                         <h3 class="text-xl font-bold text-deep-navy mb-6">
                             Thông tin đặt tour
                         </h3>
+                        <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4 mb-5">
+
+                            <div class="text-sm text-slate-500">
+                                Số chỗ còn lại
+                            </div>
+
+                            <div class="font-bold text-green-700 text-lg mt-1">
+                                ${remainingSlots} khách
+                            </div>
+
+                        </div>
+                        <c:if test="${error == 'full'}">
+
+                            <div class="mb-5 p-4 rounded-lg
+                                 bg-red-50
+                                 border-2 border-red-300
+                                 text-red-700 font-medium">
+
+                                ❌ Tour chỉ còn ${remainingSlots} chỗ trống.
+                                Vui lòng giảm số lượng khách.
+
+                            </div>
+
+                        </c:if>
 
                         <div class="mb-5">
 
@@ -151,8 +175,8 @@
                                 name="numberOfPeople"
                                 value="1"
                                 min="1"
+                                max="${remainingSlots}"
                                 required
-                                class="w-full border-2 border-slate-300 rounded-lg px-4 py-3">
 
                         </div>
 
