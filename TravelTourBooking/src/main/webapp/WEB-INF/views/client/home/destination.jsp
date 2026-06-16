@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <c:set var="pageTitle" value="Điểm đến | VoyagerElite Luxury Travel" />
@@ -42,8 +42,8 @@
             <c:set var="destImg" value="${dest.imageUrl}"/>
             <c:if test="${empty destImg || !destImg.startsWith('http')}">
                 <c:choose>
-                    <c:when test="${dest.destinationName.toLowerCase().contains('dalat') || dest.destinationName.toLowerCase().contains('đà lạt')}">
-                        <c:set var="destImg" value="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=600&q=80"/>
+                    <c:when test="${dest.destinationName.toLowerCase().contains('dalat') || dest.destinationName.toLowerCase().contains('da lat') || dest.destinationName.toLowerCase().contains('đà lạt')}">
+                        <c:set var="destImg" value="${pageContext.request.contextPath}/resource/images/da_lat.jpg"/>
                     </c:when>
                     <c:when test="${dest.destinationName.toLowerCase().contains('nha trang')}">
                         <c:set var="destImg" value="https://images.unsplash.com/photo-1540206395-68808572332f?w=600&q=80"/>
@@ -57,8 +57,8 @@
                     <c:when test="${dest.destinationName.toLowerCase().contains('ha long') || dest.destinationName.toLowerCase().contains('hạ long') || dest.destinationName.toLowerCase().contains('halong')}">
                         <c:set var="destImg" value="https://images.unsplash.com/photo-1528127269322-539801943592?w=600&q=80"/>
                     </c:when>
-                    <c:when test="${dest.destinationName.toLowerCase().contains('danang') || dest.destinationName.toLowerCase().contains('đà nẵng')}">
-                        <c:set var="destImg" value="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"/>
+                    <c:when test="${dest.destinationName.toLowerCase().contains('danang') || dest.destinationName.toLowerCase().contains('da nang') || dest.destinationName.toLowerCase().contains('đà nẵng')}">
+                        <c:set var="destImg" value="${pageContext.request.contextPath}/resource/images/da_nang.jpg"/>
                     </c:when>
                     <c:when test="${dest.destinationName.toLowerCase().contains('hoi an') || dest.destinationName.toLowerCase().contains('hội an')}">
                         <c:set var="destImg" value="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80"/>
@@ -67,7 +67,7 @@
                         <c:set var="destImg" value="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80"/>
                     </c:when>
                     <c:when test="${dest.destinationName.toLowerCase().contains('hue') || dest.destinationName.toLowerCase().contains('huế')}">
-                        <c:set var="destImg" value="https://images.unsplash.com/photo-1590001155093-a3c66ab0c3ff?w=600&q=80"/>
+                        <c:set var="destImg" value="${pageContext.request.contextPath}/resource/images/Hue.jpg"/>
                     </c:when>
                     <c:otherwise>
                         <c:set var="destImg" value="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80"/>
