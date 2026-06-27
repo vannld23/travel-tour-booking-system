@@ -8,7 +8,7 @@
 
 <aside class="h-screen w-[280px] fixed left-0 top-0 bg-[#05285D] shadow-lg flex flex-col py-6 z-50 leading-normal overflow-hidden">
 
-    <div class="px-6 mb-8">
+    <div class="px-6    mb-8">
         <h1 class="font-bold text-2xl text-white m-0">Bảng điều khiển Admin</h1>
         <p class="text-white/70 text-sm m-0 mt-1">Logistics Du lịch</p>
     </div>
@@ -51,7 +51,7 @@
 
             <div id="reportDropdown" class="hidden pl-10 space-y-2 pb-2">
                 <a href="${pageContext.request.contextPath}/admin/report/dashboard" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50'}">Tổng quan hệ thống</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50'}">1. Tổng quan hệ thống</a>
 
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>
