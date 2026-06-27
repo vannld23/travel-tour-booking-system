@@ -1,4 +1,4 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ include file="../layout/header.jsp" %>
@@ -7,8 +7,14 @@
 <c:set var="tourImg" value="${tour.imageUrl}"/>
 <c:if test="${empty tourImg || !tourImg.startsWith('http')}">
     <c:choose>
-        <c:when test="${tour.tourName.toLowerCase().contains('dalat') || tour.tourName.toLowerCase().contains('đà lạt')}">
-            <c:set var="tourImg" value="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?w=1200&q=80"/>
+        <c:when test="${tour.tourName.toLowerCase().contains('dalat') || tour.tourName.toLowerCase().contains('da lat') || tour.tourName.toLowerCase().contains('đà lạt')}">
+            <c:set var="tourImg" value="${pageContext.request.contextPath}/resource/images/da_lat.jpg"/>
+        </c:when>
+        <c:when test="${tour.tourName.toLowerCase().contains('danang') || tour.tourName.toLowerCase().contains('da nang') || tour.tourName.toLowerCase().contains('đà nẵng')}">
+            <c:set var="tourImg" value="${pageContext.request.contextPath}/resource/images/da_nang.jpg"/>
+        </c:when>
+        <c:when test="${tour.tourName.toLowerCase().contains('hue') || tour.tourName.toLowerCase().contains('huế')}">
+            <c:set var="tourImg" value="${pageContext.request.contextPath}/resource/images/Hue.jpg"/>
         </c:when>
         <c:when test="${tour.tourName.toLowerCase().contains('nha trang')}">
             <c:set var="tourImg" value="https://images.unsplash.com/photo-1540206395-68808572332f?w=1200&q=80"/>

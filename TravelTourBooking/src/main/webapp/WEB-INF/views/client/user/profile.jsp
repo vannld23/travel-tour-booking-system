@@ -42,7 +42,7 @@
                     <div class="py-2">
                         <a href="<c:url value='/user/profile'/>"
                            class="flex items-center gap-3 px-6 py-4 bg-primary/5 text-primary border-l-4 border-primary font-semibold transition-colors">
-                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">account_circle</span>
+                            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1;">person</span>
                             <span class="text-sm">Thông tin cá nhân</span>
                         </a>
 

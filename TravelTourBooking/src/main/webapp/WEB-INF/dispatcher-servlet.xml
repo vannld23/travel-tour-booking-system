@@ -14,6 +14,35 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <context:component-scan base-package="uef.edu.vn"/>
     <!--Enable the use of annotations such as @RequestMapping -->
     <mvc:annotation-driven/>    
+    
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- Protect all admin endpoints -->
+            <mvc:mapping path="/dashboard"/>
+            <mvc:mapping path="/dashboard/**"/>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:mapping path="/booking"/>
+            <mvc:mapping path="/booking/**"/>
+            <mvc:mapping path="/tuormanagement"/>
+            <mvc:mapping path="/tuormanagement/**"/>
+            <mvc:mapping path="/destination"/>
+            <mvc:mapping path="/destination/**"/>
+            <mvc:mapping path="/itinerary"/>
+            <mvc:mapping path="/itinerary/**"/>
+            <mvc:mapping path="/payment"/>
+            <mvc:mapping path="/payment/**"/>
+            <mvc:mapping path="/system"/>
+            <mvc:mapping path="/system/**"/>
+            
+            <!-- Exclude client endpoints -->
+            <mvc:exclude-mapping path="/booking/create"/>
+            <mvc:exclude-mapping path="/booking/history/**"/>
+            <mvc:exclude-mapping path="/payment/history/**"/>
+            
+            <bean class="uef.edu.vn.interceptor.RoleInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <mvc:resources mapping="/resources/**"
                location="/resources/" />
     <mvc:resources mapping="/resource/**"

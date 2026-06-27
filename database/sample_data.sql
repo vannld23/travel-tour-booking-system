@@ -1,5 +1,15 @@
 USE `travel_tour_booking`;
 
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE FROM `payments`;
+DELETE FROM `bookings`;
+DELETE FROM `schedules`;
+DELETE FROM `tours`;
+DELETE FROM `users`;
+DELETE FROM `destinations`;
+DELETE FROM `roles`;
+SET FOREIGN_KEY_CHECKS = 1;
+
 -- =========================
 -- ROLES
 -- =========================

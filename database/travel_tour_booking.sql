@@ -20,8 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `travel_tour_booking`
 --
-CREATE DATABASE IF NOT EXISTS `travel_tour_booking`;
+DROP DATABASE IF EXISTS `travel_tour_booking`;
+CREATE DATABASE `travel_tour_booking`;
 USE `travel_tour_booking`;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS `payments`;
+DROP TABLE IF EXISTS `bookings`;
+DROP TABLE IF EXISTS `schedules`;
+DROP TABLE IF EXISTS `tours`;
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `destinations`;
+DROP TABLE IF EXISTS `roles`;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- --------------------------------------------------------
 
