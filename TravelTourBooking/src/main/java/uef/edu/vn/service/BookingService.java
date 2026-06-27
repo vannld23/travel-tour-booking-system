@@ -28,44 +28,18 @@ public class BookingService {
 
     public boolean addBooking(Booking booking) {
 
-        Tour tour = tourDAO.findById(
-                booking.getTourId());
+        // Sử dụng findById() thay vì getTourById() (đúng tên method của TourDAO)
+        Tour tour = tourDAO.findById(booking.getTourId());
 
-        if (tour == null) {
-            return false;
+        if (tour != null && tour.getPrice() != null) {
+            // BigDecimal không dùng * trực tiếp; phải dùng multiply()
+            double totalPrice = tour.getPrice()
+                    .multiply(BigDecimal.valueOf(booking.getNumberOfPeople()))
+                    .doubleValue();
+            booking.setTotalPrice(totalPrice);
         }
 
-        // Kiểm tra sức chứa còn lại
-        int bookedPeople
-                = bookingDAO.getTotalBookedPeopleByTourId(
-                        booking.getTourId());
-
-        int remainingSlots
-                = tour.getMaxCapacity()
-                - bookedPeople;
-
-        if (booking.getNumberOfPeople()
-                > remainingSlots) {
-
-            return false;
-        }
-
-        // Tính tổng tiền
-        if (tour.getPrice() != null) {
-
-            double totalPrice
-                    = tour.getPrice()
-                            .multiply(
-                                    BigDecimal.valueOf(
-                                            booking.getNumberOfPeople()))
-                            .doubleValue();
-
-            booking.setTotalPrice(
-                    totalPrice);
-        }
-
-        return bookingDAO.addBooking(
-                booking);
+        return bookingDAO.addBooking(booking);
     }
 
     public boolean cancelBooking(int id) {
@@ -101,38 +75,14 @@ public class BookingService {
         return bookingDAO.getBookingsWithoutPayment();
     }
 
-    public int getRemainingSlots(
-            int tourId) {
-
-        Tour tour
-                = tourDAO.findById(
-                        tourId);
-
-        if (tour == null) {
-            return 0;
-        }
-
-        int bookedPeople
-                = bookingDAO.getTotalBookedPeopleByTourId(
-                        tourId);
-
-        int remainingSlots
-                = tour.getMaxCapacity()
-                - bookedPeople;
-
-        return Math.max(
-                remainingSlots,
-                0);
-    }
-
     public boolean updateBookingStatus(int bookingId, String status) {
         return bookingDAO.updateBookingStatus(bookingId, status);
     }
 
     /**
-     * Admin xác nhận booking (PENDING → CONFIRMED). Yêu cầu: booking đang
-     * PENDING. Ghi chú: kiểm tra thanh toán là trách nhiệm của admin trước khi
-     * bấm nút.
+     * Admin xác nhận booking (PENDING → CONFIRMED).
+     * Yêu cầu: booking đang PENDING.
+     * Ghi chú: kiểm tra thanh toán là trách nhiệm của admin trước khi bấm nút.
      *
      * @return true nếu thành công, false nếu booking không đúng trạng thái
      */
@@ -150,8 +100,8 @@ public class BookingService {
     }
 
     /**
-     * Admin đánh dấu tour đã hoàn thành (CONFIRMED → COMPLETED). Chỉ áp dụng
-     * khi booking đang ở trạng thái CONFIRMED.
+     * Admin đánh dấu tour đã hoàn thành (CONFIRMED → COMPLETED).
+     * Chỉ áp dụng khi booking đang ở trạng thái CONFIRMED.
      *
      * @return true nếu thành công, false nếu booking không đúng trạng thái
      */
@@ -162,11 +112,10 @@ public class BookingService {
         }
         return bookingDAO.updateBookingStatus(bookingId, "COMPLETED");
     }
-
     public List<Booking> getBookingsByUserId(
-            int userId) {
+        int userId) {
 
-        return bookingDAO.getBookingsByUserId(
-                userId);
-    }
+    return bookingDAO.getBookingsByUserId(
+            userId);
+}
 }

@@ -434,30 +434,4 @@ public class BookingDAO {
         }
         return stats;
     }
-
-    public int getTotalBookedPeopleByTourId(int tourId) {
-
-        String sql
-                = "SELECT COALESCE(SUM(number_of_people), 0) "
-                + "FROM bookings "
-                + "WHERE tour_id = ? "
-                + "AND booking_status <> 'CANCELLED'";
-
-        try (
-                Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
-
-            ps.setInt(1, tourId);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return 0;
-    }
 }
