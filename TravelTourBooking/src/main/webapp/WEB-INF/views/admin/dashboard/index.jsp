@@ -70,7 +70,7 @@
         </div>
 
         <!-- Thống kê tổng quan (Metrics Cards) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb -8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             
             <!-- Tổng người dùng -->
             <div class="glass-card rounded-xl p-6 shadow-sm flex items-center gap-4">
