@@ -42,7 +42,7 @@
                     <div class="bg-white border-2 border-slate-300 rounded-xl overflow-hidden shadow-md">
 
                         <img
-                            src="${selectedTour.imageUrl}"
+                            src="${pageContext.request.contextPath}/resources/images/${selectedTour.imageUrl}"
                             alt="${selectedTour.tourName}"
                             class="w-full h-[320px] object-cover">
 
@@ -177,6 +177,7 @@
                                 min="1"
                                 max="${remainingSlots}"
                                 required
+                                class="w-full border-2 border-slate-300 rounded-lg px-4 py-3">
 
                         </div>
 
@@ -354,7 +355,7 @@
 
                         <div class="bg-white border-2 border-slate-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
 
-                            <img src="${tour.imageUrl}"
+                            <img src="${pageContext.request.contextPath}/resources/images/${tour.imageUrl}"
                                  alt="${tour.tourName}"
                                  class="w-full h-52 object-cover">
 
