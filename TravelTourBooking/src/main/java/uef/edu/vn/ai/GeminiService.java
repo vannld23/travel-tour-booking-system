@@ -84,4 +84,34 @@ public class GeminiService implements AIService {
 
         return result;
     }
+
+    public AIIntentDTO getAIIntent(String userInput) {
+        String systemPrompt = PromptBuilder.buildSystemPrompt();
+        String userPrompt = PromptBuilder.buildUserPrompt(userInput);
+
+        // 1. Gọi Gemini API (Sử dụng code HttpClient bạn đã có)
+        String jsonResponse = callGeminiApi(systemPrompt, userPrompt);
+
+        // 2. Parse JSON sang AIIntentDTO
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readValue(jsonResponse, AIIntentDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AIIntentDTO("ERROR", null, null, "Không thể phân tích yêu cầu", false);
+        }
+    }
+
+    private String callGeminiApi(String systemPrompt, String userPrompt) {
+        // Kết hợp systemPrompt và userPrompt thành một chuỗi prompt duy nhất để gửi cho Gemini
+        String combinedPrompt = systemPrompt + " " + userPrompt;
+
+        try {
+            // Tái sử dụng logic gọi API của bạn
+            return this.ask(combinedPrompt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{\"intent\": \"ERROR\", \"isValid\": false, \"summary\": \"Lỗi khi gọi API Gemini\"}";
+        }
+    }
 }
