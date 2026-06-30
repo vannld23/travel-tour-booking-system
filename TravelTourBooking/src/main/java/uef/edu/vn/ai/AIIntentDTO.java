@@ -4,10 +4,6 @@
  */
 package uef.edu.vn.ai;
 
-/**
- *
- * @author bphun
- */
 public class AIIntentDTO {
     private String intent;          // VD: REVENUE_REPORT, TOP_TOUR, CUSTOMER_GROWTH
     private String timePeriod;      // VD: "2026-01-01", "2026-03-31", "current_month"
@@ -27,4 +23,44 @@ public class AIIntentDTO {
     }
     
     // Thêm các getter/setter tại đây
+
+    public String getIntent() {
+        return intent;
+    }
+
+    public void setIntent(String intent) {
+        this.intent = intent;
+    }
+
+    public String getTimePeriod() {
+        return timePeriod;
+    }
+
+    public void setTimePeriod(String timePeriod) {
+        this.timePeriod = timePeriod;
+    }
+
+    public String getChartType() {
+        return chartType;
+    }
+
+    public void setChartType(String chartType) {
+        this.chartType = chartType;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public boolean isIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(boolean isValid) {
+        this.isValid = isValid;
+    }
 }
