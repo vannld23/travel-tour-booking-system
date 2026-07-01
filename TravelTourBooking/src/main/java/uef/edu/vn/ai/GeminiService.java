@@ -89,15 +89,22 @@ public class GeminiService implements AIService {
         String systemPrompt = PromptBuilder.buildSystemPrompt();
         String userPrompt = PromptBuilder.buildUserPrompt(userInput);
 
-        // 1. Gọi Gemini API (Sử dụng code HttpClient bạn đã có)
         String jsonResponse = callGeminiApi(systemPrompt, userPrompt);
 
-        // 2. Parse JSON sang AIIntentDTO
+        if (jsonResponse != null) {
+            // Cải tiến Cleaning: Chỉ bỏ markdown, không cắt xén cấu trúc JSON
+            jsonResponse = jsonResponse.replace("```json", "").replace("```", "").trim();
+        }
+
         try {
             ObjectMapper mapper = new ObjectMapper();
+            // Cấu hình thêm để tránh lỗi nghiêm ngặt
+            mapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+            System.out.println("DEBUG JSON Response: " + jsonResponse);
             return mapper.readValue(jsonResponse, AIIntentDTO.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("Lỗi Parse JSON: " + e.getMessage());
             return new AIIntentDTO("ERROR", null, null, "Không thể phân tích yêu cầu", false);
         }
     }

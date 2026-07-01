@@ -10,6 +10,19 @@ http://www.springframework.org/schema/context
 http://www.springframework.org/schema/context/spring-context.xsd
 http://www.springframework.org/schema/mvc
 http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    
+    <!-- 1. Cấu hình DataSource -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3307/travel_tour_booking?useSSL=false&amp;serverTimezone=UTC" />
+        <property name="username" value="root" />
+        <property name="password" value="" /> <!-- Hãy để trống nếu bạn không đặt mật khẩu MySQL -->
+    </bean>
+
+    <!-- 2. Cấu hình JdbcTemplate (Đây là phần quan trọng nhất đang bị thiếu) -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
     <!-- Scan Java classes with annotations such as @Controller -->
     <context:component-scan base-package="uef.edu.vn"/>
     <!--Enable the use of annotations such as @RequestMapping -->
@@ -44,9 +57,9 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     </mvc:interceptors>
 
     <mvc:resources mapping="/resources/**"
-               location="/resources/" />
+                   location="/resources/" />
     <mvc:resources mapping="/resource/**"
-               location="/resource/" />
+                   location="/resource/" />
     <!-- Configure the view resolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>

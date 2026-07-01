@@ -47,6 +47,11 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.15.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>5.3.20</version> <!-- Bạn có thể dùng version 5.x.x tương thích với dự án của bạn -->
+        </dependency>
     </dependencies>
     
     <build>
