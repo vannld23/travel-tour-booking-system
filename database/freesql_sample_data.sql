@@ -31,8 +31,8 @@ VALUES
 INSERT INTO users(full_name,email,password,phone,address,role_id)
 VALUES
 ('Nguyen Van A','a@gmail.com','123456','0901111111','HCM',2),
-('Tran Thi B','b@gmail.com','123456','0902222222','Ha Noi',2),
-('Le Van C','c@gmail.com','123456','0903333333','Da Nang',2),
+('Tran Thi B','b@gmail.com','123456','0902222222','Ha Noi',3),
+('Le Van C','c@gmail.com','123456','0903333333','Da Nang',4),
 ('Pham Thi D','d@gmail.com','123456','0904444444','Can Tho',2),
 ('Hoang Van E','e@gmail.com','123456','0905555555','Hue',2),
 ('Vo Thi F','f@gmail.com','123456','0906666666','Nha Trang',2),
