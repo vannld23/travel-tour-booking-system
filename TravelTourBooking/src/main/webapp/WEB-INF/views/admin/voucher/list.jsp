@@ -62,7 +62,7 @@
                                         <td class="py-4 px-6 text-emerald-600 font-semibold">Giảm ${v.discountPercentage}%</td>
                                         <td class="py-4 px-6">
                                             <c:choose>
-                                                <c:when test="${v.maxDiscountAmount.compareTo(java.math.BigDecimal.ZERO) == 0}">
+                                                <c:when test="${empty v.maxDiscountAmount || v.maxDiscountAmount == 0}">
                                                     Không giới hạn
                                                 </c:when>
                                                 <c:otherwise>
