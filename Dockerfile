@@ -29,4 +29,6 @@ COPY --from=builder /app/target/TravelTourBooking.war /usr/local/tomcat/webapps/
 # Render dùng PORT 8080 mặc định
 EXPOSE 8080
 
+ENV CATALINA_OPTS="-Djava.net.preferIPv4Stack=true"
+
 CMD ["catalina.sh", "run"]

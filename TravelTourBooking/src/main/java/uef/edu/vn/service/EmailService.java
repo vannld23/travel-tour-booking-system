@@ -17,6 +17,10 @@ import uef.edu.vn.model.Payment;
  */
 public class EmailService {
 
+    static {
+        System.setProperty("java.net.preferIPv4Stack", "true");
+    }
+
     private static final String FROM_EMAIL = getEnv("EMAIL_USER", "");
     private static final String APP_PASSWORD = getEnv("EMAIL_PASSWORD", "");
     private static final String FROM_NAME = "VoyagerElite Travel";
