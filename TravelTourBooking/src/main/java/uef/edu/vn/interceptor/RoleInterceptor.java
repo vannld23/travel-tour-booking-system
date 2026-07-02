@@ -7,21 +7,20 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import uef.edu.vn.model.User;
 
 /**
- * RoleInterceptor kiểm tra quyền truy cập vào các trang quản trị (admin).
+ * RoleInterceptor kiem tra quyen truy cap vao cac trang quan tri (admin).
  *
- * Quy tắc (cấu hình trong dispatcher-servlet.xml):
- *  - Đường dẫn được bảo vệ: /dashboard/**, /admin/**, /booking/**,
- *                            /tuormanagement/**, /destination/**, /itinerary/**,
- *                            /payment/**, /system/**
- *  - Đường dẫn được loại trừ: /booking/create, /booking/history/**, /payment/history/**
- *
- * Chỉ cho phép truy cập khi người dùng đã đăng nhập và có roleId == 1 (Admin).
- * Các trường hợp còn lại sẽ bị chuyển hướng về trang đăng nhập hoặc trang chủ.
+ * He thong phan quyen:
+ *   roleId = 1 : ADMIN       - Toan quyen
+ *   roleId = 2 : CUSTOMER    - Chi xem trang client
+ *   roleId = 3 : STAFF       - Xu ly booking, payment hang ngay; khong xoa du lieu chinh
+ *   roleId = 4 : MANAGER     - Xem bao cao, quan ly gia/lich trinh; khong quan ly user
  */
 public class RoleInterceptor implements HandlerInterceptor {
 
-    /** roleId của Admin trong hệ thống */
-    private static final int ADMIN_ROLE_ID = 1;
+    private static final int ADMIN    = 1;
+    private static final int CUSTOMER = 2;
+    private static final int STAFF    = 3;
+    private static final int MANAGER  = 4;
 
     @Override
     public boolean preHandle(HttpServletRequest request,
@@ -29,40 +28,37 @@ public class RoleInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
         HttpSession session = request.getSession(false);
-
-        // Chưa có phiên đăng nhập → chuyển đến trang đăng nhập
         if (session == null) {
-            chuyenHuongDangNhap(request, response);
+            response.sendRedirect(request.getContextPath() + "/auth/login");
             return false;
         }
 
-        User nguoiDungHienTai = (User) session.getAttribute("currentUser");
-
-        // Chưa đăng nhập → chuyển đến trang đăng nhập
-        if (nguoiDungHienTai == null) {
-            chuyenHuongDangNhap(request, response);
+        User user = (User) session.getAttribute("currentUser");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/auth/login");
             return false;
         }
 
-        // Đã đăng nhập nhưng không phải Admin → chuyển về trang chủ
-        if (nguoiDungHienTai.getRoleId() != ADMIN_ROLE_ID) {
-            response.sendRedirect(request.getContextPath() + "/");
+        int roleId = user.getRoleId();
+        String path = request.getRequestURI();
+        String ctx  = request.getContextPath();
+
+        // CUSTOMER khong co quyen vao khu admin
+        if (roleId == CUSTOMER) {
+            response.sendRedirect(ctx + "/");
             return false;
         }
 
-        // Hợp lệ → cho phép tiếp tục
+        // Chi ADMIN moi quan ly users va system
+        if (path.startsWith(ctx + "/admin/user") || path.startsWith(ctx + "/system")) {
+            if (roleId != ADMIN) {
+                response.sendRedirect(ctx + "/admin/dashboard");
+                return false;
+            }
+        }
+
+        // ADMIN, STAFF, MANAGER deu co the vao admin dashboard va booking/payment/tour/destination
+        // (STAFF va MANAGER khong xoa, nhung controller se tu xu ly)
         return true;
-    }
-
-    // -------------------------------------------------------------------------
-    // Phương thức hỗ trợ
-    // -------------------------------------------------------------------------
-
-    /**
-     * Chuyển hướng người dùng về trang đăng nhập.
-     */
-    private void chuyenHuongDangNhap(HttpServletRequest request,
-                                     HttpServletResponse response) throws Exception {
-        response.sendRedirect(request.getContextPath() + "/auth/login");
     }
 }

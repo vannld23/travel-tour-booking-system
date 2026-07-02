@@ -61,11 +61,19 @@
             </nav>
             <div class="flex justify-between items-center">
                 <h2 class="text-3xl font-bold text-deep-navy">Chi tiết Đặt chỗ</h2>
-                <a href="<c:url value='/booking/list'/>"
-                   class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-sm hover:bg-surface-container transition-all">
-                    <span class="material-symbols-outlined text-base">arrow_back</span>
-                    Quay lại danh sách
-                </a>
+                <div class="flex items-center gap-3">
+                    <a href="<c:url value='/export/invoice/pdf/${booking.bookingId}'/>"
+                       target="_blank"
+                       class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 transition-all shadow">
+                        <span class="material-symbols-outlined text-base">picture_as_pdf</span>
+                        In Hóa Đơn PDF
+                    </a>
+                    <a href="<c:url value='/booking/list'/>"
+                       class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface text-sm hover:bg-surface-container transition-all">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        Quay lại danh sách
+                    </a>
+                </div>
             </div>
         </div>
 

@@ -460,4 +460,11 @@ public class BookingDAO {
 
         return 0;
     }
+
+    /**
+     * Alias of getBookingById - used by ExportService
+     */
+    public Booking findById(int bookingId) {
+        return getBookingById(bookingId);
+    }
 }

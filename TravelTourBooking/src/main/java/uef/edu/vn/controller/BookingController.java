@@ -12,6 +12,7 @@ import uef.edu.vn.model.Booking;
 import uef.edu.vn.service.BookingService;
 import uef.edu.vn.service.UserService;
 import uef.edu.vn.service.TourService;
+import uef.edu.vn.service.EmailService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
 import uef.edu.vn.model.User;
@@ -32,6 +33,7 @@ public class BookingController {
     private final UserService userService = new UserService();
     private final TourService tourService = new TourService();
     private final BookingService bookingService = new BookingService();
+    private final EmailService emailService = new EmailService();
 
     // ── Root redirect ────────────────────────────────────────────────────────
     @GetMapping({"", "/"})
@@ -218,10 +220,22 @@ public class BookingController {
                         booking);
 
         if (!result) {
-
             return "redirect:/booking/create?tourId="
                     + booking.getTourId()
                     + "&error=full";
+        }
+
+        // Gui email xac nhan dat tour
+        try {
+            Booking created = bookingService.getBookingsByUserId(currentUser.getUserId())
+                    .stream()
+                    .filter(b -> b.getTourId() == booking.getTourId())
+                    .findFirst().orElse(null);
+            if (created != null) {
+                emailService.sendBookingConfirmation(created, currentUser.getEmail());
+            }
+        } catch (Exception e) {
+            System.err.println("[BookingController] Email error: " + e.getMessage());
         }
 
         return "redirect:/booking/history";

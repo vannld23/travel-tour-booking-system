@@ -112,14 +112,14 @@
 
                 </div>
 
-                <div class="mt-8 flex justify-center">
+                <div class="mt-8 flex justify-center gap-4">
 
                     <c:choose>
 
                         <c:when test="${booking.bookingStatus == 'PENDING'}">
 
                             <span class="px-6 py-3 rounded-full bg-yellow-100 text-yellow-700 border border-yellow-300 font-bold">
-                                Chờ xác nhận
+                                Cho xac nhan
                             </span>
 
                         </c:when>
@@ -127,7 +127,7 @@
                         <c:when test="${booking.bookingStatus == 'CONFIRMED'}">
 
                             <span class="px-6 py-3 rounded-full bg-blue-100 text-blue-700 border border-blue-300 font-bold">
-                                Đã xác nhận
+                                Da xac nhan
                             </span>
 
                         </c:when>
@@ -135,7 +135,7 @@
                         <c:when test="${booking.bookingStatus == 'COMPLETED'}">
 
                             <span class="px-6 py-3 rounded-full bg-green-100 text-green-700 border border-green-300 font-bold">
-                                Hoàn thành
+                                Hoan thanh
                             </span>
 
                         </c:when>
@@ -143,12 +143,20 @@
                         <c:otherwise>
 
                             <span class="px-6 py-3 rounded-full bg-red-100 text-red-700 border border-red-300 font-bold">
-                                Đã hủy
+                                Da huy
                             </span>
 
                         </c:otherwise>
 
                     </c:choose>
+
+                    <%-- Nut in hoa don PDF - hien thi voi moi trang thai --%>
+                    <a href="${pageContext.request.contextPath}/export/invoice/pdf/${booking.bookingId}"
+                       target="_blank"
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 text-white font-bold hover:bg-red-700 transition-all shadow-md">
+                        <span class="material-symbols-outlined text-base">picture_as_pdf</span>
+                        In Hoa Don PDF
+                    </a>
 
                 </div>
 
@@ -160,4 +168,4 @@
 
 </div>
 
-<%@ include file="../layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp" %>

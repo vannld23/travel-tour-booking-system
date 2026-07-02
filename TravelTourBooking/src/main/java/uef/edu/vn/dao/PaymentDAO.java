@@ -364,4 +364,36 @@ public class PaymentDAO {
 
         return payments;
     }
+
+    /**
+     * Lay Payment dau tien theo bookingId - dung trong ExportService
+     */
+    public Payment findByBookingId(int bookingId) {
+        String sql = "SELECT p.*, u.full_name, t.tour_name "
+                + "FROM payments p "
+                + "JOIN bookings b ON p.booking_id = b.booking_id "
+                + "JOIN users u ON b.user_id = u.user_id "
+                + "JOIN tours t ON b.tour_id = t.tour_id "
+                + "WHERE p.booking_id = ? LIMIT 1";
+        try (Connection conn = uef.edu.vn.utils.DBConnection.getConnection();
+             java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, bookingId);
+            java.sql.ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Payment p = new Payment();
+                p.setPaymentId(rs.getInt("payment_id"));
+                p.setBookingId(rs.getInt("booking_id"));
+                p.setAmount(rs.getDouble("amount"));
+                p.setPaymentMethod(rs.getString("payment_method"));
+                p.setPaymentDate(rs.getTimestamp("payment_date"));
+                p.setPaymentStatus(rs.getString("payment_status"));
+                p.setFullName(rs.getString("full_name"));
+                p.setTourName(rs.getString("tour_name"));
+                return p;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
