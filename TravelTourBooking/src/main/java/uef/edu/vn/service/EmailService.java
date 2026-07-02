@@ -106,41 +106,50 @@ public class EmailService {
     // Core: Gui email HTML
     // =========================================================================
 
-    private void sendHtml(String toEmail, String subject, String htmlBody) {
-        try {
-            Properties props = new Properties();
-            props.put("mail.smtp.host", "smtp.gmail.com");
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+    private void sendHtml(final String toEmail, final String subject, final String htmlBody) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Properties props = new Properties();
+                    props.put("mail.smtp.host", "smtp.gmail.com");
+                    props.put("mail.smtp.port", "587");
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.starttls.enable", "true");
+                    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                    
+                    // Thêm timeout để không bị treo vô hạn
+                    props.put("mail.smtp.connectiontimeout", "5000"); // 5 giây kết nối
+                    props.put("mail.smtp.timeout", "5000");           // 5 giây đọc dữ liệu
 
-            Session session = Session.getInstance(props, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(FROM_EMAIL, APP_PASSWORD);
+                    Session session = Session.getInstance(props, new Authenticator() {
+                        @Override
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(FROM_EMAIL, APP_PASSWORD);
+                        }
+                    });
+
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(FROM_EMAIL, FROM_NAME, "UTF-8"));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+                    message.setSubject(MimeUtility.encodeText(subject, "UTF-8", "B"));
+
+                    MimeBodyPart htmlPart = new MimeBodyPart();
+                    htmlPart.setContent(htmlBody, "text/html; charset=UTF-8");
+
+                    Multipart multipart = new MimeMultipart();
+                    multipart.addBodyPart(htmlPart);
+                    message.setContent(multipart);
+
+                    Transport.send(message);
+                    System.out.println("[EmailService] Email sent to: " + toEmail);
+
+                } catch (Exception e) {
+                    // Khong de email loi anh huong den luong chinh
+                    System.err.println("[EmailService] Failed to send email to " + toEmail + ": " + e.getMessage());
                 }
-            });
-
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(FROM_EMAIL, FROM_NAME, "UTF-8"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject(MimeUtility.encodeText(subject, "UTF-8", "B"));
-
-            MimeBodyPart htmlPart = new MimeBodyPart();
-            htmlPart.setContent(htmlBody, "text/html; charset=UTF-8");
-
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(htmlPart);
-            message.setContent(multipart);
-
-            Transport.send(message);
-            System.out.println("[EmailService] Email sent to: " + toEmail);
-
-        } catch (Exception e) {
-            // Khong de email loi anh huong den luong chinh
-            System.err.println("[EmailService] Failed to send email to " + toEmail + ": " + e.getMessage());
-        }
+            }
+        }).start();
     }
 
     // =========================================================================
