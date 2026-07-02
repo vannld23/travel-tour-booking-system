@@ -56,8 +56,11 @@
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>
 
-                <a href="<c:url value='/admin/report/top-tours'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-tours' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">3. Tour bán chạy nhất</a>
+                <a href="${pageContext.request.contextPath}/admin/report/top-selling-tours" 
+                   class="flex items-center p-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors 
+                   ${activePage == 'report-top-tours' ? 'bg-blue-100 text-blue-700 font-bold' : ''}">
+                    <span class="mr-3"></span> 3. Tour bán chạy nhất
+                </a>
 
                 <a href="<c:url value='/admin/report/capacity'/>" 
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-capacity' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">4. Hiệu suất khai thác Tour</a>

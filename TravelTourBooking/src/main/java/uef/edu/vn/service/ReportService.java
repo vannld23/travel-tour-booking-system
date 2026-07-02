@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import uef.edu.vn.dto.RevenueByTimeDTO;
+import uef.edu.vn.dto.TourReportDTO;
 
 public class ReportService {
 
@@ -79,7 +80,12 @@ public class ReportService {
         for (Map.Entry<String, BigDecimal> entry : revenueMap.entrySet()) {
             result.add(new RevenueByTimeDTO(entry.getKey(), entry.getValue()));
         }
-           
+
         return result;
+    }
+
+    // Báo cáo 3: Tour bán chạy nhất
+    public List<TourReportDTO> getTopSellingTours(String startDate, String endDate) {
+        return tourDAO.getTopSellingTours(startDate, endDate);
     }
 }
