@@ -68,14 +68,14 @@ price,max_capacity,start_date,end_date,
 description,image_url
 )
 VALUES
-('Da Nang Discovery',1,3,3500000,30,'2026-07-01','2026-07-03','Explore Da Nang','tour1.jpg'),
+('Da Nang Discovery',1,3,3500000,30,'2026-07-01','2026-07-03','Explore Da Nang','danang.jpg'),
 ('Ha Long Cruise',2,2,2800000,25,'2026-07-10','2026-07-11','Ha Long Bay Tour','tour2.jpg'),
 ('Nha Trang Vacation',3,4,4500000,30,'2026-08-01','2026-08-04','Beach Holiday','tour3.jpg'),
 ('Phu Quoc Resort',4,5,6500000,20,'2026-08-10','2026-08-14','Luxury Resort','tour4.jpg'),
 ('Hoi An Heritage',5,2,2500000,25,'2026-08-20','2026-08-21','Ancient Town Visit','tour5.jpg'),
 ('Sapa Adventure',6,3,3900000,20,'2026-09-01','2026-09-03','Mountain Trekking','tour6.jpg'),
-('Da Lat Flower Tour',7,3,3200000,25,'2026-09-10','2026-09-12','Flower Festival','tour7.jpg'),
-('Hue Culture Tour',8,2,2700000,20,'2026-09-20','2026-09-21','Historical Tour','tour8.jpg'),
+('Da Lat Flower Tour',7,3,3200000,25,'2026-09-10','2026-09-12','Flower Festival','dalat.jpg'),
+('Hue Culture Tour',8,2,2700000,20,'2026-09-20','2026-09-21','Historical Tour','Hue.jpg'),
 ('Cat Ba Escape',9,3,3600000,20,'2026-10-01','2026-10-03','Island Adventure','tour9.jpg'),
 ('Moc Chau Experience',10,2,2200000,15,'2026-10-15','2026-10-16','Tea Hill Tour','tour10.jpg');
 

@@ -43,6 +43,18 @@
 
                         <img
                             src="${pageContext.request.contextPath}/resources/images/${selectedTour.imageUrl}"
+                            onerror="if(this.src.indexOf('https://images.unsplash.com') === -1) { 
+                                var name = '${selectedTour.tourName.toLowerCase()}';
+                                if(name.includes('da lat') || name.includes('đà lạt')) {
+                                    this.src = '${pageContext.request.contextPath}/resources/images/da_lat.jpg';
+                                } else if(name.includes('da nang') || name.includes('đà nẵng')) {
+                                    this.src = '${pageContext.request.contextPath}/resources/images/da_nang.jpg';
+                                } else if(name.includes('hue') || name.includes('huế')) {
+                                    this.src = '${pageContext.request.contextPath}/resources/images/Hue.jpg';
+                                } else {
+                                    this.src = 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80';
+                                }
+                            }"
                             alt="${selectedTour.tourName}"
                             class="w-full h-[320px] object-cover">
 
@@ -356,6 +368,18 @@
                         <div class="bg-white border-2 border-slate-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:-translate-y-1 transition-all">
 
                             <img src="${pageContext.request.contextPath}/resources/images/${tour.imageUrl}"
+                                 onerror="if(this.src.indexOf('https://images.unsplash.com') === -1) {
+                                      var name = '${tour.tourName.toLowerCase()}';
+                                      if(name.includes('da lat') || name.includes('đà lạt')) {
+                                          this.src = '${pageContext.request.contextPath}/resources/images/da_lat.jpg';
+                                      } else if(name.includes('da nang') || name.includes('đà nẵng')) {
+                                          this.src = '${pageContext.request.contextPath}/resources/images/da_nang.jpg';
+                                      } else if(name.includes('hue') || name.includes('huế')) {
+                                          this.src = '${pageContext.request.contextPath}/resources/images/Hue.jpg';
+                                      } else {
+                                          this.src = 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80';
+                                      }
+                                  }"
                                  alt="${tour.tourName}"
                                  class="w-full h-52 object-cover">
 
