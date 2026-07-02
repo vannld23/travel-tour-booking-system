@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS `tours`;
 DROP TABLE IF EXISTS `users`;
 DROP TABLE IF EXISTS `destinations`;
 DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `vouchers`;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- --------------------------------------------------------
@@ -109,6 +110,23 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
+-- Table: vouchers
+-- --------------------------------------------------------
+CREATE TABLE `vouchers` (
+  `voucher_id` int(11) NOT NULL,
+  `code` varchar(50) NOT NULL UNIQUE,
+  `discount_percentage` decimal(5,2) NOT NULL,
+  `max_discount_amount` decimal(15,2) DEFAULT 0.00,
+  `min_order_amount` decimal(15,2) DEFAULT 0.00,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `usage_limit` int(11) DEFAULT 100,
+  `used_count` int(11) DEFAULT 0,
+  `status` varchar(20) DEFAULT 'ACTIVE',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 -- Indexes
 -- --------------------------------------------------------
 ALTER TABLE `bookings`
@@ -140,6 +158,9 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `fk_user_role` (`role_id`);
 
+ALTER TABLE `vouchers`
+  ADD PRIMARY KEY (`voucher_id`);
+
 -- --------------------------------------------------------
 -- AUTO_INCREMENT
 -- --------------------------------------------------------
@@ -150,6 +171,7 @@ ALTER TABLE `roles`      MODIFY `role_id`       int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `schedules`  MODIFY `schedule_id`   int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `tours`      MODIFY `tour_id`       int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `users`      MODIFY `user_id`       int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `vouchers`   MODIFY `voucher_id`    int(11) NOT NULL AUTO_INCREMENT;
 
 -- --------------------------------------------------------
 -- Foreign Keys
