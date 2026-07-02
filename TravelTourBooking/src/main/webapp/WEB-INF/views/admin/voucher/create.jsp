@@ -28,6 +28,20 @@
             <h2 class="text-3xl font-bold text-[#05285D]">Tạo Voucher Mới</h2>
         </div>
 
+        <c:if test="${not empty param.error}">
+            <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-2 max-w-2xl">
+                <span class="material-symbols-outlined">error</span>
+                <span class="font-medium">
+                    <c:choose>
+                        <c:when test="${param.error == 'invalid_data'}">Vui lòng nhập dữ liệu hợp lệ (tỉ lệ giảm giá từ 1 đến 100%, lượt dùng lớn hơn 0).</c:when>
+                        <c:when test="${param.error == 'date_format'}">Lỗi định dạng ngày tháng.</c:when>
+                        <c:when test="${param.error == 'date_range'}">Ngày bắt đầu phải trước hoặc trùng ngày kết thúc.</c:when>
+                        <c:otherwise>Lỗi không xác định khi lưu Voucher.</c:otherwise>
+                    </c:choose>
+                </span>
+            </div>
+        </c:if>
+
         <div class="max-w-2xl bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
             <div class="p-6 bg-gray-50 border-b border-gray-100 flex items-center gap-2 text-[#0194F3]">
                 <span class="material-symbols-outlined">add_card</span>

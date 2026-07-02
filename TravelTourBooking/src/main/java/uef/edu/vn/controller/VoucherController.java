@@ -42,15 +42,33 @@ public class VoucherController {
             @RequestParam(defaultValue = "100") int usageLimit,
             @RequestParam(defaultValue = "ACTIVE") String status) {
 
+        // Validate basic inputs
+        if (code == null || code.trim().isEmpty() 
+                || discountPercentage <= 0 || discountPercentage > 100
+                || usageLimit <= 0) {
+            return "redirect:/admin/voucher/create?error=invalid_data";
+        }
+
+        Date sDate = null;
+        Date eDate = null;
+        try {
+            sDate = Date.valueOf(startDate);
+            eDate = Date.valueOf(endDate);
+        } catch (Exception e) {
+            return "redirect:/admin/voucher/create?error=date_format";
+        }
+
+        if (sDate.after(eDate)) {
+            return "redirect:/admin/voucher/create?error=date_range";
+        }
+
         Voucher voucher = new Voucher();
         voucher.setCode(code);
         voucher.setDiscountPercentage(BigDecimal.valueOf(discountPercentage));
         voucher.setMaxDiscountAmount(maxDiscountAmount != null ? BigDecimal.valueOf(maxDiscountAmount) : BigDecimal.ZERO);
         voucher.setMinOrderAmount(minOrderAmount != null ? BigDecimal.valueOf(minOrderAmount) : BigDecimal.ZERO);
-        try {
-            voucher.setStartDate(Date.valueOf(startDate));
-            voucher.setEndDate(Date.valueOf(endDate));
-        } catch (Exception ignored) {}
+        voucher.setStartDate(sDate);
+        voucher.setEndDate(eDate);
         voucher.setUsageLimit(usageLimit);
         voucher.setStatus(status);
 
@@ -81,16 +99,34 @@ public class VoucherController {
             @RequestParam int usageLimit,
             @RequestParam String status) {
 
+        // Validate basic inputs
+        if (code == null || code.trim().isEmpty() 
+                || discountPercentage <= 0 || discountPercentage > 100
+                || usageLimit <= 0) {
+            return "redirect:/admin/voucher/edit?id=" + voucherId + "&error=invalid_data";
+        }
+
+        Date sDate = null;
+        Date eDate = null;
+        try {
+            sDate = Date.valueOf(startDate);
+            eDate = Date.valueOf(endDate);
+        } catch (Exception e) {
+            return "redirect:/admin/voucher/edit?id=" + voucherId + "&error=date_format";
+        }
+
+        if (sDate.after(eDate)) {
+            return "redirect:/admin/voucher/edit?id=" + voucherId + "&error=date_range";
+        }
+
         Voucher voucher = voucherDAO.findById(voucherId);
         if (voucher != null) {
             voucher.setCode(code);
             voucher.setDiscountPercentage(BigDecimal.valueOf(discountPercentage));
             voucher.setMaxDiscountAmount(maxDiscountAmount != null ? BigDecimal.valueOf(maxDiscountAmount) : BigDecimal.ZERO);
             voucher.setMinOrderAmount(minOrderAmount != null ? BigDecimal.valueOf(minOrderAmount) : BigDecimal.ZERO);
-            try {
-                voucher.setStartDate(Date.valueOf(startDate));
-                voucher.setEndDate(Date.valueOf(endDate));
-            } catch (Exception ignored) {}
+            voucher.setStartDate(sDate);
+            voucher.setEndDate(eDate);
             voucher.setUsageLimit(usageLimit);
             voucher.setStatus(status);
             voucherDAO.update(voucher);

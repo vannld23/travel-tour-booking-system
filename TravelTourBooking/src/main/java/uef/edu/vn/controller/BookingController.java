@@ -265,8 +265,10 @@ public class BookingController {
     public String adminCreate(
             @ModelAttribute Booking booking) {
 
-        bookingService.addBooking(
-                booking);
+        boolean result = bookingService.addBooking(booking);
+        if (!result) {
+            return "redirect:/booking/list?error=full";
+        }
 
         return "redirect:/booking/list";
     }

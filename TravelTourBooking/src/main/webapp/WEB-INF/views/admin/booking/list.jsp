@@ -133,6 +133,13 @@
                     </div>
                 </div>
 
+                <c:if test="${param.error == 'full'}">
+                    <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-2">
+                        <span class="material-symbols-outlined">error</span>
+                        <span class="font-medium">Không thể tạo đặt chỗ: Tour đã hết chỗ trống (đạt giới hạn Capacity)!</span>
+                    </div>
+                </c:if>
+
                 <!-- ══ Thẻ thống kê tổng quan ════════════════════════════════════════ -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white rounded-xl p-5 glass-card flex flex-col gap-1">
