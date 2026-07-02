@@ -61,11 +61,11 @@ public class ReportController {
         return "admin/report/revenue-time";
     }
 
-    // Endpoint tạm thời để khởi tạo bảng vouchers
+    // Endpoint tạm thời để khởi tạo bảng vouchers và chèn các vai trò còn thiếu
     @GetMapping("/init-db")
     @org.springframework.web.bind.annotation.ResponseBody
     public String initDb() {
-        String sql = """
+        String sqlVoucher = """
             CREATE TABLE IF NOT EXISTS vouchers (
                 voucher_id INT AUTO_INCREMENT PRIMARY KEY,
                 code VARCHAR(50) NOT NULL UNIQUE,
@@ -80,12 +80,29 @@ public class ReportController {
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
         """;
-        try (java.sql.Connection conn = uef.edu.vn.utils.DBConnection.getConnection();
-             java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.executeUpdate();
-            return "SUCCESS: Table 'vouchers' has been initialized/checked in database!";
+        
+        String sqlRole3 = "INSERT INTO roles (role_id, role_name) VALUES (3, 'STAFF') ON DUPLICATE KEY UPDATE role_name='STAFF'";
+        String sqlRole4 = "INSERT INTO roles (role_id, role_name) VALUES (4, 'MANAGER') ON DUPLICATE KEY UPDATE role_name='MANAGER'";
+
+        try (java.sql.Connection conn = uef.edu.vn.utils.DBConnection.getConnection()) {
+            // 1. Tạo bảng vouchers
+            try (java.sql.PreparedStatement stmt = conn.prepareStatement(sqlVoucher)) {
+                stmt.executeUpdate();
+            }
+            
+            // 2. Chèn role 3
+            try (java.sql.PreparedStatement stmt = conn.prepareStatement(sqlRole3)) {
+                stmt.executeUpdate();
+            }
+            
+            // 3. Chèn role 4
+            try (java.sql.PreparedStatement stmt = conn.prepareStatement(sqlRole4)) {
+                stmt.executeUpdate();
+            }
+            
+            return "SUCCESS: Table 'vouchers' and missing Roles (3: STAFF, 4: MANAGER) have been initialized in database!";
         } catch (java.sql.SQLException e) {
-            return "ERROR: Failed to initialize table: " + e.getMessage();
+            return "ERROR: Failed to initialize database: " + e.getMessage();
         }
     }
 }
