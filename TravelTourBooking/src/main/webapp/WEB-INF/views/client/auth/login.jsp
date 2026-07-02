@@ -38,7 +38,7 @@
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <div class="w-full h-full bg-black/25 absolute inset-0"></div>
-        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resource/images/login.jpg'/>"/>
+        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resources/images/login.jpg'/>"/>
     </div>
 
     <!-- Main Container -->
