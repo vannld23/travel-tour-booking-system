@@ -27,6 +27,13 @@
             </div>
         </div>
 
+        <c:if test="${param.error == 'cannot_delete_admin'}">
+            <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center gap-2">
+                <span class="material-symbols-outlined">error</span>
+                <span class="font-medium">Lỗi bảo mật: Không thể xóa tài khoản Quản trị viên (ADMIN)!</span>
+            </div>
+        </c:if>
+
         <div class="glass-card rounded-xl shadow-sm overflow-hidden bg-white">
             <div class="p-6 border-b border-gray-100 flex justify-between items-center">
                 <h3 class="font-bold text-gray-800 text-lg">Danh sách người dùng</h3>
@@ -78,11 +85,20 @@
                                            class="text-[#0194F3] hover:text-[#0074c2] font-semibold transition-colors flex items-center gap-1">
                                             <span class="material-symbols-outlined text-base">edit</span> Sửa
                                         </a>
-                                        <a href="${pageContext.request.contextPath}/admin/user/delete?id=${u.userId}"
-                                           onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này?')"
-                                           class="text-red-600 hover:text-red-700 font-semibold transition-colors flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-base">delete</span> Xóa
-                                        </a>
+                                        <c:choose>
+                                            <c:when test="${u.roleId == 1}">
+                                                <span class="text-gray-300 flex items-center gap-1 cursor-not-allowed" title="Không thể xóa tài khoản Admin">
+                                                    <span class="material-symbols-outlined text-base">block</span> Xóa
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="${pageContext.request.contextPath}/admin/user/delete?id=${u.userId}"
+                                                   onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này?')"
+                                                   class="text-red-600 hover:text-red-700 font-semibold transition-colors flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-base">delete</span> Xóa
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </td>
                             </tr>

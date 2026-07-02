@@ -58,6 +58,11 @@ public class AdminUserController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam int id) {
+        User user = userDAO.findById(id);
+        if (user != null && user.getRoleId() == 1) {
+            // Ngăn chặn xóa tài khoản Admin để bảo mật hệ thống
+            return "redirect:/admin/user/list?error=cannot_delete_admin";
+        }
         userDAO.delete(id);
         return "redirect:/admin/user/list";
     }
