@@ -54,38 +54,31 @@
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">1. Tổng quan hệ thống</a>
 
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
-<<<<<<< HEAD
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">2. Doanh thu theo thời gian</a>
-=======
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>
 
                 <a href="${pageContext.request.contextPath}/admin/report/top-selling-tours" 
-                   class="flex items-center p-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors 
-                   ${activePage == 'report-top-tours' ? 'bg-blue-100 text-blue-700 font-bold' : ''}">
-                    <span class="mr-3"></span> 3. Tour bán chạy nhất
-                </a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-top-tours' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">3. Tour bán chạy nhất</a>
 
                 <a href="<c:url value='/admin/report/capacity'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-capacity' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">4. Hiệu suất khai thác Tour</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-capacity' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">4. Hiệu suất khai thác Tour</a>
 
                 <a href="<c:url value='/admin/report/booking-status'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-booking' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">5. Trạng thái Booking</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-booking' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">5. Trạng thái Booking</a>
 
                 <a href="<c:url value='/admin/report/destination'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-destination' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">6. Doanh thu theo điểm đến</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-destination' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">6. Doanh thu theo điểm đến</a>
 
                 <a href="<c:url value='/admin/report/payment-method'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-payment' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">7. Phương thức thanh toán</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-payment' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">7. Phương thức thanh toán</a>
 
                 <a href="<c:url value='/admin/report/loyal-customers'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-loyal' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">8. Khách hàng thân thiết</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-loyal' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">8. Khách hàng thân thiết</a>
 
                 <a href="<c:url value='/admin/report/conversion'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-conversion' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">9. Tỷ lệ chuyển đổi</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-conversion' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">9. Tỷ lệ chuyển đổi</a>
 
                 <a href="<c:url value='/admin/report/itinerary'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-itinerary' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">10. Tần suất lịch trình</a>
->>>>>>> main
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-itinerary' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">10. Tần suất lịch trình</a>
             </div>
         </div>
 

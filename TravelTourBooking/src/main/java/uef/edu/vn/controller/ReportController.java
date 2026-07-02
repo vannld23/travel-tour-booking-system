@@ -62,7 +62,6 @@ public class ReportController {
         return "admin/report/revenue-time";
     }
 
-<<<<<<< HEAD
     // Endpoint tạm thời để khởi tạo bảng vouchers và chèn các vai trò còn thiếu
     @GetMapping("/init-db")
     @org.springframework.web.bind.annotation.ResponseBody
@@ -106,7 +105,8 @@ public class ReportController {
         } catch (java.sql.SQLException e) {
             return "ERROR: Failed to initialize database: " + e.getMessage();
         }
-=======
+    }
+
     // Báo cáo 3: Tour bán chạy nhất
     @GetMapping("/top-selling-tours")
     public String getTopSellingTours(
@@ -118,6 +118,5 @@ public class ReportController {
         model.addAttribute("startDate", startDate);
         model.addAttribute("endDate", endDate);
         return "admin/report/top-selling-tours";
->>>>>>> main
     }
 }
