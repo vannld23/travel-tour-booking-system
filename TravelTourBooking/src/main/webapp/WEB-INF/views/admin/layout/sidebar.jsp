@@ -54,13 +54,9 @@
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">1. Tổng quan hệ thống</a>
 
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">2. Doanh thu theo thời gian</a>
                 <a href="${pageContext.request.contextPath}/admin/report/top-selling-tours" 
-                   class="flex items-center p-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors 
-                   ${activePage == 'report-top-tours' ? 'bg-blue-100 text-blue-700 font-bold' : ''}">
-                    <span class="mr-3"></span> 3. Tour bán chạy nhất
-                </a>
-
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-top-tours' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">3. Tour bán chạy nhất</a>
             </div>
         </div>
 

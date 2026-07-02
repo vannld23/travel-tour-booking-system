@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
-<c:set var="pageTitle" value="VoyagerElite - Khám phá thế giới theo cách của bạn" />
+<c:set var="pageTitle" value="ChillTravel - Khám phá thế giới theo cách của bạn" />
 <%@ include file="../layout/header.jsp" %>
 
     <!-- Hero Section -->
@@ -161,7 +161,7 @@
                     <div class="col-span-full text-center py-16 bg-white rounded-2xl border border-outline-variant/30 px-6">
                         <span class="material-symbols-outlined text-6xl text-on-surface-variant/40 mb-4" style="font-variation-settings: 'wght' 300;">search_off</span>
                         <h3 class="font-headline-md text-headline-md text-deep-navy font-bold mb-2">Không tìm thấy tour phù hợp</h3>
-                        <p class="text-on-surface-variant font-body-md max-w-md mx-auto mb-6">VoyagerElite hiện chưa có chương trình tour tương ứng với tiêu chí tìm kiếm này. Quý khách vui lòng thử lại bằng từ khóa hoặc điểm đến khác.</p>
+                        <p class="text-on-surface-variant font-body-md max-w-md mx-auto mb-6">ChillTravel hiện chưa có chương trình tour tương ứng với tiêu chí tìm kiếm này. Quý khách vui lòng thử lại bằng từ khóa hoặc điểm đến khác.</p>
                         <a href="<c:url value='/home'/>" class="inline-flex items-center bg-ocean-blue text-white px-6 py-3 rounded-xl font-label-md hover:bg-primary transition-all shadow-md active:scale-95">
                             <span class="material-symbols-outlined mr-2 text-base">refresh</span>
                             Xem tất cả các tour
@@ -284,7 +284,7 @@
                         <span class="material-symbols-outlined fill text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined fill text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                     </div>
-                    <p class="text-body-md italic leading-relaxed">"Chuyến đi Sapa vừa rồi thực sự tuyệt vời. Dịch vụ của VoyagerElite rất chuyên nghiệp, hướng dẫn viên nhiệt tình và khách sạn vô cùng thoải mái."</p>
+                    <p class="text-body-md italic leading-relaxed">"Chuyến đi Sapa vừa rồi thực sự tuyệt vời. Dịch vụ của ChillTravel rất chuyên nghiệp, hướng dẫn viên nhiệt tình và khách sạn vô cùng thoải mái."</p>
                 </div>
                 <!-- Review 2 -->
                 <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20">
@@ -320,7 +320,7 @@
                         <span class="material-symbols-outlined fill text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined fill text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
                     </div>
-                    <p class="text-body-md italic leading-relaxed">"Giá cả minh bạch và hỗ trợ đặt chỗ cực kỳ nhanh chóng. VoyagerElite là lựa chọn hàng đầu của tôi cho mỗi kỳ nghỉ."</p>
+                    <p class="text-body-md italic leading-relaxed">"Giá cả minh bạch và hỗ trợ đặt chỗ cực kỳ nhanh chóng. ChillTravel là lựa chọn hàng đầu của tôi cho mỗi kỳ nghỉ."</p>
                 </div>
             </div>
         </div>

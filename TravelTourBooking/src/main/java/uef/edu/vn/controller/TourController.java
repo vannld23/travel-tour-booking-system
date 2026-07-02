@@ -259,7 +259,7 @@ public class TourController {
             bindingResult.rejectValue("maxCapacity", "maxCapacity.positive", "Sức chứa tối đa phải lớn hơn 0");
         }
         if (tour.getStartDate() != null && tour.getEndDate() != null) {
-            if (tour.getStartDate().after(tour.getEndDate())) {
+            if (tour.getStartDate().isAfter(tour.getEndDate())) {
                 bindingResult.rejectValue("startDate", "startDate.invalid", "Ngày bắt đầu phải trước hoặc trùng ngày kết thúc");
             }
         }

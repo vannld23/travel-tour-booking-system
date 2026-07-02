@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Đăng ký tài khoản - VoyagerElite</title>
+    <title>Đăng ký tài khoản - ChillTravel</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
@@ -33,13 +33,13 @@
     <!-- Traveloka-style Left Logo Banner -->
     <div class="absolute top-0 left-0 bg-[#0194F3] text-white px-10 pt-5 pb-7 rounded-br-[80px] shadow-lg z-20 flex items-center gap-2 select-none">
         <span class="material-symbols-outlined text-white text-3xl font-bold">explore</span>
-        <span class="text-2xl font-black tracking-tight">VoyagerElite</span>
+        <span class="text-2xl font-black tracking-tight">ChillTravel</span>
     </div>
 
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <div class="w-full h-full bg-black/25 absolute inset-0"></div>
-        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resource/images/login.jpg'/>"/>
+        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resources/images/login.jpg'/>"/>
     </div>
 
     <!-- Main Container -->
@@ -48,7 +48,7 @@
         <div class="flex justify-end items-center">
             <a href="<c:url value='/'/>" class="text-white hover:text-blue-100 font-semibold flex items-center gap-1.5 transition-all drop-shadow-sm text-sm">
                 <span class="material-symbols-outlined text-base">arrow_back</span>
-                Vào Trang chủ VoyagerElite
+                Vào Trang chủ ChillTravel
             </a>
         </div>
 
@@ -60,7 +60,7 @@
                     Khám Phá Thế Giới,<br/>Trải Nghiệm Trọn Vẹn.
                 </h1>
                 <p class="text-lg text-white/90 font-medium">
-                    Đăng ký tài khoản để bắt đầu hành trình của bạn, tích luỹ điểm thưởng và nhận các ưu đãi giảm giá tour hấp dẫn từ VoyagerElite.
+                    Đăng ký tài khoản để bắt đầu hành trình của bạn, tích luỹ điểm thưởng và nhận các ưu đãi giảm giá tour hấp dẫn từ ChillTravel.
                 </p>
             </div>
 
@@ -81,7 +81,7 @@
                 <div class="p-6 md:p-8 flex-grow">
                     <div class="mb-5">
                         <h2 class="text-2xl font-extrabold text-[#05285D]">Đăng ký thành viên</h2>
-                        <p class="text-xs text-gray-500 mt-1">Tạo tài khoản VoyagerElite để bắt đầu hành trình của bạn</p>
+                        <p class="text-xs text-gray-500 mt-1">Tạo tài khoản ChillTravel để bắt đầu hành trình của bạn</p>
                     </div>
 
                     <form class="space-y-3.5" action="<c:url value='/auth/register'/>" method="post">
@@ -102,7 +102,7 @@
                         <!-- Input Email -->
                         <div>
                             <label class="block text-xs font-bold text-gray-500 mb-1" for="email">Địa chỉ Email</label>
-                            <input class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="email" name="email" value="${email}" placeholder="admin@voyagerelite.com" type="email" required/>
+                            <input class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="email" name="email" value="${email}" placeholder="admin@chilltravel.com" type="email" required/>
                         </div>
 
                         <!-- Input Password -->
@@ -171,7 +171,7 @@
         <!-- Footer section -->
         <div class="flex flex-col sm:flex-row justify-between items-center w-full max-w-7xl mx-auto gap-2 border-t border-white/10 pt-4 mt-auto">
             <span class="text-white/70 text-[11px]">Bằng cách đăng ký, bạn đồng ý với Điều khoản & Điều kiện của chúng tôi.</span>
-            <span class="text-white/80 text-[11px]">© 2026 VoyagerElite. All rights reserved.</span>
+            <span class="text-white/80 text-[11px]">© 2026 ChillTravel. All rights reserved.</span>
         </div>
     </div>
 
