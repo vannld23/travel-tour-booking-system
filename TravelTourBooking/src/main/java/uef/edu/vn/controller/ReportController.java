@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import uef.edu.vn.dao.DashboardDAO;
 import uef.edu.vn.dto.RevenueByTimeDTO;
+import uef.edu.vn.dto.TourReportDTO;
 import uef.edu.vn.model.DashboardDTO;
 import uef.edu.vn.service.ReportService;
 
@@ -61,6 +62,7 @@ public class ReportController {
         return "admin/report/revenue-time";
     }
 
+<<<<<<< HEAD
     // Endpoint tạm thời để khởi tạo bảng vouchers và chèn các vai trò còn thiếu
     @GetMapping("/init-db")
     @org.springframework.web.bind.annotation.ResponseBody
@@ -104,5 +106,18 @@ public class ReportController {
         } catch (java.sql.SQLException e) {
             return "ERROR: Failed to initialize database: " + e.getMessage();
         }
+=======
+    // Báo cáo 3: Tour bán chạy nhất
+    @GetMapping("/top-selling-tours")
+    public String getTopSellingTours(
+            @RequestParam(defaultValue = "2026-01-01") String startDate,
+            @RequestParam(defaultValue = "2026-12-31") String endDate,
+            Model model) {
+
+        model.addAttribute("topTours", reportService.getTopSellingTours(startDate, endDate));
+        model.addAttribute("startDate", startDate);
+        model.addAttribute("endDate", endDate);
+        return "admin/report/top-selling-tours";
+>>>>>>> main
     }
 }

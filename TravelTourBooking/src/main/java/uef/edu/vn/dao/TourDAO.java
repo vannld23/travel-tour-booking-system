@@ -9,12 +9,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import uef.edu.vn.dto.TourReportDTO;
 import uef.edu.vn.model.Tour;
 import uef.edu.vn.utils.DBConnection;
 
 /**
- * DAO xử lý CRUD, tìm kiếm, phân trang và thống kê booking cho Tour.
- * Hỗ trợ tự động tương thích ngược khi DB chưa chạy ALTER TABLE thêm cột status.
+ * DAO xử lý CRUD, tìm kiếm, phân trang và thống kê booking cho Tour. Hỗ trợ tự
+ * động tương thích ngược khi DB chưa chạy ALTER TABLE thêm cột status.
  */
 public class TourDAO {
 
@@ -33,9 +34,7 @@ public class TourDAO {
                   AND TABLE_NAME   = 'tours'
                   AND COLUMN_NAME  = 'status'
                 """;
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             statusColumnExists = rs.next() && rs.getInt(1) > 0;
         } catch (SQLException e) {
             statusColumnExists = false;
@@ -52,12 +51,12 @@ public class TourDAO {
                 : "'ACTIVE' AS status";
 
         return "SELECT t.tour_id, t.tour_name, t.destination_id, d.destination_name, "
-             + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
-             + "t.description, t.image_url, " + statusExpr + ", "
-             + "COUNT(b.booking_id) AS booking_count "
-             + "FROM tours t "
-             + "JOIN destinations d ON t.destination_id = d.destination_id "
-             + "LEFT JOIN bookings b ON b.tour_id = t.tour_id ";
+                + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
+                + "t.description, t.image_url, " + statusExpr + ", "
+                + "COUNT(b.booking_id) AS booking_count "
+                + "FROM tours t "
+                + "JOIN destinations d ON t.destination_id = d.destination_id "
+                + "LEFT JOIN bookings b ON b.tour_id = t.tour_id ";
     }
 
     /**
@@ -66,29 +65,27 @@ public class TourDAO {
     private String buildGroupBy() {
         return hasStatusColumn()
                 ? " GROUP BY t.tour_id, t.tour_name, t.destination_id, d.destination_name, "
-                  + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
-                  + "t.description, t.image_url, t.status "
+                + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
+                + "t.description, t.image_url, t.status "
                 : " GROUP BY t.tour_id, t.tour_name, t.destination_id, d.destination_name, "
-                  + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
-                  + "t.description, t.image_url ";
+                + "t.duration_days, t.price, t.max_capacity, t.start_date, t.end_date, "
+                + "t.description, t.image_url ";
     }
 
     // ─── 1. LẤY TOÀN BỘ ──────────────────────────────────────────────────────
-
     public List<Tour> findAll() {
         String sql = buildBaseSelect() + buildGroupBy() + " ORDER BY t.tour_name ";
         return executeList(sql);
     }
 
     // ─── 2. TÌM KIẾM, PHÂN TRANG & SẮP XẾP ─────────────────────────────────────
-
     /**
      * Tìm kiếm và lọc nâng cao với Phân trang & Sắp xếp.
      */
     public List<Tour> search(String keyword, Integer destinationId, BigDecimal maxPrice,
-                             Integer maxDurationDays, Tour.Status status,
-                             String sortBy, String sortDir, int limit, int offset) {
-        
+            Integer maxDurationDays, Tour.Status status,
+            String sortBy, String sortDir, int limit, int offset) {
+
         List<Object> params = new ArrayList<>();
         StringBuilder sql = new StringBuilder(buildBaseSelect()).append(" WHERE 1=1 ");
 
@@ -98,11 +95,17 @@ public class TourDAO {
 
         // Whitelist cột để tránh SQL Injection khi sắp xếp
         String orderCol = "t.tour_name";
-        if ("tourId".equalsIgnoreCase(sortBy)) orderCol = "t.tour_id";
-        else if ("price".equalsIgnoreCase(sortBy)) orderCol = "t.price";
-        else if ("durationDays".equalsIgnoreCase(sortBy)) orderCol = "t.duration_days";
-        else if ("bookingCount".equalsIgnoreCase(sortBy)) orderCol = "booking_count";
-        else if ("destinationName".equalsIgnoreCase(sortBy)) orderCol = "d.destination_name";
+        if ("tourId".equalsIgnoreCase(sortBy)) {
+            orderCol = "t.tour_id";
+        } else if ("price".equalsIgnoreCase(sortBy)) {
+            orderCol = "t.price";
+        } else if ("durationDays".equalsIgnoreCase(sortBy)) {
+            orderCol = "t.duration_days";
+        } else if ("bookingCount".equalsIgnoreCase(sortBy)) {
+            orderCol = "booking_count";
+        } else if ("destinationName".equalsIgnoreCase(sortBy)) {
+            orderCol = "d.destination_name";
+        }
 
         String orderDir = "DESC".equalsIgnoreCase(sortDir) ? "DESC" : "ASC";
         sql.append(" ORDER BY ").append(orderCol).append(" ").append(orderDir);
@@ -119,16 +122,15 @@ public class TourDAO {
      * Tính tổng số tour khớp bộ lọc (cho tính toán số trang).
      */
     public int count(String keyword, Integer destinationId, BigDecimal maxPrice,
-                     Integer maxDurationDays, Tour.Status status) {
-        
+            Integer maxDurationDays, Tour.Status status) {
+
         List<Object> params = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT COUNT(DISTINCT t.tour_id) FROM tours t ");
         sql.append("JOIN destinations d ON t.destination_id = d.destination_id WHERE 1=1 ");
 
         buildSearchQuery(sql, params, keyword, destinationId, maxPrice, maxDurationDays, status);
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql.toString())) {
             for (int i = 0; i < params.size(); i++) {
                 stmt.setObject(i + 1, params.get(i));
             }
@@ -144,8 +146,8 @@ public class TourDAO {
     }
 
     private void buildSearchQuery(StringBuilder sql, List<Object> params,
-                                  String keyword, Integer destinationId, BigDecimal maxPrice,
-                                  Integer maxDurationDays, Tour.Status status) {
+            String keyword, Integer destinationId, BigDecimal maxPrice,
+            Integer maxDurationDays, Tour.Status status) {
         if (isNotBlank(keyword)) {
             sql.append(" AND (t.tour_name LIKE ? OR t.description LIKE ? OR d.destination_name LIKE ? OR d.city LIKE ?) ");
             String likePattern = "%" + keyword.trim() + "%";
@@ -173,11 +175,9 @@ public class TourDAO {
     }
 
     // ─── 3. CÁC HÀM TRUY VẤN CHI TIẾT ──────────────────────────────────────────
-
     public Tour findById(int tourId) {
         String sql = buildBaseSelect() + " WHERE t.tour_id = ? " + buildGroupBy();
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, tourId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
@@ -198,7 +198,6 @@ public class TourDAO {
     }
 
     // ─── 4. LƯU & CẬP NHẬT ────────────────────────────────────────────────────
-
     public int save(Tour tour) {
         String sql = hasStatusColumn()
                 ? """
@@ -212,8 +211,7 @@ public class TourDAO {
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                   """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             fillStatement(stmt, tour);
             int rows = stmt.executeUpdate();
             if (rows > 0) {
@@ -244,8 +242,7 @@ public class TourDAO {
                   WHERE tour_id = ?
                   """;
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             fillStatement(stmt, tour);
             stmt.setInt(hasStatusColumn() ? 11 : 10, tour.getTourId());
             return stmt.executeUpdate();
@@ -256,8 +253,7 @@ public class TourDAO {
 
     public int delete(int tourId) {
         String sql = "DELETE FROM tours WHERE tour_id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, tourId);
             return stmt.executeUpdate();
         } catch (SQLException e) {
@@ -266,26 +262,25 @@ public class TourDAO {
     }
 
     // ─── 5. HELPERS ──────────────────────────────────────────────────────────
-
     private void fillStatement(PreparedStatement stmt, Tour t) throws SQLException {
         stmt.setString(1, t.getTourName());
         stmt.setInt(2, t.getDestinationId());
         stmt.setInt(3, t.getDurationDays());
         stmt.setBigDecimal(4, t.getPrice() == null ? BigDecimal.ZERO : t.getPrice());
         stmt.setInt(5, t.getMaxCapacity());
-        
+
         if (t.getStartDate() == null) {
             stmt.setNull(6, java.sql.Types.DATE);
         } else {
             stmt.setDate(6, Date.valueOf(t.getStartDate()));
         }
-        
+
         if (t.getEndDate() == null) {
             stmt.setNull(7, java.sql.Types.DATE);
         } else {
             stmt.setDate(7, Date.valueOf(t.getEndDate()));
         }
-        
+
         stmt.setString(8, t.getDescription());
         stmt.setString(9, t.getImageUrl());
 
@@ -303,16 +298,20 @@ public class TourDAO {
         tour.setDurationDays(rs.getInt("duration_days"));
         tour.setPrice(rs.getBigDecimal("price"));
         tour.setMaxCapacity(rs.getInt("max_capacity"));
-        
+
         Date start = rs.getDate("start_date");
-        if (start != null) tour.setStartDate(start.toLocalDate());
-        
+        if (start != null) {
+            tour.setStartDate(start.toLocalDate());
+        }
+
         Date end = rs.getDate("end_date");
-        if (end != null) tour.setEndDate(end.toLocalDate());
-        
+        if (end != null) {
+            tour.setEndDate(end.toLocalDate());
+        }
+
         tour.setDescription(rs.getString("description"));
         tour.setImageUrl(rs.getString("image_url"));
-        
+
         // Parse status an toàn
         Tour.Status status = Tour.Status.ACTIVE;
         try {
@@ -331,9 +330,7 @@ public class TourDAO {
 
     private List<Tour> executeList(String sql) {
         List<Tour> list = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 list.add(mapRow(rs));
             }
@@ -345,8 +342,7 @@ public class TourDAO {
 
     private List<Tour> executeList(String sql, List<Object> params) {
         List<Tour> list = new ArrayList<>();
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
             for (int i = 0; i < params.size(); i++) {
                 stmt.setObject(i + 1, params.get(i));
             }
@@ -363,5 +359,32 @@ public class TourDAO {
 
     private boolean isNotBlank(String val) {
         return val != null && !val.trim().isEmpty();
+    }
+
+    public List<TourReportDTO> getTopSellingTours(String startDate, String endDate) {
+        List<TourReportDTO> list = new ArrayList<>();
+        String sql = "SELECT t.tour_name, COUNT(b.booking_id) as total_bookings "
+                + "FROM tours t "
+                + "JOIN bookings b ON t.tour_id = b.tour_id "
+                + "WHERE b.booking_status IN ('CONFIRMED', 'COMPLETED') "
+                + "AND b.booking_date BETWEEN ? AND ? "
+                + // Lọc theo ngày
+                "GROUP BY t.tour_id, t.tour_name "
+                + "ORDER BY total_bookings DESC LIMIT 10";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, startDate + " 00:00:00");
+            ps.setString(2, endDate + " 23:59:59");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(new TourReportDTO(rs.getString("tour_name"), rs.getInt("total_bookings")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

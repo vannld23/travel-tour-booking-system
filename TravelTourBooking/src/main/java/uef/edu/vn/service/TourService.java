@@ -3,6 +3,7 @@ package uef.edu.vn.service;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import uef.edu.vn.dao.TourDAO;
+import uef.edu.vn.dto.TourReportDTO;
 import uef.edu.vn.model.Tour;
 
 @Service
@@ -33,4 +34,5 @@ public class TourService {
     public int deleteTour(int id) {
         return tourDAO.delete(id);
     }
+    
 }
