@@ -6,9 +6,14 @@
     <head>
         <meta charset="utf-8"/>
         <title>Doanh thu theo thời gian - Admin | VoyagerElite</title>
+        <!-- Fonts & Icons -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
+            body { font-family: 'Inter', sans-serif; }
             .glass-card {
                 background: white;
                 border: 1px solid #e5e7eb;
@@ -22,12 +27,17 @@
             <main class="flex-1 ml-[280px] p-8">
                 <div class="mb-8 flex justify-between items-center">
                     <h2 class="text-3xl font-bold text-gray-800">Doanh thu theo thời gian</h2>
-
-                    <form action="revenue-time" method="GET" class="flex gap-2">
-                        <input type="date" name="startDate" value="${startDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
-                        <input type="date" name="endDate" value="${endDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
-                        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">Lọc</button>
-                    </form>
+                    <div class="flex items-center gap-3">
+                        <form action="revenue-time" method="GET" class="flex gap-2">
+                            <input type="date" name="startDate" value="${startDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                            <input type="date" name="endDate" value="${endDate}" class="border rounded-lg px-3 py-2 text-sm outline-none focus:border-blue-500">
+                            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">Lọc</button>
+                        </form>
+                        <a href="<c:url value='/export/revenue/excel'/>"
+                           class="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-700 transition-all shadow">
+                            ⬇ Xuất Excel
+                        </a>
+                    </div>
                 </div>
 
                 <div class="glass-card rounded-xl p-6 shadow-sm mb-8">

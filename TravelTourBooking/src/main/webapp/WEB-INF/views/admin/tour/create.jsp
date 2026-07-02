@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <form:form id="tour-form" method="post" modelAttribute="tour" action="${pageContext.request.contextPath}/tuormanagement/create">
+    <form:form id="tour-form" method="post" modelAttribute="tour" action="${pageContext.request.contextPath}/tuormanagement/create" enctype="multipart/form-data">
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-8 space-y-6">
                 <section class="glass-card rounded-xl p-6 shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </section>
-
+ 
                 <section class="glass-card rounded-xl p-6 shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
                     <div class="flex items-center gap-2 mb-6 text-[#0194F3]">
                         <span class="material-symbols-outlined">payments</span>
@@ -102,19 +102,19 @@
                     </div>
                 </section>
             </div>
-
+ 
             <div class="col-span-4 space-y-6">
                 <section class="glass-card rounded-xl p-6 shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
                     <div class="flex items-center gap-2 mb-6 text-[#0194F3]">
                         <span class="material-symbols-outlined">image</span>
                         <h3 class="text-xl font-semibold">Bộ sưu tập hình ảnh</h3>
                     </div>
-                    <div class="border-2 border-dashed border-[#bfc7d4] rounded-xl p-8 text-center bg-[#f8f9f9] mb-6">
-                        <p class="font-medium text-[#191c1c] mb-1">Nhập đường dẫn ảnh cho tour</p>
-                        <p class="text-sm text-[#3f4752]">Bạn có thể nhập `imageUrl` thủ công</p>
+                    <div class="border-2 border-dashed border-[#bfc7d4] rounded-xl p-6 text-center bg-[#f8f9f9] mb-4">
+                        <p class="font-medium text-[#191c1c] mb-2">Chọn file ảnh để tải lên</p>
+                        <input type="file" name="imageFile" accept="image/*" class="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
                     </div>
                     <div>
-                        <label class="block font-semibold text-[#3f4752] mb-2">Image URL</label>
+                        <label class="block font-semibold text-[#3f4752] mb-2">Hoặc nhập URL thủ công</label>
                         <form:input path="imageUrl" cssClass="w-full h-12 px-4 bg-[#F2F3F3] border-none rounded-lg" placeholder="tour1.jpg" />
                     </div>
                 </section>

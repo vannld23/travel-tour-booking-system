@@ -11,6 +11,11 @@
             <param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- 10MB -->
+            <max-request-size>20971520</max-request-size> <!-- 20MB -->
+            <file-size-threshold>5242880</file-size-threshold> <!-- 5MB -->
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
@@ -21,5 +26,15 @@
             30
         </session-timeout>
     </session-config>
+
+    <!-- Cau hinh cac trang bao loi he thong -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/client/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/client/error/500.jsp</location>
+    </error-page>
 </web-app>
 <!-- reload context -->

@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import uef.edu.vn.dao.DestinationDAO;
 import uef.edu.vn.dao.TourDAO;
 import uef.edu.vn.model.Tour;
+import org.springframework.web.multipart.MultipartFile;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.UUID;
 
 /**
  * Controller điều hướng các request liên quan đến Quản lý Tour.
@@ -95,8 +99,34 @@ public class TourController {
     @PostMapping("/create")
     public String create(@ModelAttribute("tour") Tour tour,
                          @RequestParam(value = "statusStr", defaultValue = "ACTIVE") String statusStr,
+                         @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                         HttpServletRequest request,
                          Model model) {
         tour.setStatus(parseStatus(statusStr));
+
+        // Xu ly upload file anh
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String uploadDir = request.getServletContext().getRealPath("/resources/images/tours");
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                String originalFilename = imageFile.getOriginalFilename();
+                String ext = "";
+                if (originalFilename != null && originalFilename.contains(".")) {
+                    ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+                }
+                String filename = UUID.randomUUID().toString() + ext;
+                File serverFile = new File(dir, filename);
+                imageFile.transferTo(serverFile);
+                
+                // Thiet lap duong dan den file anh moi upload
+                tour.setImageUrl(request.getContextPath() + "/resources/images/tours/" + filename);
+            } catch (Exception e) {
+                System.err.println("[TourController] Upload error: " + e.getMessage());
+            }
+        }
 
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(tour, "tour");
         validateTour(tour, bindingResult);
@@ -127,8 +157,34 @@ public class TourController {
     @PostMapping("/edit")
     public String update(@ModelAttribute("tour") Tour tour,
                          @RequestParam(value = "statusStr", defaultValue = "ACTIVE") String statusStr,
+                         @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                         HttpServletRequest request,
                          Model model) {
         tour.setStatus(parseStatus(statusStr));
+
+        // Xu ly upload file anh khi edit
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String uploadDir = request.getServletContext().getRealPath("/resources/images/tours");
+                File dir = new File(uploadDir);
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                String originalFilename = imageFile.getOriginalFilename();
+                String ext = "";
+                if (originalFilename != null && originalFilename.contains(".")) {
+                    ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+                }
+                String filename = UUID.randomUUID().toString() + ext;
+                File serverFile = new File(dir, filename);
+                imageFile.transferTo(serverFile);
+                
+                // Cap nhat duong dan moi
+                tour.setImageUrl(request.getContextPath() + "/resources/images/tours/" + filename);
+            } catch (Exception e) {
+                System.err.println("[TourController] Edit upload error: " + e.getMessage());
+            }
+        }
 
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(tour, "tour");
         validateTour(tour, bindingResult);

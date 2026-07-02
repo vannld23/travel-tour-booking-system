@@ -17,10 +17,12 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ROLES
 -- =========================
 
-INSERT INTO roles(role_name)
+INSERT INTO roles(role_id, role_name)
 VALUES
-('ADMIN'),
-('CUSTOMER');
+(1, 'ADMIN'),
+(2, 'CUSTOMER'),
+(3, 'STAFF'),
+(4, 'MANAGER');
 
 -- =========================
 -- USERS (10 records)

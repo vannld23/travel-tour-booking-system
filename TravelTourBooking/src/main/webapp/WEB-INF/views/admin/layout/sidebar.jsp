@@ -49,39 +49,17 @@
                 <span class="material-symbols-outlined text-sm">expand_more</span>
             </a>
 
-            <div id="reportDropdown" class="hidden pl-10 space-y-2 pb-2">
+            <div id="reportDropdown" class="hidden pl-10 space-y-2 pb-2 text-sm">
                 <a href="${pageContext.request.contextPath}/admin/report/dashboard" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-50'}">1. Tổng quan hệ thống</a>
+                   class="block px-4 py-2 rounded-lg ${activePage == 'report-dashboard' ? 'bg-[#0194F3] text-white shadow-sm' : 'text-white/70 hover:bg-white/10'}">1. Tổng quan hệ thống</a>
 
                 <a href="<c:url value='/admin/report/revenue-time'/>" 
                    class="block px-4 py-2 rounded-lg ${activePage == 'report-revenue' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">2. Doanh thu theo thời gian</a>
-
                 <a href="${pageContext.request.contextPath}/admin/report/top-selling-tours" 
                    class="flex items-center p-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors 
                    ${activePage == 'report-top-tours' ? 'bg-blue-100 text-blue-700 font-bold' : ''}">
                     <span class="mr-3"></span> 3. Tour bán chạy nhất
                 </a>
-
-                <a href="<c:url value='/admin/report/capacity'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-capacity' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">4. Hiệu suất khai thác Tour</a>
-
-                <a href="<c:url value='/admin/report/booking-status'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-booking' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">5. Trạng thái Booking</a>
-
-                <a href="<c:url value='/admin/report/destination'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-destination' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">6. Doanh thu theo điểm đến</a>
-
-                <a href="<c:url value='/admin/report/payment-method'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-payment' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">7. Phương thức thanh toán</a>
-
-                <a href="<c:url value='/admin/report/loyal-customers'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-loyal' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">8. Khách hàng thân thiết</a>
-
-                <a href="<c:url value='/admin/report/conversion'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-conversion' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">9. Tỷ lệ chuyển đổi</a>
-
-                <a href="<c:url value='/admin/report/itinerary'/>" 
-                   class="block px-4 py-2 rounded-lg ${activePage == 'report-itinerary' ? 'bg-blue-600 text-white' : 'text-white/60 hover:text-white'}">10. Tần suất lịch trình</a>
             </div>
         </div>
 
@@ -89,6 +67,18 @@
            href="<c:url value='/payment/list'/>">
             <span class="material-symbols-outlined mr-3">payments</span>
             <span>Quản lý Thanh toán</span>
+        </a>
+
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'admin-user' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
+           href="<c:url value='/admin/user/list'/>">
+            <span class="material-symbols-outlined mr-3">group</span>
+            <span>Quản lý Tài khoản</span>
+        </a>
+
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'admin-voucher' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
+           href="<c:url value='/admin/voucher/list'/>">
+            <span class="material-symbols-outlined mr-3">loyalty</span>
+            <span>Quản lý Voucher</span>
         </a>
 
         <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'setting' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
@@ -113,7 +103,9 @@
                 {path: '/destination', selector: 'a[href*="/destination"]'},
                 {path: '/itinerary', selector: 'a[href*="/itinerary"]'},
                 {path: '/booking', selector: 'a[href*="/booking"]'},
-                {path: '/payment', selector: 'a[href*="/payment"]'}
+                {path: '/payment', selector: 'a[href*="/payment"]'},
+                {path: '/admin/user', selector: 'a[href*="/admin/user"]'},
+                {path: '/admin/voucher', selector: 'a[href*="/admin/voucher"]'}
             ];
 
             menuMap.forEach(item => {

@@ -237,4 +237,35 @@ public class UserDAO {
         }
         return false;
     }
+
+    public boolean update(User user) {
+        String sql = "UPDATE users SET full_name = ?, email = ?, password = ?, phone = ?, address = ?, is_active = ?, role_id = ? WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getFullName());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getPassword());
+            stmt.setString(4, user.getPhone());
+            stmt.setString(5, user.getAddress());
+            stmt.setBoolean(6, user.isActive());
+            stmt.setInt(7, user.getRoleId());
+            stmt.setInt(8, user.getUserId());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("DB query failed in UserDAO.update: " + e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean delete(int userId) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("DB query failed in UserDAO.delete: " + e.getMessage());
+        }
+        return false;
+    }
 }

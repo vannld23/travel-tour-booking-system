@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 import uef.edu.vn.dao.UserDAO;
 import uef.edu.vn.model.User;
+import uef.edu.vn.service.EmailService;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 
     private final UserDAO userDAO = new UserDAO();
+    private final EmailService emailService = new EmailService();
 
     // =========================
     // LOGIN
@@ -50,8 +52,8 @@ public class AuthController {
 
         session.setAttribute("currentUser", user);
 
-        // Phân quyền
-        if (user.getRoleId() == 1) {
+        // Phan quyen: Admin, Staff, Manager vao admin dashboard
+        if (user.getRoleId() == 1 || user.getRoleId() == 3 || user.getRoleId() == 4) {
             return "redirect:/admin/dashboard";
         }
 
@@ -147,10 +149,27 @@ public class AuthController {
     @PostMapping("/forgot-password")
     public String forgotPassword(
             @RequestParam String email,
+            jakarta.servlet.http.HttpServletRequest request,
             Model model) {
 
+        User user = userDAO.findByEmail(email.trim());
+        if (user == null) {
+            model.addAttribute("error",
+                    "Khong tim thay tai khoan voi email nay.");
+            return "client/auth/forgot-password";
+        }
+
+        // Tao reset link don gian (co the thay bang token that)
+        String resetLink = request.getScheme() + "://" + request.getServerName()
+                + ":" + request.getServerPort()
+                + request.getContextPath()
+                + "/auth/change-password";
+
+        // Gui email that
+        emailService.sendPasswordResetEmail(email.trim(), resetLink);
+
         model.addAttribute("message",
-                "Liên kết đặt lại mật khẩu đã được gửi tới " + email);
+                "Lien ket dat lai mat khau da duoc gui toi " + email + ". Vui long kiem tra hop thu cua ban.");
 
         return "client/auth/forgot-password";
     }

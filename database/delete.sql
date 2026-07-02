@@ -1,5 +1,3 @@
-USE `travel_tour_booking`;
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS payments;
@@ -9,5 +7,6 @@ DROP TABLE IF EXISTS tours;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS destinations;
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS vouchers;
 
 SET FOREIGN_KEY_CHECKS = 1;

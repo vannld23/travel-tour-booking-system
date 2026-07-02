@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <form:form id="tour-form" method="post" modelAttribute="tour" action="${pageContext.request.contextPath}/tuormanagement/edit">
+    <form:form id="tour-form" method="post" modelAttribute="tour" action="${pageContext.request.contextPath}/tuormanagement/edit" enctype="multipart/form-data">
         <form:hidden path="tourId" />
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-8 space-y-6">
@@ -63,7 +63,7 @@
                                 <form:errors path="destinationId" cssClass="field-error" />
                             </div>
                             <div>
-                                <label class="block font-semibold text-[#3f4752] mb-2">Thời lượng</label>
+                                <label class="block font-semibold text-[#3f4752] mb-2">Thời lượng (ngày)</label>
                                 <form:input path="durationDays" cssClass="w-full h-12 px-4 bg-[#F2F3F3] border-none rounded-lg" type="number" min="1" />
                                 <form:errors path="durationDays" cssClass="field-error" />
                             </div>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="grid grid-cols-3 gap-6">
                         <div>
-                            <label class="block font-semibold text-[#3f4752] mb-2">Giá cơ bản</label>
+                            <label class="block font-semibold text-[#3f4752] mb-2">Giá cơ bản (VND)</label>
                             <form:input path="price" cssClass="w-full h-12 px-4 bg-[#F2F3F3] border-none rounded-lg" type="number" step="0.01" min="0" />
                             <form:errors path="price" cssClass="field-error" />
                         </div>
@@ -110,12 +110,12 @@
                         <span class="material-symbols-outlined">image</span>
                         <h3 class="text-xl font-semibold">Bộ sưu tập hình ảnh</h3>
                     </div>
-                    <div class="border-2 border-dashed border-[#bfc7d4] rounded-xl p-8 text-center bg-[#f8f9f9] mb-6">
-                        <p class="font-medium text-[#191c1c] mb-1">Nhập đường dẫn ảnh cho tour</p>
-                        <p class="text-sm text-[#3f4752]">Bạn có thể nhập `imageUrl` thủ công</p>
+                    <div class="border-2 border-dashed border-[#bfc7d4] rounded-xl p-6 text-center bg-[#f8f9f9] mb-4">
+                        <p class="font-medium text-[#191c1c] mb-2">Chọn file ảnh để tải lên</p>
+                        <input type="file" name="imageFile" accept="image/*" class="text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
                     </div>
                     <div>
-                        <label class="block font-semibold text-[#3f4752] mb-2">Image URL</label>
+                        <label class="block font-semibold text-[#3f4752] mb-2">Hoặc nhập URL thủ công</label>
                         <form:input path="imageUrl" cssClass="w-full h-12 px-4 bg-[#F2F3F3] border-none rounded-lg" />
                     </div>
                 </section>
