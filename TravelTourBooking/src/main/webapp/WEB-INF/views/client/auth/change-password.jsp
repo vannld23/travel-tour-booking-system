@@ -32,13 +32,13 @@
     <!-- Traveloka-style Left Logo Banner -->
     <div class="absolute top-0 left-0 bg-[#0194F3] text-white px-10 pt-5 pb-7 rounded-br-[80px] shadow-lg z-20 flex items-center gap-2 select-none">
         <span class="material-symbols-outlined text-white text-3xl font-bold">explore</span>
-        <span class="text-2xl font-black tracking-tight">VoyagerElite</span>
+        <span class="text-2xl font-black tracking-tight">ChillTravel</span>
     </div>
 
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <div class="w-full h-full bg-black/25 absolute inset-0"></div>
-        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resource/images/login.jpg'/>"/>
+        <img class="w-full h-full object-cover filter brightness-[0.8]" alt="Bromo Sunrise Background" src="<c:url value='/resources/images/login.jpg'/>"/>
     </div>
 
     <!-- Main Container -->

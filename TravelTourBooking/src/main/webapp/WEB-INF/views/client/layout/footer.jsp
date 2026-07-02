@@ -5,8 +5,8 @@
         <div class="max-w-container-max mx-auto px-margin-desktop">
             <div class="flex flex-col md:flex-row justify-between gap-12">
                 <div class="mb-12 md:mb-0 max-w-sm">
-                    <span class="text-headline-md font-headline-md text-white mb-6 block font-bold">VoyagerElite</span>
-                    <p class="text-surface-container text-body-md mb-8">VoyagerElite Travel mang đến cho bạn những trải nghiệm du lịch đẳng cấp, chuyên nghiệp và đầy cảm hứng trên khắp mọi miền tổ quốc và thế giới.</p>
+                    <span class="text-headline-md font-headline-md text-white mb-6 block font-bold">ChillTravel</span>
+                    <p class="text-surface-container text-body-md mb-8">ChillTravel mang đến cho bạn những trải nghiệm du lịch đẳng cấp, chuyên nghiệp và đầy cảm hứng trên khắp mọi miền tổ quốc và thế giới.</p>
                     <div class="flex gap-4">
                         <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-ocean-blue transition-colors" href="#">
                             <span class="material-symbols-outlined text-white">public</span>
@@ -41,13 +41,13 @@
                         <h4 class="font-label-md text-white mb-6 font-semibold">Liên hệ</h4>
                         <p class="text-surface-container text-body-md mb-2">123 Đường Du Lịch, Quận 1, TP. HCM</p>
                         <p class="text-surface-container text-body-md mb-2">Hotline: 1900 1234</p>
-                        <p class="text-surface-container text-body-md">Email: support@voyagerelite.vn</p>
+                        <p class="text-surface-container text-body-md">Email: support@chilltravel.vn</p>
                     </div>
                 </div>
             </div>
             
             <div class="w-full mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center opacity-80 hover:opacity-100">
-                <p class="text-surface-container text-body-md mb-4 md:mb-0">© 2024 VoyagerElite Travel. All rights reserved.</p>
+                <p class="text-surface-container text-body-md mb-4 md:mb-0">© 2026 ChillTravel. All rights reserved.</p>
                 <div class="flex gap-4">
                     <span class="material-symbols-outlined text-surface-container">payments</span>
                     <span class="material-symbols-outlined text-surface-container">credit_card</span>
