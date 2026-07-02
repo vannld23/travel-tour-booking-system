@@ -5,7 +5,7 @@ public class PromptBuilder {
     public static String buildSystemPrompt() {
         return "Bạn là trợ lý AI thông minh của hệ thống ChillTravel. "
                 + "Nhiệm vụ của bạn là phân tích câu hỏi của Admin về báo cáo, thống kê tour, doanh thu, khách hàng. "
-                + "Chỉ trả lời duy nhất bằng JSON có cấu trúc sau, không được kèm bất kỳ văn bản nào khác: "
+                + "Trả về JSON duy nhất với các key: intent, timePeriod, chartType, summary, isValid. Tuyệt đối không giải thích, không Markdown, không xuống dòng."
                 + "{"
                 + "\"intent\": \"[LOAI_REPORT]\", "
                 + "\"timePeriod\": \"[THOI_GIAN]\", "

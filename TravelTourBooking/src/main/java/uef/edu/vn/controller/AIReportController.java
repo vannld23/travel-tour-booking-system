@@ -29,24 +29,21 @@ public class AIReportController {
     @PostMapping(value = "/admin/ai/ask", produces = "application/json;charset=UTF-8")
     @ResponseBody
     public AIIntentDTO getAIReport(@RequestParam("question") String question) {
-        try {
-            // 1. Gọi Gemini phân tích intent
-            AIIntentDTO intent = geminiService.getAIIntent(question);
 
-            // 2. Kiểm tra nếu intent hợp lệ và yêu cầu báo cáo doanh thu
-            if (intent != null && "REVENUE_REPORT".equals(intent.getIntent())) {
-                // Lấy dữ liệu thật từ DB
-                List<Double> data = reportRepository.getRevenueDataByMonth(intent.getTimePeriod());
-                intent.setData(data);
-                intent.setIsValid(true);
-            } else if (intent == null) {
-                return new AIIntentDTO("ERROR", null, null, "Không thể phân tích yêu cầu", false);
-            }
+        // 1. Gọi Gemini phân tích intent
+        AIIntentDTO intent = geminiService.getAIIntent(question);
 
-            return intent;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new AIIntentDTO("ERROR", null, null, "Lỗi hệ thống: " + e.getMessage(), false);
+        // 2. Kiểm tra nếu intent hợp lệ và yêu cầu báo cáo doanh thu
+        if (intent == null) {
+            return new AIIntentDTO("ERROR", null, "BAR", "Hệ thống đang bận, hãy thử lại", false);
         }
+
+        if ("REVENUE_REPORT".equals(intent.getIntent())) {
+            List<Double> data = reportRepository.getRevenueDataByMonth(intent.getTimePeriod());
+            intent.setData(data);
+            intent.setIsValid(true);
+        }
+
+        return intent; // Luôn trả về object, dù lỗi hay thành công
     }
 }

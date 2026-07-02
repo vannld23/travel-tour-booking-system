@@ -92,20 +92,28 @@ public class GeminiService implements AIService {
         String jsonResponse = callGeminiApi(systemPrompt, userPrompt);
 
         if (jsonResponse != null) {
-            // Cải tiến Cleaning: Chỉ bỏ markdown, không cắt xén cấu trúc JSON
-            jsonResponse = jsonResponse.replace("```json", "").replace("```", "").trim();
+            int firstBracket = jsonResponse.indexOf("{");
+            int lastBracket = jsonResponse.lastIndexOf("}");
+            if (firstBracket != -1 && lastBracket != -1) {
+                jsonResponse = jsonResponse.substring(firstBracket, lastBracket + 1);
+            }
         }
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            // Cấu hình thêm để tránh lỗi nghiêm ngặt
+            // Thêm cấu hình này để không crash khi JSON thiếu trường dữ liệu
             mapper.configure(com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            System.out.println("DEBUG JSON Response: " + jsonResponse);
-            return mapper.readValue(jsonResponse, AIIntentDTO.class);
+            AIIntentDTO dto = mapper.readValue(jsonResponse, AIIntentDTO.class);
+
+            // Kiểm tra nếu intent vẫn null, nghĩa là AI trả về sai cấu trúc
+            if (dto.getIntent() == null) {
+                throw new Exception("Intent từ AI bị null");
+            }
+            return dto;
         } catch (Exception e) {
-            System.err.println("Lỗi Parse JSON: " + e.getMessage());
-            return new AIIntentDTO("ERROR", null, null, "Không thể phân tích yêu cầu", false);
+            // Trả về một đối tượng mặc định thay vì null để Controller không bị crash
+            return new AIIntentDTO("ERROR", "0", "BAR", "AI không phản hồi đúng định dạng", false);
         }
     }
 
