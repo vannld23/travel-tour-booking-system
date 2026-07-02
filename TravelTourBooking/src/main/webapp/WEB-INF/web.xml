@@ -21,5 +21,15 @@
             30
         </session-timeout>
     </session-config>
+
+    <!-- Cau hinh cac trang bao loi he thong -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/client/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/client/error/500.jsp</location>
+    </error-page>
 </web-app>
 <!-- reload context -->
