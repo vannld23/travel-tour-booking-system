@@ -23,7 +23,7 @@ public class EmailService {
 
     private static final String FROM_EMAIL = getEnv("EMAIL_USER", "");
     private static final String APP_PASSWORD = getEnv("EMAIL_PASSWORD", "");
-    private static final String FROM_NAME = "VoyagerElite Travel";
+    private static final String FROM_NAME = "ChillTravel";
 
     // =========================================================================
     // Email 1: Xac nhan dat tour thanh cong

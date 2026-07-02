@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>${not empty pageTitle ? pageTitle : 'VoyagerElite - Khám phá thế giới theo cách của bạn'}</title>
+        <title>${not empty pageTitle ? pageTitle : 'ChillTravel - Khám phá thế giới theo cách của bạn'}</title>
         <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -134,7 +134,7 @@
         <nav class="bg-surface-container-lowest shadow-sm docked full-width top-0 sticky z-50 h-20 transition-all duration-200">
             <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
                 <div class="flex items-center gap-8">
-                    <a href="<c:url value='/'/>" class="text-headline-md font-headline-md text-primary font-bold">VoyagerElite</a>
+                    <a href="<c:url value='/'/>" class="text-headline-md font-headline-md text-primary font-bold">ChillTravel</a>
                     <div class="hidden md:flex gap-6">
                         <a class="${empty pageTitle || (!pageTitle.contains('Điểm đến') && !pageTitle.contains('Ưu đãi') && !pageTitle.contains('Hỗ trợ')) ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-all duration-200" href="<c:url value='/'/>">Tours</a>
                         <a class="${not empty pageTitle && pageTitle.contains('Điểm đến') ? 'text-primary border-b-2 border-primary pb-1 font-semibold' : 'text-deep-navy font-medium hover:text-ocean-blue'} transition-colors" href="<c:url value='/destinations'/>">Điểm đến</a>
@@ -181,7 +181,7 @@
                                         </div>
                                         <div class="mt-3 flex items-center gap-2 bg-white/15 rounded-full px-3 py-1.5 w-fit">
                                             <span class="material-symbols-outlined text-yellow-300 text-[16px]" style="font-variation-settings:'FILL' 1;">stars</span>
-                                            <span class="text-xs font-bold">VoyagerElite Member</span>
+                                            <span class="text-xs font-bold">ChillTravel Member</span>
                                         </div>
                                     </div>
 

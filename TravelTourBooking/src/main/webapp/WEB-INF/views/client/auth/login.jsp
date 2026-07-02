@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Đăng nhập - VoyagerElite</title>
+    <title>Đăng nhập - ChillTravel</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
@@ -32,7 +32,7 @@
     <!-- Traveloka-style Left Logo Banner -->
     <div class="absolute top-0 left-0 bg-[#0194F3] text-white px-10 pt-5 pb-7 rounded-br-[80px] shadow-lg z-20 flex items-center gap-2 select-none">
         <span class="material-symbols-outlined text-white text-3xl font-bold">explore</span>
-        <span class="text-2xl font-black tracking-tight">VoyagerElite</span>
+        <span class="text-2xl font-black tracking-tight">ChillTravel</span>
     </div>
 
     <!-- Background Image -->
@@ -47,7 +47,7 @@
         <div class="flex justify-end items-center">
             <a href="<c:url value='/'/>" class="text-white hover:text-blue-100 font-semibold flex items-center gap-1.5 transition-all drop-shadow-sm text-sm">
                 <span class="material-symbols-outlined text-base">arrow_back</span>
-                Vào Trang chủ VoyagerElite
+                Vào Trang chủ ChillTravel
             </a>
         </div>
 
@@ -59,7 +59,7 @@
                     Từ Đông Nam Á Đến Thế Giới,<br/>Trong Tầm Tay Bạn.
                 </h1>
                 <p class="text-lg text-white/90 font-medium">
-                    Khám phá hàng ngàn điểm đến tuyệt vời, đặt tour du lịch nhanh chóng và tận hưởng dịch vụ đẳng cấp cùng VoyagerElite.
+                    Khám phá hàng ngàn điểm đến tuyệt vời, đặt tour du lịch nhanh chóng và tận hưởng dịch vụ đẳng cấp cùng ChillTravel.
                 </p>
             </div>
 
@@ -101,7 +101,7 @@
                         <!-- Input Email -->
                         <div>
                             <label class="block text-xs font-bold text-gray-500 mb-1.5" for="email">Tên đăng nhập / Email</label>
-                            <input class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="email" name="email" value="${email}" placeholder="admin@voyagerelite.com" type="text" required/>
+                            <input class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#0194F3] focus:ring-1 focus:ring-[#0194F3] outline-none transition-all text-sm font-medium" id="email" name="email" value="${email}" placeholder="admin@chilltravel.com" type="text" required/>
                         </div>
 
                         <!-- Input Password -->
@@ -168,7 +168,7 @@
         <!-- Footer section -->
         <div class="flex flex-col sm:flex-row justify-between items-center w-full max-w-7xl mx-auto gap-2 border-t border-white/10 pt-4 mt-auto">
             <span class="text-white/70 text-[11px]">Bằng cách đăng nhập, bạn đồng ý với Điều khoản & Điều kiện của chúng tôi.</span>
-            <span class="text-white/80 text-[11px]">© 2026 VoyagerElite. All rights reserved.</span>
+            <span class="text-white/80 text-[11px]">© 2026 ChillTravel. All rights reserved.</span>
         </div>
     </div>
 
