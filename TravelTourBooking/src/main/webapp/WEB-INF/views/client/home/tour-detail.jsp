@@ -5,7 +5,7 @@
 
 <!-- Fallback check for tour image -->
 <c:set var="tourImg" value="${tour.imageUrl}"/>
-<c:if test="${empty tourImg || !tourImg.startsWith('http')}">
+<c:if test="${empty tourImg || (!tourImg.startsWith('http') && !tourImg.contains('/resources/'))}">
     <c:choose>
         <c:when test="${tour.tourName.toLowerCase().contains('dalat') || tour.tourName.toLowerCase().contains('da lat') || tour.tourName.toLowerCase().contains('đà lạt')}">
             <c:set var="tourImg" value="${pageContext.request.contextPath}/resource/images/da_lat.jpg"/>
