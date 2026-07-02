@@ -64,6 +64,18 @@
             <span>Quản lý Thanh toán</span>
         </a>
 
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'admin-user' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
+           href="<c:url value='/admin/user/list'/>">
+            <span class="material-symbols-outlined mr-3">group</span>
+            <span>Quản lý Tài khoản</span>
+        </a>
+
+        <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'admin-voucher' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
+           href="<c:url value='/admin/voucher/list'/>">
+            <span class="material-symbols-outlined mr-3">loyalty</span>
+            <span>Quản lý Voucher</span>
+        </a>
+
         <a class="flex items-center px-4 py-3 rounded-xl transition-all duration-200 no-underline ${activePage == 'setting' ? 'bg-[#0194F3] text-white shadow-lg' : 'text-white/80 hover:bg-white/10'}" 
            href="<c:url value='/system/setting'/>">
             <span class="material-symbols-outlined mr-3">settings</span>
@@ -86,7 +98,9 @@
                 {path: '/destination', selector: 'a[href*="/destination"]'},
                 {path: '/itinerary', selector: 'a[href*="/itinerary"]'},
                 {path: '/booking', selector: 'a[href*="/booking"]'},
-                {path: '/payment', selector: 'a[href*="/payment"]'}
+                {path: '/payment', selector: 'a[href*="/payment"]'},
+                {path: '/admin/user', selector: 'a[href*="/admin/user"]'},
+                {path: '/admin/voucher', selector: 'a[href*="/admin/voucher"]'}
             ];
 
             menuMap.forEach(item => {
